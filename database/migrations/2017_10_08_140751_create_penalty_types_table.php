@@ -14,7 +14,8 @@ class CreatePenaltyTypesTable extends Migration
     public function up()
     {
         Schema::create('penalty_types', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('penalty_type_id');
+            $table->string('name', 255);
             $table->timestamps();
         });
     }

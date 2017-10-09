@@ -14,7 +14,9 @@ class CreatePenaltyBooksTable extends Migration
     public function up()
     {
         Schema::create('penalty_books', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('penalty_book_id');
+            $table->integer('match_id');
+            $table->integer('player_id');
             $table->timestamps();
         });
     }

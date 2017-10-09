@@ -14,7 +14,9 @@ class CreateCoachesTable extends Migration
     public function up()
     {
         Schema::create('coaches', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('coach_id');
+            $table->string('name', 255);
+            $table->integer('team_id')->nullable();
             $table->timestamps();
         });
     }

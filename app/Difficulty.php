@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Difficulty extends Model
 {
-    //
+	public function matches()
+	{
+		return $this->hasMany(Match::class);
+	}
 }

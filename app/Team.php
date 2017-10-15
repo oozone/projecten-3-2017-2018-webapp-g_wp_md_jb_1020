@@ -10,4 +10,19 @@ class Team extends Model
 	{
 		return $this->hasOne(Coach::class);
 	}
+
+	public function division()
+	{
+		return $this->belongsTo(Division::class);
+	}
+
+	public function players()
+	{
+		return $this->hasMany(Player::class);
+	}
+
+	public function matches()
+	{
+		return $this->belongsToMany(Match::class);
+	}
 }

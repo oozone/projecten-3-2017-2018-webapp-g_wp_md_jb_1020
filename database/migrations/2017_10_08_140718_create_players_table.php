@@ -19,7 +19,7 @@ class CreatePlayersTable extends Migration
             $table->integer('player_number')->nullable();
             $table->string('name', 255);
             $table->datetime('birthdate')->nullable();
-            $table->string('status')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

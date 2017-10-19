@@ -32,9 +32,9 @@ class User extends Authenticatable
 		return $this->belongsToMany(Match::class);
 	}
 
-	public function role()
+	public function roles()
 	{
-		return $this->belongsTo(UserRole::class);
+		return $this->belongsToMany(UserRole::class);
 	}
 
 }

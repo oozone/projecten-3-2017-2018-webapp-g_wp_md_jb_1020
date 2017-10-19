@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Valor extends Model
 {
-	public function match()
+	public function matches()
 	{
 		return $this->hasMany(Match::class);
 	}

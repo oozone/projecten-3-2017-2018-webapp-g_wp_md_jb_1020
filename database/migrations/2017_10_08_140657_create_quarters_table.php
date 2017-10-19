@@ -14,7 +14,7 @@ class CreateQuartersTable extends Migration
     public function up()
     {
         Schema::create('quarters', function (Blueprint $table) {
-            $table->increments('quarter_id');
+            $table->increments('id');
             $table->integer('match_id')->nullable();
             $table->integer('quarter_period')->nullable();
             $table->integer('score_home')->default(0);

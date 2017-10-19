@@ -14,7 +14,7 @@ class CreateValorsTable extends Migration
     public function up()
     {
         Schema::create('valors', function (Blueprint $table) {
-            $table->increments('valor_id');
+            $table->increments('id');
             $table->string('name', 255);
             $table->timestamps();
         });

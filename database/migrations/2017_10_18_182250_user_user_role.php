@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePenaltyBooksTable extends Migration
+class UserUserRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreatePenaltyBooksTable extends Migration
      */
     public function up()
     {
-        Schema::create('penalty_books', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('match_id');
-            $table->integer('player_id');
-            $table->timestamps();
-        });
+	    Schema::create('user_user_role', function (Blueprint $table) {
+		    $table->increments('id');
+		    $table->integer('user_role_id');
+		    $table->integer('user_id');
+		    $table->timestamps();
+	    });
     }
 
     /**
@@ -28,6 +28,6 @@ class CreatePenaltyBooksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penalty_books');
+	    Schema::dropIfExists('user_user_role');
     }
 }

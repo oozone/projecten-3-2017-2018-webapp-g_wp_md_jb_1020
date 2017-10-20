@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Match;
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class MatchController extends Controller
 	public function show($id)
 	{
 		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor'))->find($id);
+		return Match::with(array('location', 'difficulty', 'valor','home','visitor'))->find($id);
 	}
 
 	/**

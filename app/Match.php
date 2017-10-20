@@ -11,10 +11,18 @@ class Match extends Model
 		return $this->belongsToMany(User::class);
 	}
 
-	public function teams()
-	{
-		return $this->belongsToMany(Team::class);
+	public function home(){
+		return $this->belongsTo(Team::class);
 	}
+
+	public function visitor(){
+		return $this->belongsTo(Team::class);
+	}
+//
+//	public function teams()
+//	{
+//		return $this->belongsToMany(Team::class);
+//	}
 
 	public function officials()
 	{

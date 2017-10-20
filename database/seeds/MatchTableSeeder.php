@@ -27,11 +27,13 @@ class MatchTableSeeder extends Seeder
 	    $visitor = Team::where('name', 'Aalst')->first();
 
 		$match = new Match();
-		$match->home_id = $home->id;
-		$match->visitor_id = $visitor->id;
+	    $match->home_id = $home->id;
+	    $match->visitor_id = $visitor->id;
 		$match->date = date("Y-m-d H:i:s");
 		$match->time_played = "00:00";
 		$match->save();
+		//$match->home()->save($home);
+		//$match->visitor()->save($visitor);
 
 		$location = Location::first();
 		$location->matches()->save($match);
@@ -57,6 +59,8 @@ class MatchTableSeeder extends Seeder
 	    $match->date = date("Y-m-d H:i:s");
 	    $match->time_played = "00:00";
 	    $match->save();
+	    //$match->home()->save($home);
+	    //$match->visitor()->save($visitor);
 
 	    $location = Location::first();
 	    $location->matches()->save($match);

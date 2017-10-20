@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Match;
+use App\Http\Controllers\Controller;
+use App\Player;
+use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
-class MatchController extends Controller
+class PlayerController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +17,8 @@ class MatchController extends Controller
 	 */
 	public function index()
 	{
-		return Match::with('location')->get();
+		$players = Player::get();
+		return View::make('admin.players.index', array('players' => $players));
 	}
 
 	/**
@@ -24,7 +28,8 @@ class MatchController extends Controller
 	 */
 	public function create()
 	{
-		//
+		$teams = Team::get();
+		return View::make('admin.players.create', array('teams' => $teams));
 	}
 
 	/**
@@ -46,8 +51,7 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor'))->find($id);
+		return Player::with('team')->find($id);
 	}
 
 	/**

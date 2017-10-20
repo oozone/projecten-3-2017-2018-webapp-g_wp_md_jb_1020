@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+
+	protected $with = array('division','coach');
+
 	public function coach()
 	{
 		return $this->hasOne(Coach::class);

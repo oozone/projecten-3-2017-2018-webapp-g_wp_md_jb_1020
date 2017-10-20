@@ -15,4 +15,13 @@ class Player extends Model
 	{
 		return $this->hasMany(PenaltyBook::class);
 	}
+
+	/*
+	 * Scopes
+	 */
+	public function scopeActive($query){
+		return $query->where('status', 1);
+	}
+
+
 }

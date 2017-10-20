@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Division;
+use App\Match;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
-class HomeController extends Controller
+class WelcomeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -14,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -25,6 +27,11 @@ class HomeController extends Controller
     public function index()
     {
     	$divisions = Division::get();
-        return view('home', compact('divisions'));
+    	$matches = Match::get();
+        //return view('welcome', compact('divisions'));
+	    return View::make('welcome', array(
+	    	'divisions' => $divisions,
+		    'matches' => $matches,
+	    ));
     }
 }

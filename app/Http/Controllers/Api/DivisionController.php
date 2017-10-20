@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Match;
+use App\Division;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MatchController extends Controller
+class DivisionController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +15,7 @@ class MatchController extends Controller
 	 */
 	public function index()
 	{
-		return Match::with('location')->get();
+		return Division::get();
 	}
 
 	/**
@@ -47,7 +48,7 @@ class MatchController extends Controller
 	public function show($id)
 	{
 		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor'))->find($id);
+		return Division::with(array('teams'))->find($id);
 	}
 
 	/**

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Match;
+use App\Http\Controllers\Controller;
+use App\Player;
 use Illuminate\Http\Request;
 
-class MatchController extends Controller
+class PlayerController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +15,7 @@ class MatchController extends Controller
 	 */
 	public function index()
 	{
-		return Match::with('location')->get();
+		return Player::with('team')->active()->get();
 	}
 
 	/**
@@ -46,8 +47,7 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor'))->find($id);
+		return Player::with('team')->find($id);
 	}
 
 	/**

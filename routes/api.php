@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::Resource('players', 'Api\PlayerController');
+Route::Resource('teams', 'Api\TeamController');
+Route::Resource('matches', 'Api\MatchController');
+Route::Resource('divisions', 'Api\DivisionController');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

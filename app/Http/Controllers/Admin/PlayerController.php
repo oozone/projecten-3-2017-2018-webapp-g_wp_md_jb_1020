@@ -40,7 +40,24 @@ class PlayerController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$this->validate(request(), [
+			'name' => 'required',
+			'date' => 'required',
+			'player_number' => 'required|integer',
+			'team' => 'required|integer'
+		]);
+
+		$player = new Player();
+		$player->name = request()->input('name');
+		$player->player_number = request()->input('player_number');
+		$player->birthdate = request()->input('date');
+		$player->status = request()->input('status');
+		$player->save();
+
+		$team = Team::find(request()->input('team'));
+		$team->players()->save($player);
+
+		return redirect('/admin/players');
 	}
 
 	/**

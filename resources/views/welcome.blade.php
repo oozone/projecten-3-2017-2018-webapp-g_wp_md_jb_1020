@@ -13,7 +13,7 @@
                 @endforeach
 
 
-                    <div class="row">
+
                         <div class="span5">
                             <table class="table table-striped table-condensed">
                                 <thead>
@@ -22,6 +22,8 @@
                                     <th>Visitor</th>
                                     <th>Date</th>
                                     <th>Location</th>
+                                    <th>Score</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -31,6 +33,8 @@
                                         <td>{{$match->visitor->name}}</td>
                                         <td>{{$match->date}}</td>
                                         <td>{{$match->location->name}}</td>
+                                        <td>{{$match->score_home}} - {{$match->score_visitor}}</td>
+                                        <td><a href="/matches/{{$match->id}}">Bekijk</a></td>
                                     </tr>
 
                                 @endforeach
@@ -38,7 +42,6 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
             </div>
         </div>
     </div>

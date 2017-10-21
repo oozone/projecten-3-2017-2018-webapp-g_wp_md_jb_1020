@@ -29,6 +29,8 @@ class MatchTableSeeder extends Seeder
 		$match = new Match();
 	    $match->home_id = $home->id;
 	    $match->visitor_id = $visitor->id;
+	    $match->score_home = 3;
+	    $match->score_visitor = 4;
 		$match->date = date("Y-m-d H:i:s");
 		$match->time_played = "00:00";
 		$match->save();

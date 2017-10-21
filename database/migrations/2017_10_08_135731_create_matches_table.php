@@ -20,6 +20,8 @@ class CreateMatchesTable extends Migration
             $table->integer('valor_id')->nullable();
             $table->integer('home_id')->nullable();
             $table->integer('visitor_id')->nullable();
+            $table->integer('score_home')->default(0);
+            $table->integer('score_visitor')->default(0);
             $table->datetime('date')->nullable();
             $table->time('time_played')->default('00:00');
             $table->timestamps();

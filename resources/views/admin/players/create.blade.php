@@ -1,11 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.app_sidebar')
 
 @section('content')
+
+
+
     <div class="col-sm-12">
         <legend>Create player</legend>
     </div>
     <!-- panel preview -->
-    <div class="col-sm-10 col-sm-offset-2">
+    <div class="col-sm-12">
         <h4>Player profile</h4>
         @if ($errors->any())
             <div class="alert alert-danger">

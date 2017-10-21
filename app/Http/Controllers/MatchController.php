@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Match;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class MatchController extends Controller
 {
@@ -46,8 +47,8 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor'))->find($id);
+		$match = Match::find($id);
+		return View::make('web.matches.show', array('match' => $match));
 	}
 
 	/**

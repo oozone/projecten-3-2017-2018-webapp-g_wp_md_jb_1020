@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
 
-	protected $with = array('division','coach');
+	protected $with = array('division','coach','players');
 
 	public function coach()
 	{

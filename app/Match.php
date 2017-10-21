@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
 {
+
+	protected $with = array('home','visitor','location','valor','difficulty');
+
 	public function users()
 	{
 		return $this->belongsToMany(User::class);

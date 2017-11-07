@@ -13,12 +13,12 @@ class PenaltyBooksPenalties extends Migration
      */
 	public function up()
 	{
-		Schema::create('penalty_books_penalties', function (Blueprint $table) {
-			$table->increments('id');
-			$table->integer('penalty_book_id')->unsigned();
-			$table->integer('penalty_id')->unsigned();
-			$table->timestamps();
-		});
+//		Schema::create('penalty_books_penalties', function (Blueprint $table) {
+//			$table->increments('id');
+//			$table->integer('penalty_book_id')->unsigned();
+//			$table->integer('penalty_id')->unsigned();
+//			$table->timestamps();
+//		});
 	}
 
 	/**

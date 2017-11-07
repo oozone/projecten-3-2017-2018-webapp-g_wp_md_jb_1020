@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penalty extends Model
 {
-	public function penaltybooks()
+	public function penaltybook()
 	{
-		return $this->belongsToMany(PenaltyBook::class);
+		return $this->belongsTo(PenaltyBook::class);
 	}
 
 	public function penaltytype()

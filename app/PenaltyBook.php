@@ -8,6 +8,6 @@ class PenaltyBook extends Model
 {
 	public function penalties()
 	{
-		return $this->belongsToMany(Penalty::class);
+		return $this->hasMany(Penalty::class);
 	}
 }

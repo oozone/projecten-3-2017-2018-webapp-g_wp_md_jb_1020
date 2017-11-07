@@ -52,6 +52,11 @@ class Match extends Model
 		return $this->hasMany(Quarter::class);
 	}
 
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
 	public function penaltybooks()
 	{
 		return $this->hasMany(PenaltyBook::class);

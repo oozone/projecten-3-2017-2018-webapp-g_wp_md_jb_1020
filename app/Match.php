@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Match extends Model
 {
 
-	protected $with = array('home','visitor','location','valor','difficulty');
+	protected $with = array('home','visitor','location','valor','difficulty','goals');
 
 	public function users()
 	{

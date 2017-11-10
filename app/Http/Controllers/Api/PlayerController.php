@@ -43,11 +43,24 @@ class PlayerController extends Controller
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
+	 *
 	 */
 	public function show($id)
 	{
-		return Player::with('team')->find($id);
+		return Player::with('team')->with('penaltybooks')->find($id);
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 *
+	 */
+	public function showMatch($id, $matchId)
+	{
+		return Player::with('team')->with(['penaltybooks' => function ($query) use ($matchId) {
+			$query->where('match_id', '=', $matchId);
+		}])->find($id);
 	}
 
 	/**

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('/players/{id}/match/{matchId}', 'Api\PlayerController@showMatch');
 Route::Resource('players', 'Api\PlayerController');
 Route::Resource('teams', 'Api\TeamController');
 Route::Resource('matches', 'Api\MatchController');

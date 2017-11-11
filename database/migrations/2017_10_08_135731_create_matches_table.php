@@ -15,6 +15,7 @@ class CreateMatchesTable extends Migration
     {
         Schema::create('matches', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('division_id')->nullable();
             $table->integer('location_id')->nullable();
             $table->integer('difficulty_id')->nullable();
             $table->integer('valor_id')->nullable();
@@ -22,7 +23,7 @@ class CreateMatchesTable extends Migration
             $table->integer('visitor_id')->nullable();
             $table->integer('score_home')->default(0);
             $table->integer('score_visitor')->default(0);
-            $table->datetime('date')->nullable();
+            $table->datetime('datum')->nullable();
             $table->time('time_played')->default('00:00');
             $table->timestamps();
         });

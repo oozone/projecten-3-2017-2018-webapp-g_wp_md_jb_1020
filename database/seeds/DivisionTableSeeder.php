@@ -16,13 +16,21 @@ class DivisionTableSeeder extends Seeder
     	// name, period_length
 
         $division = new Division();
-        $division->name = "Eerste klasse";
+        $division->name = "Eerste klasse Heren";
         $division->period_length = "08:00";
+        $division->ranking = 2;
         $division->save();
 
 	    $division = new Division();
-	    $division->name = "Tweede klasse";
+	    $division->name = "Tweede klasse Heren";
 	    $division->period_length = "08:00";
+	    $division->ranking = 5;
+	    $division->save();
+
+	    $division = new Division();
+	    $division->name = "Eerste klasse Vrouwen";
+	    $division->period_length = "08:00";
+	    $division->ranking = 10;
 	    $division->save();
     }
 }

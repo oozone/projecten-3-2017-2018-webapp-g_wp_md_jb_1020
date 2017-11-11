@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Goal;
 use App\Http\Controllers\Controller;
 use App\Match;
 use Illuminate\Http\Request;
@@ -13,14 +14,14 @@ class GoalController extends Controller
      * @param $id Match Id
      */
     public function store(Request $request){
-        $this->validate(request(), [
+        $this->validate($request, [
 
             'match_id' => 'required|integer',
             'player_id' => 'required|integer',
             'team_id' => 'required|integer',
         ]);
 
-        $match = Match::firstOrFail($request->match_id);
+        $match = Match::find($request->match_id);
 
         // Save in score_home or score_visitor
         if($match->home->id == $request->team_id){
@@ -47,7 +48,7 @@ class GoalController extends Controller
      */
     public function destroy($id)
     {
-        $match = Match::firstOrFail($id);
+        $match = Goal::firstOrFail($id);
         $match->delete();
     }
 

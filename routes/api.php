@@ -18,7 +18,7 @@ Route::Resource('teams', 'Api\TeamController');
 Route::Resource('matches', 'Api\MatchController');
 Route::Resource('divisions', 'Api\DivisionController');
 Route::Resource('locations', 'Api\LocationController');
-Route::Resource('goals', 'Api\GoalsController');
+Route::Resource('goals', 'Api\GoalController');
 Route::Resource('penaltybooks', 'Api\PenaltyBookController');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

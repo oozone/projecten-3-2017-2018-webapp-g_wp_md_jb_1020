@@ -7,8 +7,13 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+//window.moment = require('moment');
+//require('moment-timezone');
+//require('moment/locale/nl-nl'); // locales all in lower-case
+//window.moment.locale();         // nl-be
 
+window.Vue = require('vue');
+Vue.use(require('vue-moment'));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -17,7 +22,11 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('match', require('./components/Match.vue'));
+Vue.component('matchlist', require('./components/MatchList.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+
+    },
 });

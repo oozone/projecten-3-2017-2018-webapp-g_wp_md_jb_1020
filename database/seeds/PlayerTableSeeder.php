@@ -22,6 +22,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->player_number = 5;
 	    $player->status = true;
 	    $player->birthdate = "1984-03-27 00:00";
+	    $player->starter = true;
 	    $player->save();
 	    $team->players()->save($player);
 
@@ -30,6 +31,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->player_number = 8;
 	    $player->status = true;
 	    $player->birthdate = "1984-03-27 00:00";
+	    $player->starter = true;
 	    $player->save();
 	    $team->players()->save($player);
 

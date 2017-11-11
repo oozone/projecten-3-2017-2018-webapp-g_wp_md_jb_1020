@@ -21,6 +21,10 @@ class Match extends Model
 	public function visitor(){
 		return $this->belongsTo(Team::class);
 	}
+
+	public function division(){
+		return $this->belongsTo(Division::class);
+	}
 //
 //	public function teams()
 //	{

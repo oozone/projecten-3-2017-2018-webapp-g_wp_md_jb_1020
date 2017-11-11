@@ -26,12 +26,13 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-    	$divisions = Division::get();
-    	$matches = Match::get();
+    	$divisions = Division::with('matches')->orderBy('ranking','asc')->get();
+    	//dd($divisions->toJson());
+    	//$matches = Match::get();
         //return view('welcome', compact('divisions'));
 	    return View::make('welcome', array(
 	    	'divisions' => $divisions,
-		    'matches' => $matches,
+		    //'matches' => $matches,
 	    ));
     }
 }

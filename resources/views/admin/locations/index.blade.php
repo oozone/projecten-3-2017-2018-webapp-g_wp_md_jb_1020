@@ -7,9 +7,9 @@
 
                 <div class="col-sm-12">
                     <div class="pull-right">
-                        <a href="/admin/players/create" class="btn btn-default">Create</a>
+                        <a href="/admin/matches/create" class="btn btn-default">Create</a>
                     </div>
-                    <legend>Players</legend>
+                    <legend>Teams</legend>
                 </div>
                 <div class="row">
                     <div class="span5">
@@ -17,18 +17,16 @@
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Birthdate</th>
-                                <th>Active</th>
-                                <th>Team</th>
+                                <th>City</th>
+                                <th>&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($players as $player)
+                                @foreach($data as $item)
                                     <tr>
-                                        <td><a href="/admin/players/{{$player->id}}/edit">{{$player->name}}</a></td>
-                                        <td>{{$player->birthdate}}</td>
-                                        <td>{{$player->status}}</td>
-                                        <td>{{$player->team->name}}</td>
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->city}}</td>
+                                        <td><a href="/admin/locations/{{$item->id}}/edit"><i class="fa fa-edit fa-lg"></i></a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

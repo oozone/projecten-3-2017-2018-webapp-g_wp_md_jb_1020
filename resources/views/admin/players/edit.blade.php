@@ -2,14 +2,13 @@
 
 @section('content')
 
-
-
     <div class="col-sm-12">
-        <legend>Create player</legend>
+        <legend>Edit player</legend>
     </div>
     <!-- panel preview -->
     <div class="col-sm-12">
         <h4>Player profile</h4>
+        <!-- if there are creation errors, they will show here -->
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -21,52 +20,43 @@
         @endif
         <div class="panel panel-default">
             <div class="panel-body form-horizontal payment-form">
-                <form action="/admin/players" method="POST">
-                    {{csrf_field()}}
+                {!! Form::model($player, array('action' => array('Admin\PlayerController@update', $player->id), 'method' => 'PUT'))  !!}
+
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">Name</label>
+                        {{ Form::label('name', 'Name', array('class' => 'col-sm-3 control-label')) }}
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="name" name="name">
+                            {{ Form::text('name', null, array('class' => 'form-control' )) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="player_number" class="col-sm-3 control-label">Player Number</label>
+                        {{ Form::label('player_number', 'Player Number', array('class' => 'col-sm-3 control-label')) }}
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="player_number" name="player_number">
+                            {{ Form::text('player_number', null, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="col-sm-3 control-label">Birthdate</label>
+                        {{ Form::label('birthdate', 'Birthdate', array('class' => 'col-sm-3 control-label')) }}
                         <div class="col-sm-9">
-                            <input type="date" class="form-control" id="date" name="date">
+                            <?php $dt =  new Carbon\Carbon($player->birthdate);?>
+                            {{ Form::date('birthdate', $dt->toDateString(), null, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Starter</label>
+                        {{ Form::label('starter', 'Starter', array('class' => 'col-sm-3 control-label')) }}
                         <div class="col-sm-9">
-                            <select class="form-control" id="starter" name="starter">
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
+                            {{ Form::select('starter', array('0' => 'No', '1' => 'Yes'), null, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Status</label>
+                        {{ Form::label('status', 'Status', array('class' => 'col-sm-3 control-label')) }}
                         <div class="col-sm-9">
-                            <select class="form-control" id="status" name="status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
+                            {{ Form::select('status', array('0' => 'Inactive', '1' => 'Active'), null, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Team</label>
+                        {{ Form::label('status', 'Team', array('class' => 'col-sm-3 control-label')) }}
                         <div class="col-sm-9">
-                            <select class="form-control" id="team" name="team">
-                                @foreach($teams as $team)
-                                    <option value="{{ $team->id }}">{{ $team->name }}</option>
-                                @endforeach
-                            </select>
+                            {{ Form::select('team_id', $teams, 1, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">

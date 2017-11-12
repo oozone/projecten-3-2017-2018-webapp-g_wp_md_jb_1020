@@ -51,6 +51,7 @@ class PlayerController extends Controller
 		$player->name = request()->input('name');
 		$player->player_number = request()->input('player_number');
 		$player->birthdate = request()->input('date');
+		$player->starter = request()->input('starter');
 		$player->status = request()->input('status');
 		$player->save();
 
@@ -79,7 +80,9 @@ class PlayerController extends Controller
 	 */
 	public function edit($id)
 	{
-		//
+		$player = Player::findOrFail($id);
+		$teams = Team::pluck('name', 'id');
+		return View::make('admin.players.edit', array('player' => $player, 'teams' => $teams));
 	}
 
 	/**
@@ -91,7 +94,28 @@ class PlayerController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+
+		$player = Player::findOrFail($id);
+		//dd($player);
+		$this->validate(request(), [
+			'name' => 'required',
+			'birthdate' => 'required',
+			'player_number' => 'required|integer',
+			'team_id' => 'required|integer'
+		]);
+
+
+		$player->name = request()->input('name');
+		$player->player_number = request()->input('player_number');
+		$player->birthdate = request()->input('birthdate');
+		$player->starter = request()->input('starter');
+		$player->status = request()->input('status');
+		$player->save();
+
+		$team = Team::find(request()->input('team_id'));
+		$team->players()->save($player);
+
+		return redirect('/admin/players/' . $id .'/edit');
 	}
 
 	/**

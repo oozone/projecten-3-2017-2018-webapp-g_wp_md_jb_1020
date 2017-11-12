@@ -47,7 +47,7 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
-		$match = Match::find($id);
+		$match = Match::with('home.players')->with('visitor.players')->find($id);
 		return View::make('web.matches.show', array('match' => $match));
 	}
 

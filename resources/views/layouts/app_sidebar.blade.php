@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="nav-side-menu">
-                    <div class="brand">Brand Logo</div>
+                    <div class="brand">ADMIN</div>
                     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
                     <div class="menu-list">
@@ -86,13 +86,42 @@
                                 </a>
                             </li>
 
+                            <!-- Player -->
                             <li  data-toggle="collapse" data-target="#players" class="collapsed active">
-                                <a href="#"><i class="fa fa-users fa-lg"></i> Players <span class="arrow"></span></a>
+                                <a href="#"><i class="fa fa-user fa-lg"></i> Players <span class="arrow"></span></a>
                             </li>
                             <ul class="sub-menu collapse" id="players">
                                 <li><a href="/admin/players">List</a></li>
                                 <li><a href="/admin/players/create">Create</a></li>
                             </ul>
+
+                            <!-- Team -->
+                            <li  data-toggle="collapse" data-target="#teams" class="collapsed active">
+                                <a href="#"><i class="fa fa-users fa-lg"></i> Teams <span class="arrow"></span></a>
+                            </li>
+                            <ul class="sub-menu collapse" id="teams">
+                                <li><a href="/admin/teams">List</a></li>
+                                <li><a href="/admin/teams/create">Create</a></li>
+                            </ul>
+
+                            <!-- Match -->
+                            <li  data-toggle="collapse" data-target="#matches" class="collapsed active">
+                                <a href="#"><i class="fa fa-calendar fa-lg"></i> Matches <span class="arrow"></span></a>
+                            </li>
+                            <ul class="sub-menu collapse" id="matches">
+                                <li><a href="/admin/matches">List</a></li>
+                                <li><a href="/admin/matches/create">Create</a></li>
+                            </ul>
+
+                            <!-- Location -->
+                            <li  data-toggle="collapse" data-target="#locations" class="collapsed active">
+                                <a href="#"><i class="fa fa-globe fa-lg"></i> Locations <span class="arrow"></span></a>
+                            </li>
+                            <ul class="sub-menu collapse" id="locations">
+                                <li><a href="/admin/locations">List</a></li>
+                                <li><a href="/admin/locations/create">Create</a></li>
+                            </ul>
+
                         </ul>
                     </div>
                 </div>

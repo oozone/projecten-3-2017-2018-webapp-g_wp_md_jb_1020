@@ -16,7 +16,7 @@
   font-weight: 200;
   background-color: #2e353d;
   position: fixed;
-  top: 0px;
+  top: 65px;
   width: 300px;
   height: 100%;
   color: #e1ffff;
@@ -217,4 +217,26 @@ body {
 
 .btn-round{
   border-radius: 17px;
+}
+
+.coach-row {
+  margin-bottom: 15px;
+}
+
+div.wp-goal-home {
+  text-align: right;
+}
+
+div.col-xs-12.wp-goal-visitor {
+
+}
+
+@media (max-width: 768px) {
+  div.wp-goal-home {
+    text-align: left !important;
+  }
+
+  div.col-xs-12.wp-goal-visitor {
+    text-align: right !important;
+  }
 }

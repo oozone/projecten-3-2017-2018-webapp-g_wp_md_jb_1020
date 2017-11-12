@@ -15,7 +15,7 @@ class PlayerController extends Controller
 	 */
 	public function index()
 	{
-		return Player::with('team')->active()->get();
+		return Player::active()->get();
 	}
 
 	/**

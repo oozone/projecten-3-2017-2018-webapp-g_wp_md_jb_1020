@@ -29,4 +29,7 @@ Auth::routes();
 Route::prefix('admin')->namespace('Admin')->group(function () {
 	// Controllers Within The "App\Http\Controllers\Admin" Namespace
 	Route::resource('players', 'PlayerController');
+	Route::resource('teams', 'TeamController');
+	Route::resource('matches', 'MatchController');
+	Route::resource('locations', 'LocationController');
 });

@@ -1,32 +1,24 @@
 <template>
     <div>
 
-
-        <div v-for="division in divisions" class="panel panel-default">
+        <div v-for="division in divisions" class="panel panel-matchlist">
             <div class="panel-heading">{{division.name}}</div>
             <div class="panel-body">
 
+                    <div class="table-matchlist">
 
-                <div class="span5">
-                    <table class="table table-condensed table-matchlist">
+                            <div class="row row-matchlist" v-for="match in division.matches" v-on:click="clickList(match.id)">
 
-                        <tbody>
-
-
-                            <tr v-for="match in division.matches" v-on:click="clickList(match.id)">
-
-                                <td style="text-align: center; width: 15%;"><div class="wppdate">{{ match.datum | moment("DD-MM-YYYY")  }}</div></td>
-                                <td>{{ match.datum | moment("HH:mm") }}</td>
-                                <td style="text-align: right">{{match.home.name}}</td>
-                                <td style="text-align: center;">{{match.score_home}} - {{match.score_visitor}}</td>
-                                <td>{{match.visitor.name}}</td>
+                                <div class="col-xs-10 col-md-2" style="text-align: center;"><div class="wppdate">{{ match.datum | moment("DD-MM-YYYY")  }}</div></div>
+                                <div class="col-xs-2 col-md-2">{{ match.datum | moment("HH:mm") }}</div>
+                                <div class="col-xs-4 col-md-2" style="vertical-align: middle; text-align: right">{{match.home.name}}</div>
+                                <div class="col-xs-4 col-md-2" style="text-align: center;">{{match.score_home}} - {{match.score_visitor}}</div>
+                                <div class="col-xs-4 col-md-2">{{match.visitor.name}}</div>
+                                <div class="col-xs-12 col-md-2"><div class="live">LIVE</div></div>
 
                                 <!--<td><a href="/matches/{{$match->id}}">Bekijk</a></td>-->
-                            </tr>
+                            </div>
 
-
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

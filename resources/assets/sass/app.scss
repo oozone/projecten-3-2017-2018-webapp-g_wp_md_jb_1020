@@ -1,6 +1,7 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import "../../../node_modules/font-awesome/css/font-awesome.css";
 
 // Variables
 @import "variables";
@@ -175,10 +176,45 @@ body {
   border-radius: 25px;
   background-color: #f3db75;
   padding: 3px;
+}
+
+.row-matchlist {
+  margin-top: 3px;
+
+  div.live {
+    padding: 5px 0;
+    border-radius: 4px;
+    background-color: red;
+    padding: 3px;
+    color: white !important;
+    text-align: center;
+  }
+}
+
+.row-matchlist:hover {
+
+    cursor: pointer;
+    background-color: #f3db75;
 
 }
 
-.table-matchlist tr:hover {
-  cursor: pointer;
-  background-color: #f3db75;
+.panel-matchlist {
+
+    .panel-heading {
+      background-color: black;
+      color: white !important;
+    }
+}
+
+.panel-matchdetail {
+  background-color: #d6e2f1;
+}
+
+.wp-intro-image {
+  border-radius: 15px;
+  height: 180px;
+}
+
+.btn-round{
+  border-radius: 17px;
 }

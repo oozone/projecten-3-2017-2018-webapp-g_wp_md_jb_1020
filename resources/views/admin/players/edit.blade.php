@@ -20,7 +20,7 @@
         @endif
         <div class="panel panel-default">
             <div class="panel-body form-horizontal payment-form">
-                {!! Form::model($player, array('action' => array('Admin\PlayerController@update', $player->id), 'method' => 'PUT'))  !!}
+                {!! Form::model($player, array('action' => array('Admin\PlayerController@update', $player->id), 'method' => 'PUT', 'files' => true))  !!}
 
                     <div class="form-group">
                         {{ Form::label('name', 'Name', array('class' => 'col-sm-3 control-label')) }}
@@ -60,11 +60,24 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        {{ Form::label('image', 'Image', array('class' => 'col-sm-3 control-label')) }}
+                        <div class="col-sm-9">
+                            {{ Form::file('image') }}
+
+                            @if($player->photo != '')
+                                <img src="{{$player->photo}}" width="150px" />
+                            @endif
+
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="status" class="col-sm-3 control-label"></label>
                         <div class="col-sm-9">
                             <button class="btn btn-default" type="submit">Save</button>
                         </div>
                     </div>
+
+
 
                 </form>
             </div>

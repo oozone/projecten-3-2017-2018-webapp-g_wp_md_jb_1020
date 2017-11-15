@@ -22,7 +22,7 @@ class TeamTableSeeder extends Seeder
     	// Gent
     	$team = new Team();
     	$team->name = "Gentse WPC";
-    	$team->competition_class = "Eerste klasse";
+    	//$team->competition_class = "Eerste klasse";
     	$team->save();
     	$team->coach()->save(Coach::where('name', 'Eerste coach')->first());
 	    $division = Division::first();
@@ -36,7 +36,7 @@ class TeamTableSeeder extends Seeder
 	    // Aalst
 	    $team = new Team();
 	    $team->name = "Aalst";
-	    $team->competition_class = "Eerste klasse";
+	    //$team->competition_class = "Eerste klasse";
 	    $team->save();
 	    $team->coach()->save(Coach::where('name', 'Tweede coach')->first());
 
@@ -51,7 +51,7 @@ class TeamTableSeeder extends Seeder
 	    // Kortrijk
 	    $team = new Team();
 	    $team->name = "Kortrijk";
-	    $team->competition_class = "Eerste klasse";
+	    //$team->competition_class = "Eerste klasse";
 	    $team->save();
 	    $team->coach()->save(Coach::where('name', 'Derde coach')->first());
 	    $division = Division::first();

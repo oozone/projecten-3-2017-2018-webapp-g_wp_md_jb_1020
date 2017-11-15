@@ -20,7 +20,7 @@
         @endif
         <div class="panel panel-default">
             <div class="panel-body form-horizontal payment-form">
-                {!! Form::model($location, array('action' => array('Admin\LocationController@update', $location->id), 'method' => 'PUT'))  !!}
+                {!! Form::model($location, array('action' => array('Admin\LocationController@update', $location->id), 'method' => 'PUT', 'files' => true))  !!}
 
                 <div class="form-group">
                     {{ Form::label('name', 'Name', array('class' => 'col-sm-3 control-label')) }}
@@ -56,6 +56,14 @@
                         {{ Form::text('country', null, array('class' => 'form-control')) }}
                     </div>
                 </div>
+
+                <div class="form-group">
+                    {{ Form::label('image', 'Image', array('class' => 'col-sm-3 control-label')) }}
+                    <div class="col-sm-9">
+                        {{ Form::file('image') }}
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <label for="status" class="col-sm-3 control-label"></label>

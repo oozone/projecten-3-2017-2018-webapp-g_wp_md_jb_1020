@@ -21,7 +21,7 @@
         @endif
         <div class="panel panel-default">
             <div class="panel-body form-horizontal payment-form">
-                <form action="/admin/players" method="POST">
+                {!! Form::open(array('action' => array('Admin\PlayerController@store'), 'method' => 'POST', 'files' => true))  !!}
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Name</label>
@@ -67,6 +67,12 @@
                                     <option value="{{ $team->id }}">{{ $team->name }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('image', 'Image', array('class' => 'col-sm-3 control-label')) }}
+                        <div class="col-sm-9">
+                            {{ Form::file('image') }}
                         </div>
                     </div>
                     <div class="form-group">

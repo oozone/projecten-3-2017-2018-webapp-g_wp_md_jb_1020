@@ -11,11 +11,11 @@ class MatchController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return \Illuminate\Http\Response
+	 *
 	 */
 	public function index()
 	{
-		return Match::with('location')->get();
+		return Match::with('location')->with('home.players')->with('visitor.players')->get();
 	}
 
 	/**

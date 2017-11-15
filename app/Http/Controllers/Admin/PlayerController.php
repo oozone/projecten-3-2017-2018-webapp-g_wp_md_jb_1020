@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Player;
 use App\Team;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -47,12 +48,29 @@ class PlayerController extends Controller
 			'team' => 'required|integer'
 		]);
 
+
 		$player = new Player();
 		$player->name = request()->input('name');
 		$player->player_number = request()->input('player_number');
 		$player->birthdate = request()->input('date');
 		$player->starter = request()->input('starter');
 		$player->status = request()->input('status');
+
+		// Save image
+		if(request()->hasFile('image'))
+		{
+			// Remove cache tag
+			//Player::flushCache('status_consulenten');
+			$image = request()->file('image');
+			$filename  = time() . '.' . $image->getClientOriginalExtension();
+
+			$path = public_path('images/players/' . $filename);
+
+			Image::make($image->getRealPath())->resize(500, 500)->save($path);
+			$player->photo = url('/') . "/images/players/" . $filename;
+		}
+
+
 		$player->save();
 
 		$team = Team::find(request()->input('team'));
@@ -104,6 +122,19 @@ class PlayerController extends Controller
 			'team_id' => 'required|integer'
 		]);
 
+		// Save image
+		if(request()->hasFile('image'))
+		{
+			// Remove cache tag
+			//Player::flushCache('status_consulenten');
+			$image = request()->file('image');
+			$filename  = time() . '.' . $image->getClientOriginalExtension();
+
+			$path = public_path('images/players/' . $filename);
+
+			Image::make($image->getRealPath())->resize(500, 500)->save($path);
+			$player->photo = url('/') . "/images/players/" . $filename;
+		}
 
 		$player->name = request()->input('name');
 		$player->player_number = request()->input('player_number');

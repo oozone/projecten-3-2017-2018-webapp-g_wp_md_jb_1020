@@ -17,7 +17,8 @@ class CreateTeamsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('division_id')->nullable();
-            $table->string('competition_class', 255)->nullable();
+            //$table->string('competition_class', 255)->nullable();
+	        $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

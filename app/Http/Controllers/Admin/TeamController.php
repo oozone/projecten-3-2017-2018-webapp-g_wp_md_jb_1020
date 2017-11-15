@@ -9,6 +9,7 @@ use App\Player;
 use App\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Intervention\Image\Facades\Image;
 
 class TeamController extends Controller
 {
@@ -51,6 +52,21 @@ class TeamController extends Controller
 		$team = new Team();
 		$team->name = request()->input('name');
 		$team->division_id = request()->input('division_id');
+
+		// Save image
+		if(request()->hasFile('image'))
+		{
+			// Remove cache tag
+			//Player::flushCache('status_consulenten');
+			$image = request()->file('image');
+			$filename  = time() . '.' . $image->getClientOriginalExtension();
+
+			$path = public_path('images/teams/' . $filename);
+
+			Image::make($image->getRealPath())->resize(500, 500)->save($path);
+			$team->logo = url('/') . "/images/teams/" . $filename;
+		}
+
 		$team->save();
 
 		$coach = new Coach();
@@ -98,12 +114,33 @@ class TeamController extends Controller
 		$this->validate(request(), [
 			'name' => 'required',
 			'division_id' => 'required',
+			'coach' => 'required'
 		]);
 
 		$team = Team::findOrFail($id);
 		$team->name = request()->input('name');
 		$team->division_id = request()->input('division_id');
+
+		if(request()->hasFile('image'))
+		{
+			// Remove cache tag
+			//Player::flushCache('status_consulenten');
+			$image = request()->file('image');
+			$filename  = time() . '.' . $image->getClientOriginalExtension();
+
+			$path = public_path('images/teams/' . $filename);
+
+			Image::make($image->getRealPath())->resize(500, 500)->save($path);
+			$team->logo = url('/') . "/images/teams/" . $filename;
+		}
+
 		$team->save();
+
+		// Update coach
+		$coach = Coach::where('team_id', $team->id)->first();
+		$coach->name = request()->input('coach');
+		$coach->save();
+
 
 		return redirect('/admin/teams/' . $id .'/edit');
 	}

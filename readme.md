@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-##Waterpolo App + Backend
+## Waterpolo App + Backend
 This is the backend for the waterpolo-app we created for the course Mobile App Projects 3 at Hogeschool Gent. It is written in Laravel + Vue as frontend JS lib. The backend supplies critical info to the Android app we created in conjunction: it delivers info about matches, teams, locations and more.
 
 The backend was completely made by **Matthias Vanooteghem**.

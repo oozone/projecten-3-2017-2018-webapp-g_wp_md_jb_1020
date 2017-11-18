@@ -10,9 +10,12 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{ ScriptVariables::render() }}
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+
+
+    <script src="https://use.fontawesome.com/ed1dab6703.js"></script>
 </head>
 <body>
     <div id="app">
@@ -46,6 +49,9 @@
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
+
+
+
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -68,73 +74,106 @@
                             </li>
                         @endguest
                     </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="nav-side-menu">
-                    <div class="brand">ADMIN</div>
-                    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-
-                    <div class="menu-list">
-
-                        <ul id="menu-content" class="menu-content collapse out">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                                </a>
-                            </li>
-
-                            <!-- Player -->
-                            <li  data-toggle="collapse" data-target="#players" class="collapsed active">
-                                <a href="#"><i class="fa fa-user fa-lg"></i> Players <span class="arrow"></span></a>
-                            </li>
-                            <ul class="sub-menu collapse" id="players">
-                                <li><a href="/admin/players">List</a></li>
-                                <li><a href="/admin/players/create">Create</a></li>
-                            </ul>
-
-                            <!-- Team -->
-                            <li  data-toggle="collapse" data-target="#teams" class="collapsed active">
-                                <a href="#"><i class="fa fa-users fa-lg"></i> Teams <span class="arrow"></span></a>
-                            </li>
-                            <ul class="sub-menu collapse" id="teams">
-                                <li><a href="/admin/teams">List</a></li>
-                                <li><a href="/admin/teams/create">Create</a></li>
-                            </ul>
-
-                            <!-- Match -->
-                            <li  data-toggle="collapse" data-target="#matches" class="collapsed active">
-                                <a href="#"><i class="fa fa-calendar fa-lg"></i> Matches <span class="arrow"></span></a>
-                            </li>
-                            <ul class="sub-menu collapse" id="matches">
-                                <li><a href="/admin/matches">List</a></li>
-                                <li><a href="/admin/matches/create">Create</a></li>
-                            </ul>
-
-                            <!-- Location -->
-                            <li  data-toggle="collapse" data-target="#locations" class="collapsed active">
-                                <a href="#"><i class="fa fa-globe fa-lg"></i> Locations <span class="arrow"></span></a>
-                            </li>
-                            <ul class="sub-menu collapse" id="locations">
-                                <li><a href="/admin/locations">List</a></li>
-                                <li><a href="/admin/locations/create">Create</a></li>
-                            </ul>
-
+	                <?php $urls = dispatch_now(new \Keevitaja\Linguist\Switcher); ?>
+                    <div class="dropdown pull-right language-switcher" style="margin-top: 6px;">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-globe" aria-hidden="true"></i>
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            @foreach($urls as $key => $url)
+                                @if ($key == 'en')
+                                    <li><a href="{{ $url }}"><span class="flag-icon flag-icon-gb"></span> {{ $key }}</a></li>
+                                @else
+                                    <li><a href="{{ $url }}"><span class="flag-icon flag-icon-{{ $key }}"></span> {{ $key }}</a></li>
+                                @endif
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9">
-                @yield('content')
+        </nav>
+        <div class="wrapper" style="">
+                <!-- Sidebar -->
+                <nav id="sidebar" class="">
+                    <div class="sidebar-header">
+
+
+                        <div class="brand">ADMIN</div>
+
+                    </div>
+                        <div class="nav-side-menu">
+
+                            <ul id="menu-content" class="">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                                    </a>
+                                </li>
+
+                                <!-- Player -->
+                                <li  data-toggle="collapse" data-target="#players" class="collapsed active">
+                                    <a href="#"><i class="fa fa-user fa-lg"></i> {{ __('Players') }} <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="players">
+                                    <li><a href="{{ url('admin/players')}}">{{ __('List') }}</a></li>
+                                    <li><a href="{{ url('admin/players/create')}}">{{ __('Create') }}</a></li>
+                                </ul>
+
+                                <!-- Team -->
+                                <li  data-toggle="collapse" data-target="#teams" class="collapsed active">
+                                    <a href="#"><i class="fa fa-users fa-lg"></i> {{ __('Teams') }} <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="teams">
+                                    <li><a href="{{ url('admin/teams')}}">{{ __('List') }}</a></li>
+                                    <li><a href="{{ url('admin/teams/create')}}">{{ __('Create') }}</a></li>
+                                </ul>
+
+                                <!-- Match -->
+                                <li  data-toggle="collapse" data-target="#matches" class="collapsed active">
+                                    <a href="#"><i class="fa fa-calendar fa-lg"></i> {{ __('Matches') }} <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="matches">
+                                    <li><a href="{{ url('admin/matches')}}">{{ __('List') }}</a></li>
+                                    <li><a href="{{ url('admin/matches/create')}}">{{ __('Create') }}</a></li>
+                                </ul>
+
+                                <!-- Location -->
+                                <li  data-toggle="collapse" data-target="#locations" class="collapsed active">
+                                    <a href="#"><i class="fa fa-globe fa-lg"></i> {{ __('Locations') }} <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="locations">
+                                    <li><a href="{{ url('admin/locations') }}">{{ __('List') }}</a></li>
+                                    <li><a href="{{ url('admin/locations/create')}}">{{ __('Create') }}</a></li>
+                                </ul>
+
+                            </ul>
+
+                        </div>
+
+                </nav>
+            <div id="content">
+                <div class="container-fluid">
+                    <div class="container" style="padding-top: 30px;">
+                        @yield('content')
+                    </div>
+
+
+                </div>
             </div>
         </div>
+</div>
 
-
-    </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/js/app.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+
+        });
+    </script>
+
 </body>
 </html>

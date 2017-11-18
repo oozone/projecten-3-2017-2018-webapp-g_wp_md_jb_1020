@@ -13,6 +13,18 @@ require('./bootstrap');
 //window.moment.locale();         // nl-be
 
 window.Vue = require('vue');
+window.axios = require('axios');
+
+window.Lang = require('vuejs-localization');
+
+//Notice that you need to specify the lang folder, in this case './lang'
+Lang.requireAll(require.context('./lang', true, /\.js$/));
+
+window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.config.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
+
 Vue.use(require('vue-moment'));
 /**
  * Next, we will create a fresh Vue application instance and attach it to

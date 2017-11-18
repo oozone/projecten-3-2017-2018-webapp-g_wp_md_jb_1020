@@ -10,6 +10,7 @@ use App\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TeamController extends Controller
 {
@@ -20,7 +21,7 @@ class TeamController extends Controller
 	 */
 	public function index()
 	{
-		$teams= Team::get();
+		$teams= Team::paginate(20);
 		return View::make('admin.teams.index', array('data' => $teams));
 	}
 
@@ -155,4 +156,59 @@ class TeamController extends Controller
 	{
 		//
 	}
+
+	public function csv($id)
+	{
+		$team = Team::findOrFail($id);
+		return View::make('admin.teams.csv', array('team' => $team));
+	}
+
+	public function csvImport($id)
+	{
+		$this->validate(request(), [
+			'csv' => 'required',
+		]);
+
+		$team = Team::findOrFail($id);
+
+		if(request()->hasFile('csv'))
+		{
+			$csvFile = request()->file('csv');
+
+			Excel::load($csvFile, function($reader) use ($team) {
+
+				//Excel::selectSheetsByIndex(0)->load();
+
+				// Getting all results
+				$results = $reader->get();
+
+
+				foreach($results as $result){
+					//dd($result->name);
+
+					$player = new Player();
+					$player->name = $result->name;
+					$player->player_number = $result->player_number;
+					$player->birthdate = $result->birthdate;
+					$player->status = $result->status;
+					$player->starter = $result->starter;
+
+					$team->players()->save($player);
+
+				}
+
+			});
+
+
+
+		}
+
+
+
+
+		return redirect('/admin/players/');
+	}
+
+
+
 }

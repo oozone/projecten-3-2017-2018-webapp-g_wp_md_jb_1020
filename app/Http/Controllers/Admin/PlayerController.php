@@ -18,7 +18,7 @@ class PlayerController extends Controller
 	 */
 	public function index()
 	{
-		$players = Player::get();
+		$players = Player::paginate(20);
 		return View::make('admin.players.index', array('players' => $players));
 	}
 

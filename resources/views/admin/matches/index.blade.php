@@ -5,20 +5,22 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="col-sm-12">
-                    <div class="pull-right">
-                        <a href="/admin/matches/create" class="btn btn-default">Create</a>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <legend>{{__('Matches')}}</legend>
                     </div>
-                    <legend>Teams</legend>
+                    <div class="col-sm-3">
+                        <a href="{{url('admin/matches/create')}}" class="btn btn-default">{{ __('Create') }}</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="span5">
                         <table class="table table-striped table-condensed">
                             <thead>
                             <tr>
-                                <th>Home</th>
-                                <th>Visitor</th>
-                                <th>Date</th>
+                                <th>{{__('Home')}}</th>
+                                <th>{{__('Visitor')}}</th>
+                                <th>{{__('Date')}}</th>
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
@@ -28,9 +30,11 @@
                                         <td>{{$item->home->name}}</td>
                                         <td>{{$item->visitor->name}}</td>
                                         <td>{{$item->datum}}</td>
-                                        <td><a href="/admin/matches/{{$item->id}}/edit"><i class="fa fa-edit fa-lg"></i></a></td>
+                                        <td><a href="{{url('admin/matches/'.$item->id.'/edit')}}"><i class="fa fa-edit fa-lg"></i></a></td>
                                     </tr>
                                 @endforeach
+
+                                {{ $data->links() }}
                             </tbody>
                         </table>
                     </div>

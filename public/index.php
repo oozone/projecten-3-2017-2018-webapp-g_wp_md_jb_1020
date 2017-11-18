@@ -22,7 +22,7 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/../vendor/autoload.php';
-
+(new Keevitaja\Linguist\UriFixer)->fixit();
 /*
 |--------------------------------------------------------------------------
 | Turn On The Lights

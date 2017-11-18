@@ -2,14 +2,14 @@
 
 @section('content')
 
-
+<div class="container">
 
     <div class="col-sm-12">
-        <legend>Create player</legend>
+        <legend>{{ __('Create player') }}</legend>
     </div>
     <!-- panel preview -->
     <div class="col-sm-12">
-        <h4>Player profile</h4>
+        <h4>{{ __('Player profile') }}</h4>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -21,28 +21,37 @@
         @endif
         <div class="panel panel-default">
             <div class="panel-body form-horizontal payment-form">
-                {!! Form::open(array('action' => array('Admin\PlayerController@store'), 'method' => 'POST', 'files' => true))  !!}
+
+                <div class="row" style="margin-bottom: 20px;">
+                    <div class="col-sm-3">
+                        <div class="pull-right">
+                            <a href="{{url('admin/players')}}" class="btn btn-default">{{ __('Back') }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                    {!! Form::open(array('action' => array('Admin\PlayerController@store'), 'method' => 'POST', 'files' => true))  !!}
                     {{csrf_field()}}
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">Name</label>
+                        <label for="name" class="col-sm-3 control-label">{{ __('Name') }}</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="name" name="name">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="player_number" class="col-sm-3 control-label">Player Number</label>
+                        <label for="name" class="col-sm-3 control-label">{{ __('Player number') }}</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="player_number" name="player_number">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="date" class="col-sm-3 control-label">Birthdate</label>
+                        <label for="name" class="col-sm-3 control-label">{{ __('Birthdate') }}</label>
                         <div class="col-sm-9">
                             <input type="date" class="form-control" id="date" name="date">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Starter</label>
+                        <label for="name" class="col-sm-3 control-label">{{ __('Starter') }}</label>
                         <div class="col-sm-9">
                             <select class="form-control" id="starter" name="starter">
                                 <option value="1">Yes</option>
@@ -51,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Status</label>
+                        <label for="name" class="col-sm-3 control-label">{{ __('Status') }}</label>
                         <div class="col-sm-9">
                             <select class="form-control" id="status" name="status">
                                 <option value="1">Active</option>
@@ -60,7 +69,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label">Team</label>
+                        <label for="name" class="col-sm-3 control-label">{{ __('Team') }}</label>
                         <div class="col-sm-9">
                             <select class="form-control" id="team" name="team">
                                 @foreach($teams as $team)
@@ -70,7 +79,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        {{ Form::label('image', 'Image', array('class' => 'col-sm-3 control-label')) }}
+                        <label for="name" class="col-sm-3 control-label">{{ __('Image') }}</label>
                         <div class="col-sm-9">
                             {{ Form::file('image') }}
                         </div>
@@ -78,7 +87,7 @@
                     <div class="form-group">
                         <label for="status" class="col-sm-3 control-label"></label>
                         <div class="col-sm-9">
-                            <button class="btn btn-default" type="submit">Save</button>
+                            <button class="btn btn-default" type="submit">{{ __('Save') }}</button>
                         </div>
                     </div>
 
@@ -86,4 +95,5 @@
             </div>
         </div>
     </div> <!-- / panel preview -->
+</div>
 @endsection

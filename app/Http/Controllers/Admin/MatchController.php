@@ -22,7 +22,7 @@ class MatchController extends Controller
 	 */
 	public function index()
 	{
-		$matches = Match::get();
+		$matches = Match::paginate(20);
 		return View::make('admin.matches.index', array('data' => $matches));
 	}
 
@@ -105,7 +105,16 @@ class MatchController extends Controller
 	{
 		$match = Match::findOrFail($id);
 		$teams = Team::pluck('name', 'id');
-		return View::make('admin.matches.edit', array('match' => $match, 'teams' => $teams));
+		$divisions = Division::pluck('name', 'id');
+		$locations = Location::pluck('name', 'id');
+		return View::make('admin.matches.edit', array(
+			'match' => $match,
+			'teams' => $teams,
+			'divisions' => $divisions,
+			'locations' => $locations,
+			'valors' => Valor::pluck('name', 'id'),
+			'difficulties' => Difficulty::pluck('name', 'id'),
+		));
 	}
 
 	/**

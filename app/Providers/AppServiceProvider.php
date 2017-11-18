@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Eusebiu\JavaScript\Facades\ScriptVariables;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+	    ScriptVariables::add(function () {
+		    return [
+			    'csrfToken' => csrf_token(),
+		    ];
+	    });
     }
 
     /**

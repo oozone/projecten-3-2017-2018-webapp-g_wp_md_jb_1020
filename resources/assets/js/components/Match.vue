@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button type="button" class="btn btn-default" v-on:click="goHome()">Overzicht matchen</button>
+        <button type="button" class="btn btn-default" v-on:click="goHome()">{{overzichtmatchen}}</button>
         <div class="row">
             <div class="col-sm-6 col-md-12">
                 <div class="panel panel-matchdetail">
@@ -14,21 +14,29 @@
 
                         <div class="row">
                             <div class="col-sm-12 text-center">
-                                {{match.home.competition_class}}
+                                {{datamatch.home.division.name}}
                             </div>
                             <div class="col-sm-4" style="padding-top: 25px;">
-                            {{ match.home.name }}
+                                <div class="teamlogo" v-if="datamatch.home.logo != ''">
+                                    <img :src="datamatch.home.logo" width="50px" />
+                                </div>
+                            {{ datamatch.home.name }}
+
                             </div>
                             <div class="col-sm-4">
-                                <span style="font-size: 32px">{{match.score_home}} - {{match.score_visitor}}</span>
+                                <div style="font-size: 32px; padding-top: 16px;">{{datamatch.score_home}} - {{datamatch.score_visitor}}</div>
                             </div>
                             <div class="col-sm-4" style="padding-top: 25px;">
-                                {{ match.visitor.name }}
+                                <div class="teamlogo" v-if="datamatch.visitor.logo != ''">
+                                    <img :src="datamatch.visitor.logo" width="50px" />
+                                </div>
+                                {{ datamatch.visitor.name }}
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                Locatie: {{ match.location.name }}
+                                {{location }}: {{ datamatch.location.name }}
                             </div>
                         </div>
 
@@ -38,11 +46,11 @@
                 <!-- Match details -->
                 <div class="panel panel-matchlist">
                     <div class="panel-heading text-center">
-                        Matchverloop
+                        {{ matchverloop }}
                     </div>
                     <div class="panel-body">
                         <!-- home -->
-                            <div class="row" v-for="goal in match.goals">
+                            <div class="row" v-for="goal in datamatch.goals">
 
                                 <div class="row" v-if="goal.team_id == match.home.id">
                                     <div class="col-sm-6 col-xs-12 wp-goal-home">
@@ -70,22 +78,22 @@
                 <!-- Players -->
                 <div class="panel panel-matchlist">
                     <div class="panel-heading text-center">
-                        Teams
+                        {{ teams }}
                     </div>
                     <div class="panel-body">
                         <!-- home -->
                         <div class="col-sm-6 col-xs-12">
                             <div class="row coach-row">
                                 <div class="col-sm-12">
-                                    <b>{{ match.home.name }}</b>
+                                    <b>{{ datamatch.home.name }}</b>
                                 </div>
                             </div>
                             <div class="row coach-row">
                                 <div class="col-sm-12">
-                                    Coach: {{ match.home.coach.name }}
+                                    {{ coach }}: {{ datamatch.home.coach.name }}
                                 </div>
                             </div>
-                            <div class="row" v-for="player in match.home.players">
+                            <div class="row" v-for="player in datamatch.home.players">
                                 <div class="col-sm-2 col-xs-2">
                                     {{ player.player_number }}
                                 </div>
@@ -98,15 +106,15 @@
                         <div class="col-sm-6 col-xs-12">
                             <div class="row coach-row">
                                 <div class="col-sm-12">
-                                    <b>{{ match.visitor.name }}</b>
+                                    <b>{{ datamatch.visitor.name }}</b>
                                 </div>
                             </div>
                             <div class="row coach-row">
                                 <div class="col-sm-12">
-                                    Coach: {{ match.visitor.coach.name }}
+                                    {{ coach }}: {{ datamatch.visitor.coach.name }}
                                 </div>
                             </div>
-                            <div class="row" v-for="player in match.visitor.players">
+                            <div class="row" v-for="player in datamatch.visitor.players">
                                 <div class="col-sm-2 col-xs-2">
                                     {{ player.player_number }}
                                 </div>
@@ -123,24 +131,63 @@
     </div>
 </template>
 <script>
-
-
     export default {
         name: 'match',
         props: ['match'],
         components: {
-            //'starrating': starrating,
         },
         mounted: function() {
             "use strict";
         },
+        data: function(){
+            return {
+                datamatch: this.match,
+                matchverloop: "Match detail",
+                location: "Location",
+                teams: "Teams",
+                coach: "Coach",
+                overzichtmatchen: "Matchlist"
+            }
+        },
         created () {
+            this.setLocale();
+            this.loadData();
+
+            setInterval(function () {
+                this.loadData();
+            }.bind(this), 10000);
         },
         methods: {
+            setLocale(){
+                if(window.location.pathname.split('/')[1] == 'nl'){
+                    this.matchverloop = 'Match detail';
+                    this.location = 'Locatie';
+                    this.overzichtmatchen = "Overzicht matchen";
+                } else if(window.location.pathname.split('/')[1] == 'fr'){
+                    this.matchverloop = 'Détail du match';
+                    this.location = 'Emplacement';
+                    this.overzichtmatchen = "Aperçu des matchs";
+                    this.coach = "Entraîneur";
+                    this.teams = "Équipes";
+                }
+            },
             goHome: function () {
-                window.location.href = '/';
+
+                if(window.location.pathname.split('/')[1] == 'nl'){
+                    window.location.href = '/nl/';
+                } else if(window.location.pathname.split('/')[1] == 'fr'){
+                    window.location.href = '/fr/';
+                } else {
+                    window.location.href = '/';
+                }
+
+
+            },
+            loadData: function () {
+                axios.get('/api/matches/' + this.datamatch.id)
+                    .then(response => this.datamatch = (response.data));
             }
-        }
+        },
     }
 
 </script>

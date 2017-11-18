@@ -5,19 +5,21 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="col-sm-12">
-                    <div class="pull-right">
-                        <a href="/admin/matches/create" class="btn btn-default">Create</a>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <legend>{{ __('Locations') }}</legend>
                     </div>
-                    <legend>Teams</legend>
+                    <div class="col-sm-3">
+                        <a href="{{url('admin/locations/create')}}" class="btn btn-default">{{ __('Create') }}</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="span5">
                         <table class="table table-striped table-condensed">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>City</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('City') }}</th>
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
@@ -26,9 +28,11 @@
                                     <tr>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->city}}</td>
-                                        <td><a href="/admin/locations/{{$item->id}}/edit"><i class="fa fa-edit fa-lg"></i></a></td>
+                                        <td><a href="{{url('admin/locations/'.$item->id.'/edit')}}"><i class="fa fa-edit fa-lg"></i></a></td>
                                     </tr>
                                 @endforeach
+
+                                {{ $data->links() }}
                             </tbody>
                         </table>
                     </div>

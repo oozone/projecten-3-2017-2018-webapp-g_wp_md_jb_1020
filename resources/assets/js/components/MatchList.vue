@@ -1,13 +1,9 @@
 <template>
     <div>
 
-        <div v-for="division in divisions" class="panel panel-matchlist">
-            <div class="panel-heading">{{division.name}}</div>
-            <div class="panel-body">
 
-                    <div class="table-matchlist">
 
-                            <div class="row row-matchlist" v-for="match in division.matches" v-on:click="clickList(match.id)">
+                            <div class="row row-matchlist" v-for="match in divisions" v-on:click="clickList(match.id)">
 
                                 <div class="col-xs-10 col-md-2" style="text-align: center;"><div class="wppdate">{{ match.datum | moment("DD-MM-YYYY")  }}</div></div>
                                 <div class="col-xs-2 col-md-2">{{ match.datum | moment("HH:mm") }}</div>
@@ -19,11 +15,8 @@
                                 <!--<td><a href="/matches/{{$match->id}}">Bekijk</a></td>-->
                             </div>
 
-                </div>
-            </div>
-        </div>
-
     </div>
+
 </template>
 <script>
 

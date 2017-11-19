@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Location;
+//use Cornford\Googlmapper\Mapper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Mapper;
 
 class LocationController extends Controller
 {
@@ -46,8 +49,12 @@ class LocationController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
-		return Location::find($id);
+		$location = Location::find($id);
+		$locations = Location::get();
+		return View::make('web.locations.show', array(
+			'location' => $location,
+			'locations' => $locations,
+		));
 	}
 
 	/**

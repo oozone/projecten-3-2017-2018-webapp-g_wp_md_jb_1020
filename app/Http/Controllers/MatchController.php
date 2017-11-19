@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Match;
+use App\Player;
+use App\Season;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class MatchController extends Controller
@@ -47,8 +50,19 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
+		$topscorers = DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
+
+		$season = Season::find(1);
+		$standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
+
+
+//
 		$match = Match::with('home.players')->with('visitor.players')->find($id);
-		return View::make('web.matches.show', array('match' => $match));
+		return View::make('web.matches.show', array(
+			'match' => $match,
+			'topscorers' => $topscorers,
+			'standings' => $standings
+		));
 	}
 
 	/**

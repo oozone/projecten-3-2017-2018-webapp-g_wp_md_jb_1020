@@ -28,4 +28,14 @@ class Team extends Model
 	{
 		return $this->belongsToMany(Match::class);
 	}
+
+	public function seasons()
+	{
+		return $this->belongsToMany(Season::class);
+	}
+
+	public function scopeDivision($query, $divisionId = 1){
+		return $query->where('division_id', $divisionId);
+	}
+
 }

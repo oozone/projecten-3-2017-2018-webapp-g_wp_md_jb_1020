@@ -25,9 +25,18 @@
                                 <b>{{ __('Goals') }}</b>
                             </div>
                         </div>
-                        <topscorers :topscorers="{{$topscorers}}"></topscorers>
+                        @foreach($topscorers as $t)
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    {{ $t->name }}
+                                </div>
+                                <div class="col-sm-3">
+                                    {{ $t->goalscore }}
+                                </div>
+                            </div>
+                        @endforeach
+                        </div>
                     </div>
-                </div>
 
                 <!-- Standings -->
                 <div class="panel panel-sidebar">
@@ -43,8 +52,17 @@
                                 <b>{{ __('Points') }}</b>
                             </div>
                         </div>
-                        <standings :standings="{{$standings}}"></standings>
+                        @foreach($standings as $s)
 
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    {{ $s->name }}
+                                </div>
+                                <div class="col-sm-3">
+                                    {{ $s->pivot->won * 3 }}
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 

@@ -66,5 +66,10 @@ class Match extends Model
 		return $this->hasMany(PenaltyBook::class);
 	}
 
+	public function season()
+	{
+		return $this->belongsTo(Season::class);
+	}
+
 
 }

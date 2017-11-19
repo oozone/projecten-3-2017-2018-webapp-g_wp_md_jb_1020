@@ -14,22 +14,47 @@ class CoachTableSeeder extends Seeder
     public function run()
     {
 
-    	$team = Team::where('name','Gentse WPC')->first();
     	$coach = new Coach();
     	$coach->name = "Eerste coach";
     	$coach->save();
 
 
-	    $team = Team::where('name','Aalst')->first();
+
 	    $coach = new Coach();
 	    $coach->name = "Tweede coach";
 	    $coach->save();
 
 
-	    $team = Team::where('name','Kortrijk')->first();
 	    $coach = new Coach();
 	    $coach->name = "Derde coach";
 	    $coach->save();
 
+	    $coach = new Coach();
+	    $coach->name = "Vierde coach";
+	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Vijfde coach";
+	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Zesde coach";
+	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Zevende coach";
+	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Achtste coach";
+	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Negende coach";
+	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Tiende coach";
+	    $coach->save();
     }
 }

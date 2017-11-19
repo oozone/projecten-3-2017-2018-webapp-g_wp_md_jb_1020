@@ -3,6 +3,7 @@
 use App\Difficulty;
 use App\Location;
 use App\Match;
+use App\Season;
 use App\Team;
 use App\Valor;
 use Illuminate\Database\Seeder;
@@ -18,13 +19,13 @@ class MatchTableSeeder extends Seeder
     {
 	    // location_id, difficulty_id, 'valor_id', home_id', 'visitor_id', datetime('date'), time('time_played')->default('00:00');
 
-	    // Gent - Aalst
-	    $location = Location::first();
+	    // Moeskroen - Antwerpen
+	    $location = Location::where('name', 'like', 'dauphins')->first();
 	    $difficulty = Difficulty::first();
 	    $valor = Valor::first();
 
-	    $home = Team::where('name', 'Gentse WPC')->first();
-	    $visitor = Team::where('name', 'Aalst')->first();
+	    $home = Team::where('name', 'Moeskroen')->first();
+	    $visitor = Team::where('name', 'Antwerpen')->first();
 
 		$match = new Match();
 		$match->division_id = 1;
@@ -35,8 +36,7 @@ class MatchTableSeeder extends Seeder
 		$match->datum = date("Y-m-d H:i:s");
 		$match->time_played = "00:00";
 		$match->save();
-		//$match->home()->save($home);
-		//$match->visitor()->save($visitor);
+
 
 		$location = Location::first();
 		$location->matches()->save($match);
@@ -44,17 +44,19 @@ class MatchTableSeeder extends Seeder
 		$difficulty->matches()->save($match);
 		$valor = Valor::first();
 		$valor->matches()->save($match);
-		//$match->difficulty()->attach($difficulty);
-		//$match->valor()->save($valor);
+
+		$season = Season::first();
+		$season->matches()->save($match);
 
 
-		// Kortrijk - Aalst
-	    $location = Location::where('name', 'Van Eyck')->first();
+
+		// Kortrijk - Mechelen
+	    $location = Location::where('name', 'Zwembad Sportpunt')->first();
 	    $difficulty = Difficulty::first();
 	    $valor = Valor::first();
 
 	    $home = Team::where('name', 'Kortrijk')->first();
-	    $visitor = Team::where('name', 'Aalst')->first();
+	    $visitor = Team::where('name', 'Mechelen')->first();
 
 	    $match = new Match();
 	    $match->division_id = 1;
@@ -63,15 +65,12 @@ class MatchTableSeeder extends Seeder
 	    $match->datum = date("Y-m-d H:i:s");
 	    $match->time_played = "00:00";
 	    $match->save();
-	    //$match->home()->save($home);
-	    //$match->visitor()->save($visitor);
 
-	    $location = Location::first();
 	    $location->matches()->save($match);
-	    $difficulty = Difficulty::first();
 	    $difficulty->matches()->save($match);
-	    $valor = Valor::first();
 	    $valor->matches()->save($match);
+
+	    $season->matches()->save($match);
 
     }
 }

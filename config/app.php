@@ -183,6 +183,7 @@ return [
 	    Collective\Html\HtmlServiceProvider::class,
 	    Intervention\Image\ImageServiceProvider::class,
 	    Eusebiu\JavaScript\JavaScriptServiceProvider::class,
+	    Cornford\Googlmapper\MapperServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'ScriptVariables' => Eusebiu\JavaScript\Facades\ScriptVariables::class,
+        'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
 
     ],
 

@@ -44,5 +44,22 @@
   "Login": "Login",
   "Register": "Registrer",
   "Logout": "Logout",
-  "Teams": "Équipes"
+  "Teams": "Équipes",
+  "Topscorers First Division": "Buteurs Première Division",
+  "Standings First Division": "Resultats Première Division",
+  "Topscorers": "Buteurs",
+  "Standings": "Resultats",
+
+  "First division": "Première division",
+  "Second division": "Deuxième division",
+  "Third division": "Troisième division",
+  "Fourth division": "Quatrième division",
+  "Amateur A": "Amateur A",
+  "Amateur B": "Amateur B",
+  "Amateur C": "Amateur C",
+  "Amateur D": "Amateur D",
+  "Women First division": "Femmes première division",
+  "Cup A": "Coupe A",
+  "Cup B": "Coupe B",
+  "Cup Women": "Coupe femmes"
 }

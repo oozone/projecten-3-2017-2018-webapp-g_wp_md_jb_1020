@@ -20,7 +20,10 @@
                                 <div class="teamlogo" v-if="datamatch.home.logo != ''">
                                     <img :src="datamatch.home.logo" width="50px" />
                                 </div>
-                            {{ datamatch.home.name }}
+                                {{ datamatch.home.name }}
+                                <div id="goalhome" style="display: none; color: white; background-color: red">
+                                    GOAL
+                                </div>
 
                             </div>
                             <div class="col-sm-4">
@@ -31,12 +34,14 @@
                                     <img :src="datamatch.visitor.logo" width="50px" />
                                 </div>
                                 {{ datamatch.visitor.name }}
-
+                                <div id="goalvisitor" style="display: none; color: red; font-size: 16px; font-weight: bold;">
+                                    GOAL
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                {{location }}: {{ datamatch.location.name }}
+                                {{location }}: <a :href="'/locations/' + datamatch.location.id">{{ datamatch.location.name }}</a>
                             </div>
                         </div>
 
@@ -54,7 +59,11 @@
 
                                 <div class="row" v-if="goal.team_id == match.home.id">
                                     <div class="col-sm-6 col-xs-12 wp-goal-home">
+
                                         {{ goal.player.player_number }} {{ goal.player.name }} <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                        <!--{{ moment.utc(moment(goal.created_at,"YYYY-MM-DD HH:mm:ss").diff(moment(match.created_at,"YYYY-MM-DD HH:mm:ss"))).format("mm:ss")}}-->
+
+                                        {{ goal.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
                                     </div>
                                     <div class="col-sm-6">
 
@@ -65,6 +74,7 @@
 
                                     </div>
                                     <div class="col-sm-6 col-xs-12 wp-goal-visitor">
+                                        {{ goal.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
                                         <i class="fa fa-futbol-o" aria-hidden="true"></i> {{ goal.player.player_number }} {{ goal.player.name }}
                                     </div>
                                 </div>
@@ -131,6 +141,12 @@
     </div>
 </template>
 <script>
+    //import moment from "moment";
+    //import momentTimezone from "moment-timezone";
+    //import VueMomentJS from "vue-momentjs";
+    Vue.use(require('vue-moment'));
+    //Vue.use(VueMomentJS, moment);
+
     export default {
         name: 'match',
         props: ['match'],
@@ -146,18 +162,31 @@
                 location: "Location",
                 teams: "Teams",
                 coach: "Coach",
-                overzichtmatchen: "Matchlist"
+                overzichtmatchen: "Matchlist",
+                score_home: 0,
+                score_visitor: 0,
             }
         },
         created () {
             this.setLocale();
-            this.loadData();
+            axios.get('/api/matches/' + this.datamatch.id)
+                .then(
+                    response => {
+                        this.datamatch = (response.data);
+                        this.score_home = response.data.score_home;
+                        this.score_visitor = response.data.score_visitor;
+                    }
+                );
 
             setInterval(function () {
                 this.loadData();
+
             }.bind(this), 10000);
         },
         methods: {
+            moment: function () {
+                return moment();
+            },
             setLocale(){
                 if(window.location.pathname.split('/')[1] == 'nl'){
                     this.matchverloop = 'Match detail';
@@ -185,7 +214,21 @@
             },
             loadData: function () {
                 axios.get('/api/matches/' + this.datamatch.id)
-                    .then(response => this.datamatch = (response.data));
+                    .then(
+                        response => {
+                            this.datamatch = (response.data);
+                            this.checkGoals();
+                        }
+                    );
+            },
+            checkGoals: function(){
+                if(this.datamatch.score_home > this.score_home){
+                    $("#goalhome").show().delay(5000).fadeOut();
+                    this.score_home = this.datamatch.score_home;
+                } else if(this.datamatch.score_visitor > this.score_visitor){
+                    $("#goalvisitor").show().delay(5000).fadeOut();
+                    this.score_visitor = this.datamatch.score_visitor;
+                }
             }
         },
     }

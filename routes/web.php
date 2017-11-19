@@ -23,6 +23,7 @@ Route::Resource('players', 'PlayerController');
 Route::Resource('teams', 'TeamController');
 Route::Resource('matches', 'MatchController');
 Route::Resource('divisions', 'DivisionController');
+Route::Resource('locations', 'LocationController');
 
 Auth::routes();
 

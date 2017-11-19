@@ -90,6 +90,9 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL0zXQMr-I1pFHYCfeie3zEnqEo1qlz5k"></script>
     <script src="/js/app.js"></script>
+
+
 </body>
 </html>

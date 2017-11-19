@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Division;
 use App\Match;
+use App\Season;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class WelcomeController extends Controller
@@ -27,12 +29,15 @@ class WelcomeController extends Controller
     public function index()
     {
     	$divisions = Division::with('matches')->orderBy('ranking','asc')->get();
-    	//dd($divisions->toJson());
-    	//$matches = Match::get();
-        //return view('welcome', compact('divisions'));
+    	$season = Season::current()->first();
+	    $standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
+	    $topscorers = DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
+
+
 	    return View::make('welcome', array(
 	    	'divisions' => $divisions,
-		    //'matches' => $matches,
+		    'standings' => $standings,
+		    'topscorers' => $topscorers
 	    ));
     }
 }

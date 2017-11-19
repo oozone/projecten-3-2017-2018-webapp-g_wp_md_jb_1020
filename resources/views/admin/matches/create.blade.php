@@ -33,6 +33,12 @@
                 {!! Form::open(array('action' => array('Admin\MatchController@store'), 'method' => 'POST'))  !!}
 
                 <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">{{ __('Season') }}</label>
+                    <div class="col-sm-9">
+                        {{ Form::select('season_id', $seasons, 1, array('class' => 'form-control')) }}
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">{{ __('Home') }}</label>
                     <div class="col-sm-9">
                         {{ Form::select('home_id', $teams, 1, array('class' => 'form-control')) }}

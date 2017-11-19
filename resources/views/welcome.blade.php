@@ -11,7 +11,7 @@
 
                 @foreach($divisions as $division)
                     <div class="panel panel-matchlist">
-                        <div class="panel-heading">{{ __($division->name)}}</div>
+                        <div class="panel-heading text-center">{{ __($division->name)}}</div>
                         <div class="panel-body">
 
                             <div class="table-matchlist">

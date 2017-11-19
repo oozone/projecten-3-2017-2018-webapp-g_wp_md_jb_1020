@@ -30,7 +30,12 @@
                 </div>
 
                 {!! Form::model($match, array('action' => array('Admin\MatchController@update', $match->id), 'method' => 'PUT'))  !!}
-
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">{{ __('Season') }}</label>
+                    <div class="col-sm-9">
+                        {{ Form::select('season_id', $seasons, $match->season_id, array('class' => 'form-control')) }}
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="name" class="col-sm-3 control-label">{{ __('Home') }}</label>
                     <div class="col-sm-9">

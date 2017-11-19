@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Location;
 use App\Player;
 use App\Match;
+use App\Season;
 use App\Team;
 use App\Valor;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ class MatchController extends Controller
 		$teams = Team::pluck('name', 'id');
 		$difficulties = Difficulty::pluck('name', 'id');
 		$valors = Valor::pluck('name', 'id');
+		$seasons = Season::pluck('name', 'id');
 		$divisions = Division::pluck('name', 'id');
 		$locations = Location::pluck('name', 'id');
 
@@ -44,7 +46,8 @@ class MatchController extends Controller
 			'difficulties' => $difficulties,
 			'valors' => $valors,
 			'divisions' => $divisions,
-			'locations' => $locations
+			'locations' => $locations,
+			'seasons' => $seasons
 		));
 	}
 
@@ -64,10 +67,8 @@ class MatchController extends Controller
 			'division_id' => 'required|integer',
 			'difficulty_id' => 'required|integer',
 			'location_id' => 'required|integer',
-
+			'season_id' => 'required|integer'
 		]);
-
-
 
 		$match = new Match();
 		$match->home_id = request()->input('home_id');
@@ -77,6 +78,7 @@ class MatchController extends Controller
 		$match->division_id = request()->input('division_id');
 		$match->difficulty_id = request()->input('difficulty_id');
 		$match->location_id = request()->input('location_id');
+		$match->season_id = request()->input('season_id');
 		$match->save();
 
 
@@ -107,6 +109,7 @@ class MatchController extends Controller
 		$teams = Team::pluck('name', 'id');
 		$divisions = Division::pluck('name', 'id');
 		$locations = Location::pluck('name', 'id');
+		$seasons = Season::pluck('name', 'id');
 		return View::make('admin.matches.edit', array(
 			'match' => $match,
 			'teams' => $teams,
@@ -114,6 +117,7 @@ class MatchController extends Controller
 			'locations' => $locations,
 			'valors' => Valor::pluck('name', 'id'),
 			'difficulties' => Difficulty::pluck('name', 'id'),
+			'seasons' => $seasons
 		));
 	}
 
@@ -134,7 +138,8 @@ class MatchController extends Controller
 			'valor_id' => 'required|integer',
 			'division_id' => 'required|integer',
 			'difficulty_id' => 'required|integer',
-			'location_id' => 'required|integer'
+			'location_id' => 'required|integer',
+			'season_id' => 'required|integer'
 		]);
 
 		$match = Match::findOrFail($id);
@@ -145,6 +150,7 @@ class MatchController extends Controller
 		$match->division_id = request()->input('division_id');
 		$match->difficulty_id = request()->input('difficulty_id');
 		$match->location_id = request()->input('location_id');
+		$match->season_id = request()->input('season_id');
 		$match->save();
 
 		return redirect('/admin/matches/' . $id .'/edit');

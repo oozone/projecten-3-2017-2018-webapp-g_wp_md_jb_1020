@@ -84,6 +84,50 @@
                     </div>
                 </div>
 
+                <!-- Match details -->
+                <div class="panel panel-matchlist">
+                    <div class="panel-heading text-center">
+                        {{ fouten }}
+                    </div>
+                    <div class="panel-body">
+                        <!-- home -->
+                        <div class="row" v-for="item in datamatch.penaltybooks">
+
+                            <div class="row" v-if="item.player.team_id == match.home.id">
+                                <div class="col-sm-6 col-xs-12 wp-goal-home">
+
+                                    {{ item.player.player_number }} {{ item.player.name }}
+
+                                            <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
+                                            <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
+                                            <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
+
+                                    {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+                                </div>
+                                <div class="col-sm-6">
+
+                                </div>
+                            </div>
+                            <div class="row" v-else>
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6 col-xs-12 wp-goal-visitor">
+                                    {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+
+                                    <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
+                                    <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
+                                    <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
+
+                                    {{ item.player.player_number }} {{ item.player.name }}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                
 
                 <!-- Players -->
                 <div class="panel panel-matchlist">
@@ -108,7 +152,7 @@
                                     {{ player.player_number }}
                                 </div>
                                 <div class="col-sm-10 col-xs-10">
-                                    {{ player.name }}
+                                    <a :href="'/players/' + player.id" class="playerprofilelink">{{ player.name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +173,7 @@
                                     {{ player.player_number }}
                                 </div>
                                 <div class="col-sm-10 col-xs-10">
-                                    {{ player.name }}
+                                    <a :href="'/players/' + player.id" class="playerprofilelink">{{ player.name }}</a>
                                 </div>
                             </div>
                         </div>
@@ -146,6 +190,8 @@
     //import VueMomentJS from "vue-momentjs";
     Vue.use(require('vue-moment'));
     //Vue.use(VueMomentJS, moment);
+    import { bus } from './bus.js';
+    //const Bus = new Vue({});
 
     export default {
         name: 'match',
@@ -165,6 +211,7 @@
                 overzichtmatchen: "Matchlist",
                 score_home: 0,
                 score_visitor: 0,
+                fouten: "Penalties"
             }
         },
         created () {
@@ -192,12 +239,14 @@
                     this.matchverloop = 'Match detail';
                     this.location = 'Locatie';
                     this.overzichtmatchen = "Overzicht matchen";
+                    this.fouten = "Fouten";
                 } else if(window.location.pathname.split('/')[1] == 'fr'){
                     this.matchverloop = 'Détail du match';
                     this.location = 'Emplacement';
                     this.overzichtmatchen = "Aperçu des matchs";
                     this.coach = "Entraîneur";
                     this.teams = "Équipes";
+                    this.fouten = "Fautes";
                 }
             },
             goHome: function () {
@@ -225,9 +274,18 @@
                 if(this.datamatch.score_home > this.score_home){
                     $("#goalhome").show().delay(5000).fadeOut();
                     this.score_home = this.datamatch.score_home;
+                    bus.$emit('goalScored');
                 } else if(this.datamatch.score_visitor > this.score_visitor){
                     $("#goalvisitor").show().delay(5000).fadeOut();
                     this.score_visitor = this.datamatch.score_visitor;
+                    bus.$emit('goalScored', true);
+                }
+            },
+            getPenaltyType: function(penaltyType){
+                switch(penaltyType) {
+                    case 1: return "U20"; break;
+                    case 2: return "UMV"; break;
+                    case 3: return "UMV4"; break;
                 }
             }
         },

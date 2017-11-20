@@ -240,6 +240,15 @@ body {
   }
 }
 
+span.wppenalty {
+  adding: 5px 0;
+  border-radius: 4px;
+  background-color: red;
+  padding: 3px;
+  color: white !important;
+  text-align: center;
+}
+
 .row-matchlist:hover {
 
     cursor: pointer;

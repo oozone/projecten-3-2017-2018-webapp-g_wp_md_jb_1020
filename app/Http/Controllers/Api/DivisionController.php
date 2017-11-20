@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Division;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DivisionController extends Controller
 {
@@ -83,5 +84,10 @@ class DivisionController extends Controller
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function topscorers($id){
+		return DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
+
 	}
 }

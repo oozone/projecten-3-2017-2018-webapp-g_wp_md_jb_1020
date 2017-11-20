@@ -184,6 +184,8 @@ return [
 	    Intervention\Image\ImageServiceProvider::class,
 	    Eusebiu\JavaScript\JavaScriptServiceProvider::class,
 	    Cornford\Googlmapper\MapperServiceProvider::class,
+	    Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+	    Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -238,7 +240,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'ScriptVariables' => Eusebiu\JavaScript\Facades\ScriptVariables::class,
         'Mapper'         => Cornford\Googlmapper\Facades\MapperFacade::class,
-
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

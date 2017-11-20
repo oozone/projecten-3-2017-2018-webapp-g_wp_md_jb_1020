@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 
 class Player extends Model
 {
@@ -26,5 +28,18 @@ class Player extends Model
 		return $query->where('status', 1);
 	}
 
+	/*
+	 * Accessors
+	 */
+	public function getFormattedBirthdateAttribute()
+	{
+		try {
+			$date = Carbon::createFromFormat('Y-m-d H:i:s', $this->birthdate)->format('d/m/Y');
+		} catch(Exception $e){
+			return "-";
+		}
+
+		return $date;
+	}
 
 }

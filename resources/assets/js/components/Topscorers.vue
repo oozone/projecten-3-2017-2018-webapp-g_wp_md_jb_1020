@@ -12,6 +12,8 @@
 </template>
 <script>
 
+//    import bus from 'bus.js';
+import { bus } from './bus.js';
     export default {
         name: 'topscorers',
         props: ['topscorers'],
@@ -26,6 +28,20 @@
             "use strict";
         },
         created () {
+            let self = this;
+            bus.$on('goalScored', function(data) {
+
+                console.log("bus catch");
+                // Goal scored, let's get our topscorers
+                axios.get('/api/divisions/1/topscorers')
+                    .then(
+                        response => {
+                            self.datatopscorers = (response.data);
+                        }
+                    );
+            });
+
+
         },
         methods: {
 

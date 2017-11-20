@@ -44,7 +44,6 @@ class PenaltyBookController extends Controller
 		$penaltybook->penalties()->save($penalty);
 
 
-
 	}
 
 

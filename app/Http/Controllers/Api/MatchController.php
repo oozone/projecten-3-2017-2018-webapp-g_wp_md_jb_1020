@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Match;
+//use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use \Illuminate\Http\Response;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class MatchController extends Controller
 {
@@ -49,7 +51,7 @@ class MatchController extends Controller
 	public function show($id)
 	{
 		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor','home','visitor'))->find($id);
+		return Match::with(array('location', 'difficulty', 'valor','home','visitor','penaltybooks'))->find($id);
 	}
 
 	/**
@@ -84,6 +86,16 @@ class MatchController extends Controller
 	public function destroy($id)
 	{
 		//
+	}
+
+
+	public function generatePdf($id){
+
+		$match = Match::findOrFail($id);
+
+		$pdf = PDF::loadView('pdf.finasheet', $match)->setPaper('a4', 'landscape');
+		return $pdf->download('finasheet.pdf');
+
 	}
 
 

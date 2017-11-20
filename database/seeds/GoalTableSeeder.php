@@ -22,19 +22,19 @@ class GoalTableSeeder extends Seeder
 	    $player = Player::first();
 	    $team = $player->team;
     	$this->createGoal($match, $player);
-	    $player = Player::find(10);
+	    $player = Player::find(16);
 	    $this->createGoal($match, $player);
 	    $player = Player::find(3);
 	    $this->createGoal($match, $player);
-	    $player = Player::find(9);
+	    $player = Player::find(18);
 	    $this->createGoal($match, $player);
 	    $player = Player::find(6);
 	    $this->createGoal($match, $player);
-	    $player = Player::find(7);
+	    $player = Player::find(22);
 	    $this->createGoal($match, $player);
 
 
-	    $player = Player::find(11);
+	    $player = Player::find(24);
 	    $this->createGoal($match, $player);
 
     }

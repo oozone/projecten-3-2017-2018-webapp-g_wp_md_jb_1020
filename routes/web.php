@@ -27,7 +27,7 @@ Route::Resource('locations', 'LocationController');
 
 Auth::routes();
 
-Route::prefix('admin')->namespace('Admin')->group(function () {
+Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function () {
 
 	Route::get('/teams/{id}/csv', 'TeamController@csv');
 	Route::post('/teams/{id}/csvImport', 'TeamController@csvImport');

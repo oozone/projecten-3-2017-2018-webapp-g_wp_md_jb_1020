@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Player;
+use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class PlayerController extends Controller
 {
@@ -46,7 +48,12 @@ class PlayerController extends Controller
 	 */
 	public function show($id)
 	{
-		return Player::with('team')->find($id);
+		$player = Player::findOrFail($id);
+		$team = Team::find($player->team_id);
+		return View::make('web.players.show', array(
+			'player' => $player,
+			'team' => $team->players,
+		));
 	}
 
 	/**

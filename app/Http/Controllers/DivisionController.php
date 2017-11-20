@@ -47,12 +47,8 @@ class DivisionController extends Controller
 	public function show($id)
 	{
 		$divisions = Division::find($id)->with('matches');
-		//dd($divisions->toJson());
-		//$matches = Match::get();
-		//return view('welcome', compact('divisions'));
 		return View::make('welcome', array(
 			'division' => $divisions,
-			//'matches' => $matches,
 		));
 	}
 

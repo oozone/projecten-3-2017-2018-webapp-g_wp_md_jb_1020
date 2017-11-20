@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
 	    // Matches
 	    $this->call(MatchTableSeeder::class);
 	    $this->call(GoalTableSeeder::class);
+	    $this->call(PenaltyTableSeeder::class);
 
     }
 }

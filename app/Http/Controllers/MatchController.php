@@ -56,8 +56,8 @@ class MatchController extends Controller
 		$standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
 
 
-//
-		$match = Match::with('home.players')->with('visitor.players')->find($id);
+
+		$match = Match::with('home.players')->with('visitor.players')->with('penaltybooks')->find($id);
 		return View::make('web.matches.show', array(
 			'match' => $match,
 			'topscorers' => $topscorers,

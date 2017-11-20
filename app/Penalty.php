@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penalty extends Model
 {
+
+	//protected $with = array('penaltytype');
+
 	public function penaltybook()
 	{
 		return $this->belongsTo(PenaltyBook::class);

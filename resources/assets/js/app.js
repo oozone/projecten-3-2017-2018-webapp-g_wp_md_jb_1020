@@ -32,6 +32,8 @@ window.axios.defaults.headers.common = {
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+
 Vue.component('match', require('./components/Match.vue'));
 Vue.component('matchlist', require('./components/MatchList.vue'));
 Vue.component('topscorers', require('./components/Topscorers.vue'));

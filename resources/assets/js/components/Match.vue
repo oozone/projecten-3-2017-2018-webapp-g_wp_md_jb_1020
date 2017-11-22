@@ -18,9 +18,9 @@
                             </div>
                             <div class="col-sm-4" style="padding-top: 25px;">
                                 <div class="teamlogo" v-if="datamatch.home.logo != ''">
-                                    <img :src="datamatch.home.logo" width="50px" />
+                                    <a :href="'/teams/' + datamatch.home.id"><img :src="datamatch.home.logo" width="50px" /></a>
                                 </div>
-                                {{ datamatch.home.name }}
+                                <a :href="'/teams/' + datamatch.home.id">{{ datamatch.home.name }}</a>
                                 <br />
                                 <span class="wppgoallive" id="goalhome" style="">
                                     GOAL
@@ -32,9 +32,9 @@
                             </div>
                             <div class="col-sm-4" style="padding-top: 25px;">
                                 <div class="teamlogo" v-if="datamatch.visitor.logo != ''">
-                                    <img :src="datamatch.visitor.logo" width="50px" />
+                                    <a :href="'/teams/' + datamatch.visitor.id"><img :src="datamatch.visitor.logo" width="50px" /></a>
                                 </div>
-                                {{ datamatch.visitor.name }}
+                                <a :href="'/teams/' + datamatch.visitor.id">{{ datamatch.visitor.name }}</a>
                                 <br />
                                 <span class="wppgoallive" id="goalvisitor" style="">
                                     GOAL
@@ -121,7 +121,33 @@
                     </div>
                 </div>
 
+                <!-- Match details -->
+                <div class="panel panel-matchlist">
+                    <div class="panel-heading text-center">
+                        {{ comments }}
+                    </div>
+                    <div class="panel-body">
+                        <!-- home -->
+                        <div class="row" v-for="comment in datacommentaries">
+                            <div class="col-md-3 text-right">
+                                {{ comment.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+                            </div>
+                            <div class="col-md-9">
+                                {{ comment.text }}
+                            </div>
 
+                        </div>
+                        <div class="row" v-if="isadmin != 0" style="margin-top: 20px;">
+                            <div class="col-md-9">
+                                <input v-model="acommentary" class="form-control" type="text">
+                            </div>
+                            <div class="col-md-3">
+                                <button v-on:click="addCommentary()">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
                 <!--&lt;!&ndash; Match details &ndash;&gt;-->
                 <!--<div class="panel panel-matchlist">-->
@@ -273,7 +299,7 @@
 
     export default {
         name: 'match',
-        props: ['match','matchdetail'],
+        props: ['match','matchdetail','isadmin'],
         components: {
         },
         mounted: function() {
@@ -283,6 +309,7 @@
             return {
                 datamatch: this.match,
                 datamatchdetail: this.matchdetail,
+                datacommentaries: this.match.commentaries,
                 matchverloop: "Match detail",
                 location: "Location",
                 teams: "Teams",
@@ -290,7 +317,9 @@
                 overzichtmatchen: "Matchlist",
                 score_home: 0,
                 score_visitor: 0,
-                fouten: "Penalties"
+                fouten: "Penalties",
+                acommentary: "",
+                comments: "Commentary",
             }
         },
         created () {
@@ -300,6 +329,7 @@
                     response => {
                         this.datamatch = (response.data);
                         this.datamatchdetail = response.data.matchdetail;
+                        this.datacommentaries = response.data.commentaries;
                         this.score_home = response.data.score_home;
                         this.score_visitor = response.data.score_visitor;
                     }
@@ -320,6 +350,7 @@
                     this.location = 'Locatie';
                     this.overzichtmatchen = "Overzicht matchen";
                     this.fouten = "Fouten";
+                    this.comments = "Commentaar";
                 } else if(window.location.pathname.split('/')[1] == 'fr'){
                     this.matchverloop = 'Détail du match';
                     this.location = 'Emplacement';
@@ -327,6 +358,7 @@
                     this.coach = "Entraîneur";
                     this.teams = "Équipes";
                     this.fouten = "Fautes";
+                    this.comments = "Commentaire";
                 }
             },
             goHome: function () {
@@ -347,6 +379,7 @@
                         response => {
                             this.datamatch = (response.data);
                             this.datamatchdetail = response.data.matchdetail;
+                            this.datacommentaries = response.data.commentaries;
                             this.checkGoals();
                         }
                     );
@@ -368,6 +401,15 @@
                     case 2: return "UMV"; break;
                     case 3: return "UMV4"; break;
                 }
+            },
+            addCommentary: function(){
+                let self = this;
+                axios.put('/api/matches/' + this.datamatch.id + '/comment', {
+                    comment: self.acommentary
+                },{'headers':{'Content-Type': 'application/json'}} )
+                .then(
+                    self.acommentary = ""
+                );
             }
         },
     }

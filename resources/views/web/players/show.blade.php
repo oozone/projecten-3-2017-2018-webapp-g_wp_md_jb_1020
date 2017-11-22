@@ -26,6 +26,7 @@
                                 {{ __('Team') }}: {{ $player->team->name }}<br />
                                 {{ __('Player number') }}: {{ $player->player_number }}<br />
                                 {{ __('Birthdate') }}: {{ $player->formatted_birthdate  }}<br />
+                                {{ __('Goals') }}: {{ $goals[0]->goalscore }}
                             </div>
                         </div>
                     </div>

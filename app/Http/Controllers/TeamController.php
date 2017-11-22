@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Match;
+use App\Season;
 use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class TeamController extends Controller
 {
@@ -47,8 +50,20 @@ class TeamController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
-		return Team::with('players')->find($id);
+		$team = Team::with(array('players'))->findOrFail($id);
+//		$matches = Season::current()->whereHas('matches', function ($query) use($id) {
+//			$query->where('home_id', '=', $id);
+//		})->with(array('matches.home', 'matches.visitor'))->first();
+		$matches = Match::where('home_id','=',$id)->orWhere('visitor_id','=',$id)->get();
+		$teams = Team::where('division_id', '=', $team->division_id)->get();
+
+		//dd($matches->matches->toJSON());
+
+		return View::make('web.teams.show', array(
+			'team' => $team,
+			'matches' => $matches,
+			'teams' => $teams
+		));
 	}
 
 	/**

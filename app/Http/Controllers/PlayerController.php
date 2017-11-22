@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Player;
 use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
 class PlayerController extends Controller
@@ -50,9 +51,11 @@ class PlayerController extends Controller
 	{
 		$player = Player::findOrFail($id);
 		$team = Team::find($player->team_id);
+		$goals = $topscorers = DB::table('goals')->selectRaw('count(*) as goalscore')->where('player_id','=',$id)->get();
 		return View::make('web.players.show', array(
 			'player' => $player,
 			'team' => $team->players,
+			'goals' => $goals
 		));
 	}
 

@@ -2,7 +2,7 @@
     <div>
         <div v-for="t in datastandings" class="row">
             <div class="col-sm-9">
-                {{ t.name }}
+                <a :href="'/teams/' + t.id">{{ t.name }}</a>
             </div>
             <div class="col-sm-3">
                 {{ t.pivot.won * 3 + t.pivot.draw }}

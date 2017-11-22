@@ -2,12 +2,14 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
 {
 
-	protected $with = array('home','visitor','location','valor','difficulty','goals','goals.player');
+	protected $with = array('home','visitor','location','valor','difficulty','goals','goals.player','commentaries');
 
 	public function users()
 	{
@@ -69,6 +71,24 @@ class Match extends Model
 	public function season()
 	{
 		return $this->belongsTo(Season::class);
+	}
+
+	public function commentaries(){
+		return $this->hasMany(Commentary::class);
+	}
+
+	/*
+	 * Accessors
+	 */
+	public function getFormattedDateAttribute()
+	{
+		try {
+			$date = Carbon::createFromFormat('Y-m-d H:i:s', $this->datum)->format('d/m/Y H:i');
+		} catch(Exception $e){
+			return "-";
+		}
+
+		return $date;
 	}
 
 

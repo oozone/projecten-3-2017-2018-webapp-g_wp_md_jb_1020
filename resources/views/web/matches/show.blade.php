@@ -4,8 +4,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
+                <?php
+                    $isadmin = 0;
+                    if (auth()->check())
+	                    $isadmin = auth()->user()->isAdmin();
 
-                <match :match="{{$match}}" :matchdetail="{{$matchdetail}}"></match>
+                ?>
+                <match :match="{{$match}}" :matchdetail="{{$matchdetail}}" :isadmin="{{$isadmin}}"></match>
 
             </div>
 

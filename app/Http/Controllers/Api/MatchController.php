@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Commentary;
 use App\Goal;
 use App\Http\Controllers\Controller;
 use App\Match;
@@ -165,6 +166,25 @@ class MatchController extends Controller
 //	        'foutenThuis' => $foutenThuis,
 //	        'foutenBezoeker' => $foutenBezoeker
 //        ));
+	}
+
+	public function addCommentary(Request $request, $id){
+
+
+
+		$match = Match::find($id);
+
+		//dd($request);
+
+		$this->validate($request, [
+			'comment' => 'required'
+		]);
+
+
+		$commentary = new Commentary();
+		$commentary->text = $request->comment;
+		$match->commentaries()->save($commentary);
+
 	}
 
 

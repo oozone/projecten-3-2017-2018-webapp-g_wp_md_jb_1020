@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Goal;
 use App\Http\Controllers\Controller;
 use App\Match;
 //use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use \Illuminate\Http\Response;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class MatchController extends Controller
 {
@@ -50,8 +53,23 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
-		return Match::with(array('location', 'difficulty', 'valor','home','visitor','penaltybooks'))->find($id);
+
+		$match = Match::with(array('location', 'difficulty', 'valor','home','visitor','penaltybooks'))->find($id);
+
+		$goals = collect(Goal::where('match_id', '=', 1)->with('player')->get());
+		$penaltybooks = collect($match->penaltybooks()->with('player')->orderBy('created_at')->get());
+		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
+
+		$items = $matchdetail->all();
+		usort($items, function($a, $b) {
+			return $a->created_at <=> $b->created_at;
+		});
+		$sorted = collect($items);
+
+		$matchArray = $match->toArray();
+		$matchArray["matchdetail"] = $sorted;
+
+		return $matchArray;
 	}
 
 	/**
@@ -88,14 +106,65 @@ class MatchController extends Controller
 		//
 	}
 
+	public function startMatch($id){
+
+		$match = Match::findOrFail($id);
+		$match->match_start = date('Y-m-D H:i:s');
+		$match->save();
+	}
+
+	public function endMatch($id){
+		$match = Match::findOrFail($id);
+		$match->match_end = date('Y-m-D H:i:s');
+		$match->save();
+	}
+
 
 	public function generatePdf($id){
 
 		$match = Match::findOrFail($id);
 
-		$pdf = PDF::loadView('pdf.finasheet', $match)->setPaper('a4', 'landscape');
-		return $pdf->download('finasheet.pdf');
+		//dd($match->home->team_id);
 
+		$foutenThuis = DB::table('penalty_books')
+		                 ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
+		                 ->join('penalties','penalty_books.id','=','penalties.penalty_book_id')
+		                 ->join('players','player_id','=','players.id')
+//							->join('players', function ($join) use ($match) {
+//								$join->on('player_id', '=', 'players.id')
+//								     ->where('players.team_id', '=', $match->home->team_id);
+//							})
+		                 ->where('players.team_id', '=', $match->home->id)
+		                 ->orderBy('player_id', 'asc')
+		                 ->groupBy('player_id')
+		                 ->get();
+
+		$foutenBezoeker = DB::table('penalty_books')
+		                 ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
+		                 ->join('penalties','penalty_books.id','=','penalties.penalty_book_id')
+		                 ->join('players','player_id','=','players.id')
+//							->join('players', function ($join) use ($match) {
+//								$join->on('player_id', '=', 'players.id')
+//								     ->where('players.team_id', '=', $match->home->team_id);
+//							})
+                         ->where('players.team_id', '=', $match->visitor->id)
+		                 ->orderBy('player_id', 'asc')
+		                 ->groupBy('player_id')
+		                 ->get();
+		//dd($foutenBezoeker->toJSON());
+
+		//dd($match->visitor->players->toJSON());
+		$pdf = PDF::loadView('pdf.finasheet', array(
+			'match' => $match,
+			'foutenThuis' => $foutenThuis,
+			'foutenBezoeker' => $foutenBezoeker
+		))->setPaper('a4', 'landscape');
+		return $pdf->download('finasheet.pdf');
+//        return View::make('pdf.finasheet', array(
+//        	'match' => $match,
+//	        'foutenThuis' => $foutenThuis,
+//	        'foutenBezoeker' => $foutenBezoeker
+//        ));
 	}
 
 

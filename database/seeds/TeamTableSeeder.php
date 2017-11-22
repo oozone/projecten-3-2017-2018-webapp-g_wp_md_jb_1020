@@ -18,12 +18,11 @@ class TeamTableSeeder extends Seeder
 
     	// name, division_id, competition_class
 
-    	$division = Division::first();
-
     	// Gent
     	$team = new Team();
     	$team->name = "Moeskroen";
     	//$team->competition_class = "Eerste klasse";
+	    $team->logo = "http://voom.be:12005/images/teams/1511276834.jpg";
     	$team->save();
     	$team->coach()->save(Coach::where('name', 'Eerste coach')->first());
 	    $division = Division::first();
@@ -42,9 +41,10 @@ class TeamTableSeeder extends Seeder
 	    ]);
 
 
-	    // Aalst
+	    // Antwerpen
 	    $team = new Team();
 	    $team->name = "Antwerpen";
+	    $team->logo = "http://voom.be:12005/images/teams/1511276842.jpeg";
 	    //$team->competition_class = "Eerste klasse";
 	    $team->save();
 	    $team->coach()->save(Coach::where('name', 'Tweede coach')->first());

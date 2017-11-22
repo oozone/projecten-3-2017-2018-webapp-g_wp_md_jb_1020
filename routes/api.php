@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::get('/players/{id}/match/{matchId}', 'Api\PlayerController@showMatch');
 Route::Resource('players', 'Api\PlayerController');
 Route::Resource('teams', 'Api\TeamController');
+Route::put('/matches/{id}/start', 'Api\MatchController@startMatch');
+Route::put('/matches/{id}/end', 'Api\MatchController@endMatch');
 Route::get('/matches/{id}/pdf', 'Api\MatchController@generatePdf');
 Route::Resource('matches', 'Api\MatchController');
 Route::get('/divisions/{id}/topscorers', 'Api\DivisionController@topscorers');

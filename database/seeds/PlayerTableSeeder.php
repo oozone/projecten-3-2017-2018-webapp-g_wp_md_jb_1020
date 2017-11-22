@@ -23,6 +23,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->status = true;
 	    $player->birthdate = "1984-03-27 00:00";
 	    $player->starter = true;
+	    $player->photo = "http://voom.be:12005/images/players/1511276995.png";
 	    $player->save();
 	    $team->players()->save($player);
 
@@ -31,6 +32,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->player_number = 2;
 	    $player->birthdate = date('Y-m-d H:i:s');
 	    $player->starter = true;
+	    $player->photo = "http://voom.be:12005/images/players/1511277004.jpg";
 	    $player->save();
 	    $team->players()->save($player);
 

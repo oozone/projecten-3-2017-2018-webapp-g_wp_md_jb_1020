@@ -241,12 +241,22 @@ body {
 }
 
 span.wppenalty {
-  adding: 5px 0;
   border-radius: 4px;
-  background-color: red;
+  background-color: #df9815;
   padding: 3px;
   color: white !important;
   text-align: center;
+}
+
+.wppgoallive {
+  border-radius: 4px;
+  background-color: red;
+  padding: 5px;
+  color: white !important;
+  text-align: center;
+  display: none;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .row-matchlist:hover {

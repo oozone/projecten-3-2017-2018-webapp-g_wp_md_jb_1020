@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8">
 
-                <match :match="{{$match}}"></match>
+                <match :match="{{$match}}" :matchdetail="{{$matchdetail}}"></match>
 
             </div>
 

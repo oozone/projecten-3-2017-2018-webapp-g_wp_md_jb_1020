@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Goal;
 use App\Match;
+use App\PenaltyBook;
 use App\Player;
 use App\Season;
 use Illuminate\Http\Request;
@@ -42,6 +44,11 @@ class MatchController extends Controller
 		//
 	}
 
+	function cmp($a, $b)
+	{
+		return strcmp($a->created_at, $b->created_at);
+	}
+
 	/**
 	 * Display the specified resource.
 	 *
@@ -50,18 +57,35 @@ class MatchController extends Controller
 	 */
 	public function show($id)
 	{
+
+		$match = Match::with('home.players')->with('visitor.players')->with('penaltybooks')->find($id);
 		$topscorers = DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
 
 		$season = Season::find(1);
 		$standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
 
+		$goals = collect(Goal::where('match_id', '=', 1)->with('player')->get());
 
+		$penaltybooks = collect($match->penaltybooks()->with('player')->orderBy('created_at')->get());
 
-		$match = Match::with('home.players')->with('visitor.players')->with('penaltybooks')->find($id);
+		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
+
+		$sorted = $matchdetail->sortBy(function($post)
+		{
+			return $post->created_at;
+		});
+
+		$items = $sorted->all();
+		usort($items, function($a, $b) {
+			return $a->created_at <=> $b->created_at;
+		});
+		$sorted = collect($items);
+
 		return View::make('web.matches.show', array(
 			'match' => $match,
 			'topscorers' => $topscorers,
-			'standings' => $standings
+			'standings' => $standings,
+			'matchdetail' => $sorted
 		));
 	}
 

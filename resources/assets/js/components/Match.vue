@@ -21,9 +21,10 @@
                                     <img :src="datamatch.home.logo" width="50px" />
                                 </div>
                                 {{ datamatch.home.name }}
-                                <div id="goalhome" style="display: none; color: white; background-color: red">
+                                <br />
+                                <span class="wppgoallive" id="goalhome" style="">
                                     GOAL
-                                </div>
+                                </span>
 
                             </div>
                             <div class="col-sm-4">
@@ -34,9 +35,10 @@
                                     <img :src="datamatch.visitor.logo" width="50px" />
                                 </div>
                                 {{ datamatch.visitor.name }}
-                                <div id="goalvisitor" style="display: none; color: red; font-size: 16px; font-weight: bold;">
+                                <br />
+                                <span class="wppgoallive" id="goalvisitor" style="">
                                     GOAL
-                                </div>
+                                </span>
                             </div>
                         </div>
                         <div class="row">
@@ -55,15 +57,17 @@
                     </div>
                     <div class="panel-body">
                         <!-- home -->
-                            <div class="row" v-for="goal in datamatch.goals">
+                        <div class="row" v-for="item in datamatchdetail">
 
-                                <div class="row" v-if="goal.team_id == match.home.id">
+                            <div v-if="!item.penalties">
+                                <!-- GOAL -->
+                                <div class="row" v-if="item.team_id == match.home.id">
                                     <div class="col-sm-6 col-xs-12 wp-goal-home">
 
-                                        {{ goal.player.player_number }} {{ goal.player.name }} <i class="fa fa-futbol-o" aria-hidden="true"></i>
-                                        <!--{{ moment.utc(moment(goal.created_at,"YYYY-MM-DD HH:mm:ss").diff(moment(match.created_at,"YYYY-MM-DD HH:mm:ss"))).format("mm:ss")}}-->
+                                        {{ item.player.player_number }} {{ item.player.name }} <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                        <!--{{ moment.utc(moment(item.created_at,"YYYY-MM-DD HH:mm:ss").diff(moment(match.created_at,"YYYY-MM-DD HH:mm:ss"))).format("mm:ss")}}-->
 
-                                        {{ goal.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
                                     </div>
                                     <div class="col-sm-6">
 
@@ -74,59 +78,133 @@
 
                                     </div>
                                     <div class="col-sm-6 col-xs-12 wp-goal-visitor">
-                                        {{ goal.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
-                                        <i class="fa fa-futbol-o" aria-hidden="true"></i> {{ goal.player.player_number }} {{ goal.player.name }}
+                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+                                        <i class="fa fa-futbol-o" aria-hidden="true"></i> {{ item.player.player_number }} {{ item.player.name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="item.penalties">
+                                <!-- PENALTY -->
+                                <div class="row" v-if="item.player.team_id == match.home.id">
+                                    <div class="col-sm-6 col-xs-12 wp-goal-home">
+
+                                        {{ item.player.player_number }} {{ item.player.name }}
+
+                                        <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
+                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
+                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
+
+                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+                                    </div>
+                                    <div class="col-sm-6">
+
+                                    </div>
+                                </div>
+                                <div class="row" v-else>
+                                    <div class="col-sm-6">
+
+                                    </div>
+                                    <div class="col-sm-6 col-xs-12 wp-goal-visitor">
+                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+
+                                        <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
+                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
+                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
+
+                                        {{ item.player.player_number }} {{ item.player.name }}
                                     </div>
                                 </div>
 
-
                             </div>
-                    </div>
-                </div>
-
-                <!-- Match details -->
-                <div class="panel panel-matchlist">
-                    <div class="panel-heading text-center">
-                        {{ fouten }}
-                    </div>
-                    <div class="panel-body">
-                        <!-- home -->
-                        <div class="row" v-for="item in datamatch.penaltybooks">
-
-                            <div class="row" v-if="item.player.team_id == match.home.id">
-                                <div class="col-sm-6 col-xs-12 wp-goal-home">
-
-                                    {{ item.player.player_number }} {{ item.player.name }}
-
-                                            <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
-                                            <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
-                                            <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
-
-                                    {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
-                                </div>
-                                <div class="col-sm-6">
-
-                                </div>
-                            </div>
-                            <div class="row" v-else>
-                                <div class="col-sm-6">
-
-                                </div>
-                                <div class="col-sm-6 col-xs-12 wp-goal-visitor">
-                                    {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
-
-                                    <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
-                                    <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
-                                    <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
-
-                                    {{ item.player.player_number }} {{ item.player.name }}
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>
                 </div>
+
+
+
+                <!--&lt;!&ndash; Match details &ndash;&gt;-->
+                <!--<div class="panel panel-matchlist">-->
+                    <!--<div class="panel-heading text-center">-->
+                        <!--{{ matchverloop }}-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--&lt;!&ndash; home &ndash;&gt;-->
+                            <!--<div class="row" v-for="goal in datamatch.goals">-->
+
+                                <!--<div class="row" v-if="goal.team_id == match.home.id">-->
+                                    <!--<div class="col-sm-6 col-xs-12 wp-goal-home">-->
+
+                                        <!--{{ goal.player.player_number }} {{ goal.player.name }} <i class="fa fa-futbol-o" aria-hidden="true"></i>-->
+                                        <!--&lt;!&ndash;{{ moment.utc(moment(goal.created_at,"YYYY-MM-DD HH:mm:ss").diff(moment(match.created_at,"YYYY-MM-DD HH:mm:ss"))).format("mm:ss")}}&ndash;&gt;-->
+
+                                        <!--{{ goal.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-6">-->
+
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="row" v-else>-->
+                                    <!--<div class="col-sm-6">-->
+
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-6 col-xs-12 wp-goal-visitor">-->
+                                        <!--{{ goal.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'-->
+                                        <!--<i class="fa fa-futbol-o" aria-hidden="true"></i> {{ goal.player.player_number }} {{ goal.player.name }}-->
+                                    <!--</div>-->
+                                <!--</div>-->
+
+
+                            <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+
+
+                <!--&lt;!&ndash; Match details &ndash;&gt;-->
+                <!--<div class="panel panel-matchlist">-->
+                    <!--<div class="panel-heading text-center">-->
+                        <!--{{ fouten }}-->
+                    <!--</div>-->
+                    <!--<div class="panel-body">-->
+                        <!--&lt;!&ndash; home &ndash;&gt;-->
+                        <!--<div class="row" v-for="item in datamatch.penaltybooks">-->
+
+                            <!--<div class="row" v-if="item.player.team_id == match.home.id">-->
+                                <!--<div class="col-sm-6 col-xs-12 wp-goal-home">-->
+
+                                    <!--{{ item.player.player_number }} {{ item.player.name }}-->
+
+                                            <!--<span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>-->
+                                            <!--<span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>-->
+                                            <!--<span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>-->
+
+                                    <!--{{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-6">-->
+
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="row" v-else>-->
+                                <!--<div class="col-sm-6">-->
+
+                                <!--</div>-->
+                                <!--<div class="col-sm-6 col-xs-12 wp-goal-visitor">-->
+                                    <!--{{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'-->
+
+                                    <!--<span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>-->
+                                    <!--<span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>-->
+                                    <!--<span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>-->
+
+                                    <!--{{ item.player.player_number }} {{ item.player.name }}-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
                 
 
                 <!-- Players -->
@@ -195,7 +273,7 @@
 
     export default {
         name: 'match',
-        props: ['match'],
+        props: ['match','matchdetail'],
         components: {
         },
         mounted: function() {
@@ -204,6 +282,7 @@
         data: function(){
             return {
                 datamatch: this.match,
+                datamatchdetail: this.matchdetail,
                 matchverloop: "Match detail",
                 location: "Location",
                 teams: "Teams",
@@ -220,6 +299,7 @@
                 .then(
                     response => {
                         this.datamatch = (response.data);
+                        this.datamatchdetail = response.data.matchdetail;
                         this.score_home = response.data.score_home;
                         this.score_visitor = response.data.score_visitor;
                     }
@@ -266,17 +346,18 @@
                     .then(
                         response => {
                             this.datamatch = (response.data);
+                            this.datamatchdetail = response.data.matchdetail;
                             this.checkGoals();
                         }
                     );
             },
             checkGoals: function(){
                 if(this.datamatch.score_home > this.score_home){
-                    $("#goalhome").show().delay(5000).fadeOut();
+                    $("#goalhome").show().delay(10000).fadeOut();
                     this.score_home = this.datamatch.score_home;
                     bus.$emit('goalScored');
                 } else if(this.datamatch.score_visitor > this.score_visitor){
-                    $("#goalvisitor").show().delay(5000).fadeOut();
+                    $("#goalvisitor").show().delay(10000).fadeOut();
                     this.score_visitor = this.datamatch.score_visitor;
                     bus.$emit('goalScored', true);
                 }

@@ -8,7 +8,7 @@
 </p>
 
 ## Waterpolo App + Backend
-This is the backend API + website & admin-section for the waterpolo-app we created for the course Mobile App Projects 3 at Hogeschool Gent. 
+This is the backend API + website and admin-section for the waterpolo-app we created for the course Mobile App Projects 3 at Hogeschool Gent. 
 It is written in Laravel + Vue as frontend JS lib. 
 
 ####Backend
@@ -18,7 +18,7 @@ it delivers info about matches, teams, locations and more.
 ####Frontend
 The website gives a live-feed of waterpolo matches, also gives info about players, teams, topscorers, locations, ... 
 
-The adminsection is CRUD-oriented for matches, teams, players & locations.
+The adminsection is CRUD-oriented for matches, teams, players and locations.
 
 ####Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.

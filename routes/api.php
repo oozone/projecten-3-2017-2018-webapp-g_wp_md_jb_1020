@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::get('/players/{id}/match/{matchId}', 'Api\PlayerController@showMatch');
 Route::Resource('players', 'Api\PlayerController');
 Route::Resource('teams', 'Api\TeamController');
+Route::put('/matches/{id}/cancel', 'Api\MatchController@cancelMatch');
 Route::put('/matches/{id}/comment', 'Api\MatchController@addCommentary');
 Route::put('/matches/{id}/start', 'Api\MatchController@startMatch');
 Route::put('/matches/{id}/end', 'Api\MatchController@endMatch');

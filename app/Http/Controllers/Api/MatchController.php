@@ -57,7 +57,7 @@ class MatchController extends Controller
 
 		$match = Match::with(array('location', 'difficulty', 'valor','home','visitor','penaltybooks'))->find($id);
 
-		$goals = collect(Goal::where('match_id', '=', 1)->with('player')->get());
+		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
 		$penaltybooks = collect($match->penaltybooks()->with('player')->orderBy('created_at')->get());
 		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
 
@@ -107,20 +107,65 @@ class MatchController extends Controller
 		//
 	}
 
-	public function startMatch($id){
+	/**
+	 * Start the specified match
+	 * @param Request $request
+	 * @param $id
+	 */
+	public function startMatch(Request $request, $id){
 
 		$match = Match::findOrFail($id);
 		$match->match_start = date('Y-m-D H:i:s');
 		$match->save();
 	}
 
-	public function endMatch($id){
+	/**
+	 * End the specified match
+	 * @param Request $request
+	 * @param $id
+	 */
+	public function endMatch(Request $request, $id){
 		$match = Match::findOrFail($id);
 		$match->match_end = date('Y-m-D H:i:s');
 		$match->save();
 	}
 
+	/**
+	 * Cancel the specified match
+	 * @param Request $request
+	 * @param $id
+	 */
+	public function cancelMatch(Request $request, $id){
 
+		$match = Match::findOrFail($id);
+		$match->cancelled = true;
+		$match->save();
+
+	}
+
+	/**
+	 * Add match commentary to specified match
+	 * @param Request $request
+	 * @param $id
+	 */
+	public function addCommentary(Request $request, $id){
+
+		$match = Match::find($id);
+		$this->validate($request, [
+			'comment' => 'required'
+		]);
+		$commentary = new Commentary();
+		$commentary->text = $request->comment;
+		$match->commentaries()->save($commentary);
+
+	}
+
+	/**
+	 * Generate FINA-sheet PDF for specified match
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function generatePdf($id){
 
 		$match = Match::findOrFail($id);
@@ -131,10 +176,6 @@ class MatchController extends Controller
 		                 ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
 		                 ->join('penalties','penalty_books.id','=','penalties.penalty_book_id')
 		                 ->join('players','player_id','=','players.id')
-//							->join('players', function ($join) use ($match) {
-//								$join->on('player_id', '=', 'players.id')
-//								     ->where('players.team_id', '=', $match->home->team_id);
-//							})
 		                 ->where('players.team_id', '=', $match->home->id)
 		                 ->orderBy('player_id', 'asc')
 		                 ->groupBy('player_id')
@@ -144,48 +185,23 @@ class MatchController extends Controller
 		                 ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
 		                 ->join('penalties','penalty_books.id','=','penalties.penalty_book_id')
 		                 ->join('players','player_id','=','players.id')
-//							->join('players', function ($join) use ($match) {
-//								$join->on('player_id', '=', 'players.id')
-//								     ->where('players.team_id', '=', $match->home->team_id);
-//							})
                          ->where('players.team_id', '=', $match->visitor->id)
 		                 ->orderBy('player_id', 'asc')
 		                 ->groupBy('player_id')
 		                 ->get();
-		//dd($foutenBezoeker->toJSON());
 
-		//dd($match->visitor->players->toJSON());
 		$pdf = PDF::loadView('pdf.finasheet', array(
 			'match' => $match,
 			'foutenThuis' => $foutenThuis,
 			'foutenBezoeker' => $foutenBezoeker
 		))->setPaper('a4', 'landscape');
+
 		return $pdf->download('finasheet.pdf');
-//        return View::make('pdf.finasheet', array(
-//        	'match' => $match,
-//	        'foutenThuis' => $foutenThuis,
-//	        'foutenBezoeker' => $foutenBezoeker
-//        ));
 	}
 
-	public function addCommentary(Request $request, $id){
 
 
 
-		$match = Match::find($id);
-
-		//dd($request);
-
-		$this->validate($request, [
-			'comment' => 'required'
-		]);
-
-
-		$commentary = new Commentary();
-		$commentary->text = $request->comment;
-		$match->commentaries()->save($commentary);
-
-	}
 
 
 }

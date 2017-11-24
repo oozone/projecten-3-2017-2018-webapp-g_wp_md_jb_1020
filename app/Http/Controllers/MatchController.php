@@ -64,7 +64,7 @@ class MatchController extends Controller
 		$season = Season::find(1);
 		$standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
 
-		$goals = collect(Goal::where('match_id', '=', 1)->with('player')->get());
+		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
 
 		$penaltybooks = collect($match->penaltybooks()->with('player')->orderBy('created_at')->get());
 

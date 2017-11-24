@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8">
 
-                <a href="{{url('/')}}"><button type="button" class="btn btn-default">{{ __("Back") }}</button></a>
+                <a href="{{ url()->previous() }}"><button type="button" class="btn btn-default">{{ __("Back") }}</button></a>
                 <!-- Match details -->
                 <div class="panel panel-matchlist">
                     <div class="panel-heading text-center">

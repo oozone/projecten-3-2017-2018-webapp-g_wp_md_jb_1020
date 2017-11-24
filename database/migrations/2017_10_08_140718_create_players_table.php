@@ -20,7 +20,7 @@ class CreatePlayersTable extends Migration
             $table->string('name', 255);
             $table->datetime('birthdate')->nullable();
             $table->string('photo')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('status')->default(1);
 	        $table->boolean('starter')->default(false);
             $table->timestamps();
         });

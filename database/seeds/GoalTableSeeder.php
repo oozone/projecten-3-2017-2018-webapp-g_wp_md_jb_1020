@@ -39,13 +39,14 @@ class GoalTableSeeder extends Seeder
 
     }
 
-    private function createGoal($match, $player, $scoreHome, $scoreVisitor){
+    private function createGoal($match, $player, $scoreHome, $scoreVisitor, $quarter = 1){
 	    $goal = new Goal();
 	    $goal->match_id = $match->id;
 	    $goal->player_id = $player->id;
 	    $goal->team_id = $player->team->id;
 	    $goal->score_home = $scoreHome;
 	    $goal->score_visitor = $scoreVisitor;
+	    $goal->quarter = $quarter;
 	    $match->goals()->save($goal);
     }
 }

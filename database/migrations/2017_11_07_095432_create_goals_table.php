@@ -18,6 +18,7 @@ class CreateGoalsTable extends Migration
             $table->integer('player_id')->unsigned();
             $table->integer('match_id')->unsigned();
             $table->integer('team_id')->unsigned();
+            $table->integer('quarter');
             $table->integer('score_home');
 	        $table->integer('score_visitor');
             $table->timestamps();

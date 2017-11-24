@@ -20,7 +20,7 @@ class PlayerTableSeeder extends Seeder
 	    $player = new Player();
 	    $player->name = "Christof de Bonheure";
 	    $player->player_number = 1;
-	    $player->status = true;
+	    $player->status = 1;
 	    $player->birthdate = "1984-03-27 00:00";
 	    $player->starter = true;
 	    $player->photo = "http://voom.be:12005/images/players/1511276995.png";
@@ -31,7 +31,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->name = "Bert-Jan Weijermars";
 	    $player->player_number = 2;
 	    $player->birthdate = date('Y-m-d H:i:s');
-	    $player->starter = true;
+	    $player->starter = 1;
 	    $player->photo = "http://voom.be:12005/images/players/1511277004.jpg";
 	    $player->save();
 	    $team->players()->save($player);
@@ -72,7 +72,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->name = $name;
 	    $player->player_number = $nr;
 	    $player->starter = $starter;
-	    $player->status = true;
+	    $player->status = 1;
 	    $player->birthdate = date('Y-m-d H:i:s');
 	    $player->save();
 	    $team->players()->save($player);

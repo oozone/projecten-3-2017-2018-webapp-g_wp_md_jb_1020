@@ -64,7 +64,9 @@
                         <div class="col-sm-9">
                             <select class="form-control" id="status" name="status">
                                 <option value="1">Active</option>
-                                <option value="0">Inactive</option>
+                                <option value="2">Suspended</option>
+                                <option value="3">Game over</option>
+                                <option value="3">Injured</option>
                             </select>
                         </div>
                     </div>

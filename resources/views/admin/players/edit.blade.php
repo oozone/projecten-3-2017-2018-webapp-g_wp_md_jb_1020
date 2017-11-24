@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">{{ __('Status') }}</label>
                         <div class="col-sm-9">
-                            {{ Form::select('status', array('0' => 'Inactive', '1' => 'Active'), $player->status, array('class' => 'form-control')) }}
+                            {{ Form::select('status', array('1' => 'Active', '2' => 'Suspended', '3' => 'Game over', '4' => 'Injured'), $player->status, array('class' => 'form-control')) }}
                         </div>
                     </div>
                     <div class="form-group">

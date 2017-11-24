@@ -18,7 +18,8 @@ class GoalController extends Controller
         $this->validate($request, [
 
             'match_id' => 'required|integer',
-            'player_id' => 'required|integer'
+            'player_id' => 'required|integer',
+	        'quarter' => 'required|integer'
         ]);
 
         $match = Match::find($request->match_id);
@@ -38,6 +39,7 @@ class GoalController extends Controller
         $goal->team_id = $player->team_id;
         $goal->score_home = $match->score_home;
         $goal->score_visitor = $match->score_visitor;
+        $goal->quarter = $request->quarter;
         $match->goals()->save($goal);
 
 

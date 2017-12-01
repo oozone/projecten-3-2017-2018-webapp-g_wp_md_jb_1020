@@ -162,5 +162,21 @@ class TeamTableSeeder extends Seeder
 		    'draw' => 0
 	    ]);
 
+	    // Moeskroen B
+	    $team = new Team();
+	    $team->name = "Moeskroen B";
+	    $team->save();
+	    $team->addRelatedTeam(1);
+	    $team->coach()->save(Coach::where('name', 'Tiende coach')->first());
+	    $division = Division::find(2);
+	    $division->teams()->save($team);
+
+	    $season->teams()->attach($team, [
+		    'played' => 0,
+		    'won' => 0,
+		    'lost' => 0,
+		    'draw' => 0
+	    ]);
+
     }
 }

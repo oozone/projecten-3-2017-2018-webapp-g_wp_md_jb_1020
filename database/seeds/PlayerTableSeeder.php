@@ -23,6 +23,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->status = 1;
 	    $player->birthdate = "1984-03-27 00:00";
 	    $player->starter = true;
+	    $player->division_id = 1;
 	    $player->photo = "http://voom.be:12005/images/players/1511276995.png";
 	    $player->save();
 	    $team->players()->save($player);
@@ -32,6 +33,7 @@ class PlayerTableSeeder extends Seeder
 	    $player->player_number = 2;
 	    $player->birthdate = date('Y-m-d H:i:s');
 	    $player->starter = 1;
+	    $player->division_id = 1;
 	    $player->photo = "http://voom.be:12005/images/players/1511277004.jpg";
 	    $player->save();
 	    $team->players()->save($player);
@@ -41,12 +43,16 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Cees Mark", 5, true, $team);
 	    $this->createPlayer("Stefaan Zwinsel", 6, true, $team);
 	    $this->createPlayer("Lou Drent", 7, true, $team);
-	    $this->createPlayer("Riaz Silvius", 8, false, $team);
-	    $this->createPlayer("Samuel van Osch", 9, false, $team);
-	    $this->createPlayer("Selahattin Nuijens", 10, false, $team);
-	    $this->createPlayer("Konstantin Vervoorn", 11, false, $team);
-	    $this->createPlayer("Ajay Duijndam", 12, false, $team);
-	    $this->createPlayer("Mateo Hanoeman", 13, false, $team);
+	    $this->createPlayer("Riaz Silvius", 8, true, $team);
+	    $this->createPlayer("Samuel van Osch", 9, true, $team);
+	    $this->createPlayer("Selahattin Nuijens", 10, true, $team);
+	    $this->createPlayer("Konstantin Vervoorn", 11, true, $team);
+	    $this->createPlayer("Ajay Duijndam", 12, true, $team);
+	    $this->createPlayer("Mateo Hanoeman", 13, true, $team);
+	    $this->createPlayer("Elco Derks", 14, false, $team);
+	    $this->createPlayer("Luuk Wallenburg", 15, false, $team);
+	    $this->createPlayer("Ruud Kemper", 16, false, $team);
+	    $this->createPlayer("Lowie Reijnders", 17, false, $team);
 
 	    // Team 2
 	    $team = Team::find(2);
@@ -57,22 +63,33 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Sjaak Kruit", 5, true, $team);
 	    $this->createPlayer("Rudie van Rijn", 6, true, $team);
 	    $this->createPlayer("Lodewijk Koedijk", 7, true, $team);
-	    $this->createPlayer("Timen Plasmans", 8, false, $team);
-	    $this->createPlayer("Casimir Liebrand", 9, false, $team);
-	    $this->createPlayer("Louwe Eeken", 10, false, $team);
-	    $this->createPlayer("Shadi Backus", 11, false, $team);
-	    $this->createPlayer("Tunahan van Hezik", 12, false, $team);
-	    $this->createPlayer("Jolle Tienstra", 13, false, $team);
+	    $this->createPlayer("Timen Plasmans", 8, true, $team);
+	    $this->createPlayer("Casimir Liebrand", 9, true, $team);
+	    $this->createPlayer("Louwe Eeken", 10, true, $team);
+	    $this->createPlayer("Shadi Backus", 11, true, $team);
+	    $this->createPlayer("Tunahan van Hezik", 12, true, $team);
+	    $this->createPlayer("Jolle Tienstra", 13, true, $team);
+	    $this->createPlayer("Arjan Wibbens", 14, false, $team);
+	    $this->createPlayer("Mathies Meuleman", 15, false, $team);
+	    $this->createPlayer("Arnout Deijk", 16, false, $team);
+	    $this->createPlayer("Jelle Gerrits", 17, false, $team);
+
+
+	    // Team 10 Moeskroen B
+	    $team = Team::find(10);
+	    $this->createPlayer("Moeskroentester", 1, true, $team);
+
 
     }
 
-    private function createPlayer($name, $nr, $starter = false, $team){
+    private function createPlayer($name, $nr, $starter = false, $team, $division = 1){
 
 	    $player = new Player();
 	    $player->name = $name;
 	    $player->player_number = $nr;
 	    $player->starter = $starter;
 	    $player->status = 1;
+	    $player->division_id = $division;
 	    $player->birthdate = date('Y-m-d H:i:s');
 	    $player->save();
 	    $team->players()->save($player);

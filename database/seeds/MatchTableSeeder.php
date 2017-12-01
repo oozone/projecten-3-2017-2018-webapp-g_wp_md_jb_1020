@@ -31,8 +31,8 @@ class MatchTableSeeder extends Seeder
 		$match->division_id = 1;
 	    $match->home_id = $home->id;
 	    $match->visitor_id = $visitor->id;
-	    $match->score_home = 3;
-	    $match->score_visitor = 4;
+	    $match->score_home = 0;
+	    $match->score_visitor = 0;
 		$match->datum = date("Y-m-d H:i:s");
 		$match->time_played = "00:00";
 		$match->save();

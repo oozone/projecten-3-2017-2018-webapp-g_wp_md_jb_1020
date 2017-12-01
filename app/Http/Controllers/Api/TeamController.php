@@ -86,5 +86,25 @@ class TeamController extends Controller
 		//
 	}
 
+	public function getAllPlayersFromRelatedTeams($id){
+		$players = array();
+
+		$team = Team::where('id','=',$id)->with(['players', 'relatedTeams','relatedTeams.players'])->get();
+
+		//dd($team);
+		foreach($team[0]->players as $p){
+			$players[] = $p;
+		}
+
+		foreach($team[0]->relatedTeams as $rt){
+			foreach($rt->players as $p){
+				$players[] = $p;
+			}
+		}
+
+		return $players;
+
+	}
+
 
 }

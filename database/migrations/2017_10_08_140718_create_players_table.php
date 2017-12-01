@@ -16,6 +16,7 @@ class CreatePlayersTable extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('team_id')->nullable();
+            $table->integer('division_id')->nullable();
             $table->integer('player_number')->nullable();
             $table->string('name', 255);
             $table->datetime('birthdate')->nullable();

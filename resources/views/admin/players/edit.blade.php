@@ -22,7 +22,7 @@
             <div class="panel-body form-horizontal payment-form">
                     <div class="row" style="margin-bottom: 20px;">
                         <div class="col-sm-3">
-                            <div class="pull-right">
+                            <div class="">
                                 <a href="{{url('admin/players')}}" class="btn btn-default">{{ __('Back') }}</a>
                             </div>
                         </div>
@@ -31,61 +31,68 @@
 
                 {!! Form::model($player, array('action' => array('Admin\PlayerController@update', $player->id), 'method' => 'PUT', 'files' => true))  !!}
 
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Name') }}</label>
-                        <div class="col-sm-9">
-                            {{ Form::text('name', null, array('class' => 'form-control' )) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Player number') }}</label>
-                        <div class="col-sm-9">
-                            {{ Form::text('player_number', null, array('class' => 'form-control')) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Birthdate') }}</label>
-                        <div class="col-sm-9">
-                            <?php $dt =  new Carbon\Carbon($player->birthdate);?>
-                            {{ Form::date('birthdate', $dt->toDateString(), null, array('class' => 'form-control')) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Starter') }}</label>
-                        <div class="col-sm-9">
-                            {{ Form::select('starter', array('0' => 'No', '1' => 'Yes'), $player->starter, array('class' => 'form-control')) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Status') }}</label>
-                        <div class="col-sm-9">
-                            {{ Form::select('status', array('1' => 'Active', '2' => 'Suspended', '3' => 'Game over', '4' => 'Injured'), $player->status, array('class' => 'form-control')) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Team') }}</label>
-                        <div class="col-sm-9">
-                            {{ Form::select('team_id', $teams, $player->team->id, array('class' => 'form-control')) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">{{ __('Image') }}</label>
-                        <div class="col-sm-9">
-                            {{ Form::file('image') }}
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Image') }}</label>
+                            <div class="col-sm-9">
+                                @if($player->photo != '')
+                                    <img src="{{$player->photo}}" width="150px" />
+                                @endif
+                                <br /><br />
+                                {{ Form::file('image') }}
 
-                            @if($player->photo != '')
-                                <img src="{{$player->photo}}" width="150px" />
-                            @endif
-
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="status" class="col-sm-3 control-label"></label>
-                        <div class="col-sm-9">
-                            <button class="btn btn-default" type="submit">{{ __('Save') }}</button>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Name') }}</label>
+                            <div class="col-sm-9">
+                                {{ Form::text('name', null, array('class' => 'form-control' )) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Player number') }}</label>
+                            <div class="col-sm-9">
+                                {{ Form::text('player_number', null, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Birthdate') }}</label>
+                            <div class="col-sm-9">
+			                    <?php $dt =  new Carbon\Carbon($player->birthdate);?>
+                                {{ Form::date('birthdate', $dt->toDateString(), null, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Starter') }}</label>
+                            <div class="col-sm-9">
+                                {{ Form::select('starter', array('0' => 'No', '1' => 'Yes'), $player->starter, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Status') }}</label>
+                            <div class="col-sm-9">
+                                {{ Form::select('status', array('1' => 'Active', '2' => 'Suspended', '3' => 'Game over', '4' => 'Injured'), $player->status, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Team') }}</label>
+                            <div class="col-sm-9">
+                                {{ Form::select('team_id', $teams, $player->team->id, array('class' => 'form-control')) }}
+                            </div>
                         </div>
                     </div>
 
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="status" class="col-sm-6 control-label"></label>
+                            <div class="col-sm-6">
+                                <button class="btn btn-default" type="submit">{{ __('Save') }}</button>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

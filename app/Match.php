@@ -63,9 +63,13 @@ class Match extends Model
         return $this->hasMany(Goal::class);
     }
 
-	public function penaltybooks()
-	{
-		return $this->hasMany(PenaltyBook::class);
+//	public function penaltybooks()
+//	{
+//		return $this->hasMany(PenaltyBook::class);
+//	}
+
+	public function penalties(){
+		return $this->hasMany(Penalty::class);
 	}
 
 	public function season()
@@ -75,6 +79,18 @@ class Match extends Model
 
 	public function commentaries(){
 		return $this->hasMany(Commentary::class);
+	}
+
+
+	/*
+	 * Scopes
+	 */
+	public function scopeNotCancelled($query){
+		return $query->where('cancelled', '=', 0);
+	}
+
+	public function scopeNotEnded($query){
+		return $query->where('match_end', '=', null);
 	}
 
 	/*

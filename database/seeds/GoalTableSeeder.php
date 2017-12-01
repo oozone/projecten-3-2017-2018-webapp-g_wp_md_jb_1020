@@ -18,24 +18,24 @@ class GoalTableSeeder extends Seeder
 
     	// Recreate 7 goals: 3 - 4
 	    // home
-	    $match = Match::first();
-	    $player = Player::first();
-	    $team = $player->team;
-    	$this->createGoal($match, $player, 1, 0);
-	    $player = Player::find(16);
-	    $this->createGoal($match, $player, 1, 1);
-	    $player = Player::find(3);
-	    $this->createGoal($match, $player, 2, 1);
-	    $player = Player::find(18);
-	    $this->createGoal($match, $player, 2, 2);
-	    $player = Player::find(6);
-	    $this->createGoal($match, $player, 3, 2);
-	    $player = Player::find(22);
-	    $this->createGoal($match, $player, 3, 3);
-
-
-	    $player = Player::find(24);
-	    $this->createGoal($match, $player, 3, 4);
+//	    $match = Match::first();
+//	    $player = Player::first();
+//	    $team = $player->team;
+//    	$this->createGoal($match, $player, 1, 0);
+//	    $player = Player::find(16);
+//	    $this->createGoal($match, $player, 1, 1);
+//	    $player = Player::find(3);
+//	    $this->createGoal($match, $player, 2, 1);
+//	    $player = Player::find(18);
+//	    $this->createGoal($match, $player, 2, 2);
+//	    $player = Player::find(6);
+//	    $this->createGoal($match, $player, 3, 2);
+//	    $player = Player::find(22);
+//	    $this->createGoal($match, $player, 3, 3);
+//
+//
+//	    $player = Player::find(24);
+//	    $this->createGoal($match, $player, 3, 4);
 
     }
 

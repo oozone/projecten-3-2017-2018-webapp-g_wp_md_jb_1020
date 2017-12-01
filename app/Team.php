@@ -9,6 +9,12 @@ class Team extends Model
 
 	protected $with = array('division','coach', 'players');
 
+	public function relatedTeams()
+	{
+		$friends = $this->belongsToMany(Team::class, 'team_team', 'team_id', 'related_id');
+		return $friends;
+	}
+
 	public function coach()
 	{
 		return $this->hasOne(Coach::class);
@@ -37,5 +43,19 @@ class Team extends Model
 	public function scopeDivision($query, $divisionId = 1){
 		return $query->where('division_id', $divisionId);
 	}
+
+	public function addRelatedTeam($friend_id)
+	{
+		$this->relatedTeams()->attach($friend_id);   // add friend
+		$friend = Team::find($friend_id);       // find your friend, and...
+		$friend->relatedTeams()->attach($this->id);  // add yourself, too
+	}
+	public function removeRelatedTeam($friend_id)
+	{
+		$this->relatedTeams()->detach($friend_id);   // remove friend
+		$friend = Team::find($friend_id);       // find your friend, and...
+		$friend->relatedTeams()->detach($this->id);  // remove yourself, too
+	}
+
 
 }

@@ -64,7 +64,7 @@
                         <!-- home -->
                         <div class="row" v-for="item in datamatchdetail">
 
-                            <div v-if="!item.penalties">
+                            <div v-if="!item.penalty_type_id">
                                 <!-- GOAL -->
                                 <div class="row" v-if="item.team_id == match.home.id">
                                     <div class="col-sm-6 col-xs-12 wp-goal-home">
@@ -88,16 +88,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="item.penalties">
+                            <div v-if="item.penalty_type_id">
                                 <!-- PENALTY -->
                                 <div class="row" v-if="item.player.team_id == match.home.id">
                                     <div class="col-sm-6 col-xs-12 wp-goal-home">
 
                                         {{ item.player.player_number }} {{ item.player.name }}
 
-                                        <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
-                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
-                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
+                                        <span class="wppenalty" v-if="item.penalty_type_id == 1">U20</span>
+                                        <span class="wppenalty" v-else-if="item.penalty_type_id == 2">UMV</span>
+                                        <span class="wppenalty" v-else-if="item.penalty_type_id == 3">UMV 4</span>
 
                                         {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 / 60 | round }}'
                                     </div>
@@ -112,9 +112,9 @@
                                     <div class="col-sm-6 col-xs-12 wp-goal-visitor">
                                         {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 / 60 | round }}'
 
-                                        <span class="wppenalty" v-if="item.penalties[0].penalty_type_id == 1">U20</span>
-                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 2">UMV</span>
-                                        <span class="wppenalty" v-else-if="item.penalties[0].penalty_type_id == 3">UMV 4</span>
+                                        <span class="wppenalty" v-if="item.penalty_type_id == 1">U20</span>
+                                        <span class="wppenalty" v-else-if="item.penalty_type_id == 2">UMV</span>
+                                        <span class="wppenalty" v-else-if="item.penalty_type_id == 3">UMV 4</span>
 
                                         {{ item.player.player_number }} {{ item.player.name }}
                                     </div>
@@ -126,7 +126,7 @@
                     </div>
                 </div>
 
-                <!-- Match details -->
+                <!-- Match commentary -->
                 <div v-if="datacommentaries.count > 0 || isadmin != 0" class="panel panel-matchlist">
                     <div class="panel-heading text-center">
                         {{ comments }}

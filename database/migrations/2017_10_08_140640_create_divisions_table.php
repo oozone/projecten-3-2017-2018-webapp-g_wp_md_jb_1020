@@ -17,6 +17,7 @@ class CreateDivisionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->time('period_length')->default("08:00");
+	        $table->time('break_length')->default("05:00");
             $table->integer('ranking')->default(20);
             $table->timestamps();
         });

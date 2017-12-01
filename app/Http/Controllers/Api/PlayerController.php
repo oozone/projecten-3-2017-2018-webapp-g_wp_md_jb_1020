@@ -47,7 +47,7 @@ class PlayerController extends Controller
 	 */
 	public function show($id)
 	{
-		return Player::with('team')->with('penaltybooks')->find($id);
+		return Player::with('team')->with('penalties')->find($id);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class PlayerController extends Controller
 	 */
 	public function showMatch($id, $matchId)
 	{
-		return Player::with('team')->with(['penaltybooks' => function ($query) use ($matchId) {
+		return Player::with('team')->with(['penalties' => function ($query) use ($matchId) {
 			$query->where('match_id', '=', $matchId);
 		}])->find($id);
 	}

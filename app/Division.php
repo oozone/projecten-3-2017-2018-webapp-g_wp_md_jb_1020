@@ -11,6 +11,11 @@ class Division extends Model
 		return $this->hasMany(Team::class);
 	}
 
+	public function players()
+	{
+		return $this->hasMany(Player::class);
+	}
+
 	public function matches()
 	{
 		return $this->hasMany(Match::class);

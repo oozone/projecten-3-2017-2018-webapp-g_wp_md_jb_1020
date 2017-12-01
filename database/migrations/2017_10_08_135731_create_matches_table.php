@@ -27,6 +27,7 @@ class CreateMatchesTable extends Migration
             $table->datetime('datum')->nullable();
             $table->datetime('match_start')->nullable();
             $table->datetime('match_end')->nullable();
+            $table->boolean('signed')->default(false);
             $table->time('time_played')->default('00:00');
             $table->boolean('cancelled')->default(false);
             $table->timestamps();

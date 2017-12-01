@@ -29,6 +29,9 @@ Auth::routes();
 
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function () {
 
+	Route::get('/teams/{id}/related', 'TeamController@relatedTeams');
+	Route::put('/teams/{id}/related', 'TeamController@updateRelatedTeams');
+
 	Route::get('/teams/{id}/csv', 'TeamController@csv');
 	Route::post('/teams/{id}/csvImport', 'TeamController@csvImport');
 

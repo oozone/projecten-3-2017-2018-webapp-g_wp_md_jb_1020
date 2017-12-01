@@ -7,6 +7,7 @@ use App\Goal;
 use App\Http\Controllers\Controller;
 use App\Match;
 //use Barryvdh\DomPDF\PDF;
+use App\Player;
 use Illuminate\Http\Request;
 use \Illuminate\Http\Response;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -23,6 +24,10 @@ class MatchController extends Controller
 	public function index()
 	{
 		return Match::with('location')->get();
+	}
+
+	public function activeMatches(){
+		return Match::notCancelled()->notEnded()->with('location')->get();
 	}
 
 	/**
@@ -55,10 +60,10 @@ class MatchController extends Controller
 	public function show($id)
 	{
 
-		$match = Match::with(array('location', 'difficulty', 'valor','home','visitor','penaltybooks'))->find($id);
+		$match = Match::with(array('location', 'difficulty', 'valor','home','visitor'))->find($id);
 
 		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
-		$penaltybooks = collect($match->penaltybooks()->with('player')->orderBy('created_at')->get());
+		$penaltybooks = collect($match->penalties()->with('player')->orderBy('created_at')->get());
 		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
 
 		$items = $matchdetail->all();
@@ -199,7 +204,20 @@ class MatchController extends Controller
 		return $pdf->download('finasheet.pdf');
 	}
 
+	public function setStarters(Request $request, $id){
 
+		$players = json_decode($request->getContent(), true);
+		//dd($players);
+		foreach($players as $p){
+			//dd($p["player_id"]);
+			$player = Player::find($p["player_id"]);
+			$player->starter = $p["starter"];
+			$player->save();
+		}
+
+
+
+	}
 
 
 

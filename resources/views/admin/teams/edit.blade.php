@@ -23,12 +23,13 @@
 
                 <div class="row" style="margin-bottom: 20px;">
                     <div class="col-sm-3">
-                        <div class="pull-right">
+                        <div class="">
                             <a href="{{url('admin/teams')}}" class="btn btn-default">{{ __('Back') }}</a>
                         </div>
                     </div>
                     <div class="col-sm-9">
                         <div class="pull-right">
+                            <a href="{{url('admin/teams/'.$team->id .'/related')}}" class="btn btn-default">{{ __('Related teams') }}</a>
                             <a href="{{url('admin/teams/'.$team->id .'/csv')}}" class="btn btn-default">{{ __('Upload players') }}</a>
                         </div>
                     </div>
@@ -36,44 +37,53 @@
 
                 {!! Form::model($team, array('action' => array('Admin\TeamController@update', $team->id), 'method' => 'PUT', 'files' => true))  !!}
 
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">{{ __('Name') }}</label>
-                    <div class="col-sm-9">
-                        {{ Form::text('name', null, array('class' => 'form-control' )) }}
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">{{ __('Image') }}</label>
+                        <div class="col-sm-9">
+                            @if($team->logo != '')
+                                <img src="{{$team->logo}}" width="150px" />
+                            @endif
+                            <br /><br />
+                            {{ Form::file('image') }}
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">{{ __('Name') }}</label>
+                        <div class="col-sm-9">
+                            {{ Form::text('name', null, array('class' => 'form-control' )) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">{{ __('Division') }}</label>
+                        <div class="col-sm-9">
+                            {{ Form::select('division_id', $divisions, $team->division->id, array('class' => 'form-control')) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">{{ __('Coach') }}</label>
+                        <div class="col-sm-9">
+                            {{ Form::text('coach', $team->coach->name, array('class' => 'form-control')) }}
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">{{ __('Division') }}</label>
-                    <div class="col-sm-9">
-                        {{ Form::select('division_id', $divisions, $team->division->id, array('class' => 'form-control')) }}
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="status" class="col-sm-6 control-label"></label>
+                        <div class="col-sm-6">
+                            <button class="btn btn-default" type="submit">{{ __('Save') }}</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">{{ __('Coach') }}</label>
-                    <div class="col-sm-9">
-                        {{ Form::text('coach', $team->coach->name, array('class' => 'form-control')) }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">{{ __('Image') }}</label>
-                    <div class="col-sm-9">
-                        {{ Form::file('image') }}
-
-                        @if($team->logo != '')
-                            <img src="{{$team->logo}}" width="150px" />
-                        @endif
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="status" class="col-sm-3 control-label"></label>
-                    <div class="col-sm-9">
-                        <button class="btn btn-default" type="submit">{{ __('Save') }}</button>
-                    </div>
-                </div>
 
                 </form>
             </div>

@@ -157,6 +157,48 @@ class TeamController extends Controller
 		//
 	}
 
+	public function relatedTeams($id){
+		$team = Team::with('relatedTeams')->find($id);
+		$teams = Team::where([ ['id','!=', $id],['division_id','!=',$team->division_id] ])->pluck('name','id');
+		$idRelatedTeams = [];
+		foreach($team->relatedTeams as $rt){
+			//dd($rt);
+			$idRelatedTeams[] = $rt->id;
+		}
+
+		return View::make('admin.teams.relatedteams', array(
+			'team' => $team,
+			'teams' => $teams,
+			'relatedTeams' => $idRelatedTeams,
+		));
+	}
+
+	public function updateRelatedTeams(Request $request, $id)
+	{
+		//dd($request->all());
+		$this->validate(request(), [
+			'teams' => ''
+		]);
+
+		$team = Team::findOrFail($id);
+
+		// Remove all related teams
+		foreach($team->relatedTeams as $rt){
+			$team = Team::find($rt->id);
+			$team->removeRelatedTeam($id);
+		}
+		$team->relatedTeams()->detach();
+
+		if(($request->teams != null) && !empty($request->teams)){
+			foreach($request->teams as $rt){
+				$team->addRelatedTeam($rt);
+			}
+		}
+
+		return redirect('/admin/teams/' . $id .'/edit');
+	}
+
+
 	public function csv($id)
 	{
 		$team = Team::findOrFail($id);

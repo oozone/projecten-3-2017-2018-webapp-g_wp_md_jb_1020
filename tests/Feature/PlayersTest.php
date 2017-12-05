@@ -23,7 +23,7 @@ class PlayersTest extends TestCase {
 				     'name',
 				     'birthdate',
 				     'status',
-				     'team',
+				     //'team',
 			     ]
 		     ]);
 	}
@@ -37,10 +37,26 @@ class PlayersTest extends TestCase {
 		);
 
 		$this->assertEquals($response->name, "Christof de Bonheure");
-		$this->assertEquals($response->player_number, 5);
+		$this->assertEquals($response->player_number, 1);
 		$this->assertEquals($response->birthdate, "1984-03-27 00:00:00");
 		$this->assertEquals($response->status, 1);
-		$this->assertEquals($response->team->name, "Gentse WPC");
+		$this->assertEquals($response->team->name, "Moeskroen");
+	}
+
+	public function testPlayerSpecificMatchTest(){
+
+		$response = json_decode($this->get('/api/players/1/match/1')
+		     ->assertStatus(200)
+		     ->assertJson([
+				     'id' => 1,
+				     'player_number' => 1,
+				     'name' => "Christof de Bonheure",
+				     'birthdate' => "1984-03-27 00:00:00",
+				     'status' => 1,
+				     //'team',
+		     ])->getContent());
+
+			$this->assertGreaterThanOrEqual(10, count($response->team->players));
 	}
 
 

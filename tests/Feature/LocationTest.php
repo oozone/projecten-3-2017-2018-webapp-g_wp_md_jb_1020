@@ -36,10 +36,10 @@ class LocationTest extends TestCase {
 			     ->getContent()
 		);
 
-		$this->assertEquals($response->name, "Strop");
-		$this->assertEquals($response->street, "Stropstraat 1");
-		$this->assertEquals($response->postalcode, "9000");
-		$this->assertEquals($response->city, "Gent");
+		$this->assertEquals($response->name, "Piscine 'Les Dauphins'");
+		$this->assertEquals($response->street, "Rue du Père Damien 2");
+		$this->assertEquals($response->postalcode, "7700");
+		$this->assertEquals($response->city, "Moeskroen");
 		$this->assertEquals($response->country, "BE");
 	}
 

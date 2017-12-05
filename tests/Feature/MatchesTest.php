@@ -36,9 +36,9 @@ class MatchesTest extends TestCase {
 			     ->getContent()
 		);
 
-		$this->assertEquals($response->home->name, "Gentse WPC");
-		$this->assertEquals($response->visitor->name, "Aalst");
-		$this->assertEquals($response->location->name, "Strop");
+		$this->assertEquals($response->home->name, "Moeskroen");
+		$this->assertEquals($response->visitor->name, "Antwerpen");
+		$this->assertEquals($response->location->name, "Piscine 'Les Dauphins'");
 	}
 
 

@@ -33,9 +33,9 @@ class DivisionTest extends TestCase {
 			     ->getContent()
 		);
 
-		$this->assertEquals($response->name, "Eerste klasse");
+		$this->assertEquals($response->name, "First division");
 		$this->assertEquals($response->period_length, "08:00:00");
-		$this->assertEquals($response->teams[0]->name, "Gentse WPC");
+		$this->assertEquals($response->teams[0]->name, "Moeskroen");
 	}
 
 

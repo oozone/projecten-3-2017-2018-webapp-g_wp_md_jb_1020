@@ -35,9 +35,28 @@ class TeamsTest extends TestCase {
 			     ->getContent()
 		);
 
-		$this->assertEquals($response->name, "Gentse WPC");
-		$this->assertEquals($response->division->name, "Eerste klasse");
+		$this->assertEquals($response->name, "Moeskroen");
+		$this->assertEquals($response->division->name, "First division");
 		$this->assertEquals($response->coach->name, "Eerste coach");
+	}
+
+	public function testAllPlayersFromTeamTest(){
+
+		$response = json_decode($this->get('/api/teams/1/allplayers')
+		                             ->assertStatus(200)
+		                             ->assertJsonStructure([
+			                             '*' => [
+				                             'id',
+				                             'player_number',
+				                             'name',
+				                             'birthdate',
+				                             'status',
+				                             //'team',
+			                             ]
+			                             //'team',
+		                             ])->getContent());
+
+		$this->assertGreaterThanOrEqual(10, count($response));
 	}
 
 

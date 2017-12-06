@@ -25,6 +25,8 @@ class GoalController extends Controller
         $match = Match::find($request->match_id);
         $player = Player::find($request->player_id);
 
+        //dd($player->team_id);
+
         // Save in score_home or score_visitor
         if($match->home->id == $player->team_id){
             $match->score_home += 1;
@@ -33,6 +35,8 @@ class GoalController extends Controller
         }
         $match->save();
 
+        //dd($player->team_id);
+
         $goal = new Goal();
         $goal->match_id = $match->match_id;
         $goal->player_id = $request->player_id;
@@ -40,6 +44,7 @@ class GoalController extends Controller
         $goal->score_home = $match->score_home;
         $goal->score_visitor = $match->score_visitor;
         $goal->quarter = $request->quarter;
+
         $match->goals()->save($goal);
 
 

@@ -120,7 +120,7 @@ class MatchController extends Controller
 	public function startMatch(Request $request, $id){
 
 		$match = Match::findOrFail($id);
-		$match->match_start = date('Y-m-D H:i:s');
+		$match->match_start = date('Y-m-d H:i:s');
 		$match->save();
 	}
 
@@ -131,7 +131,7 @@ class MatchController extends Controller
 	 */
 	public function endMatch(Request $request, $id){
 		$match = Match::findOrFail($id);
-		$match->match_end = date('Y-m-D H:i:s');
+		$match->match_end = date('Y-m-d H:i:s');
 		$match->save();
 	}
 

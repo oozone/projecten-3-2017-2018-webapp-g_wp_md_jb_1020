@@ -113,26 +113,110 @@ class AdminTest extends TestCase
 
 	public function testMatchPostTest(){
 		$user = User::find(2);
+
+		$date = date('Y-m-d H:i:s');
+
 		$this->actingAs($user)
 		     ->post('/admin/matches', [
-				     'season_id' => "tempteam",
+				     'season_id' => 1,
 				     'division_id' => 1,
-				     'coach' => "tempcoach",
+				     'location_id' => 6,
+				     'difficulty_id' => 1,
+				     'valor_id' => 1,
+				     'home_id' => 2,
+				     'visitor_id' => 1,
+				     'datum' => $date
 			     ]
 		     )
 		     ->assertStatus(302)
 		;
 
-		$this->assertDatabaseHas('coaches', [
-			'name' => "tempcoach",
+		$this->assertDatabaseHas('matches', [
+			'home_id' => 2,
+			'visitor_id' => 1,
+			'datum' => $date
 		]);
 
-		$this->assertDatabaseHas('teams', [
-			'name' => "tempteam",
-			'division_id' => 1
-		]);
 	}
 
+	public function testMatchPostFailureTest(){
+		$user = User::find(2);
+
+		$date = date('Y-m-d H:i:s');
+
+		$this->actingAs($user)
+		     ->post('/admin/matches', [
+				     'season_id' => 1,
+				     'division_id' => 1,
+				     'location_id' => 6,
+				     'difficulty_id' => 1,
+				     'valor_id' => 1,
+				     //'home_id' => 2,
+				     'visitor_id' => 1,
+				     'datum' => $date
+			     ]
+		     )
+		     ->assertStatus(302)
+		;
+
+		$this->assertDatabaseMissing('matches', [
+			//'home_id' => 2,
+			'visitor_id' => 1,
+			'datum' => $date
+		]);
+
+	}
+
+
+	public function testPlayerPostTest(){
+		$user = User::find(2);
+
+		$date = date('Y-m-d H:i:s');
+
+		$this->actingAs($user)
+		     ->post('/admin/players', [
+				     'team' => 2,
+		     	     'division_id' => 1,
+				     'player_number' => 55,
+				     'name' => "tempplayer",
+				     'date' => $date,
+				     'starter' => 1,
+				     'status' => 1,
+			     ]
+		     )
+		     ->assertStatus(302)
+		;
+
+		$this->assertDatabaseHas('players', [
+			'name' => "tempplayer",
+		]);
+
+	}
+
+	public function testPlayerFailurePostTest(){
+		$user = User::find(2);
+
+		$date = date('Y-m-d H:i:s');
+
+		$this->actingAs($user)
+		     ->post('/admin/players', [
+				     //'team' => 2,
+				     'division_id' => 1,
+				     'player_number' => 55,
+				     'name' => "tempplayer",
+				     'date' => $date,
+				     'starter' => 1,
+				     'status' => 1,
+			     ]
+		     )
+		     ->assertStatus(302)
+		;
+
+		$this->assertDatabaseMissing('players', [
+			'name' => "tempplayer",
+		]);
+
+	}
 
 
 }

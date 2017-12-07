@@ -9,11 +9,6 @@ class Penalty extends Model
 
 	//protected $with = array('penaltytype');
 
-//	public function penaltybook()
-//	{
-//		return $this->belongsTo(PenaltyBook::class);
-//	}
-
 	public function player()
 	{
 		return $this->belongsTo(Player::class);

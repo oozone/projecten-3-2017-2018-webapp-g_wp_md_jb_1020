@@ -46,15 +46,15 @@ class Team extends Model
 
 	public function addRelatedTeam($friend_id)
 	{
-		$this->relatedTeams()->attach($friend_id);   // add friend
-		$friend = Team::find($friend_id);       // find your friend, and...
-		$friend->relatedTeams()->attach($this->id);  // add yourself, too
+		$this->relatedTeams()->attach($friend_id);
+		$friend = Team::find($friend_id);
+		$friend->relatedTeams()->attach($this->id);
 	}
 	public function removeRelatedTeam($friend_id)
 	{
-		$this->relatedTeams()->detach($friend_id);   // remove friend
-		$friend = Team::find($friend_id);       // find your friend, and...
-		$friend->relatedTeams()->detach($this->id);  // remove yourself, too
+		$this->relatedTeams()->detach($friend_id);
+		$friend = Team::find($friend_id);
+		$friend->relatedTeams()->detach($this->id);
 	}
 
 

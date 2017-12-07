@@ -21,11 +21,6 @@ class Player extends Model
 		return $this->belongsTo(Division::class);
 	}
 
-//	public function penaltybooks()
-//	{
-//		return $this->hasMany(PenaltyBook::class);
-//	}
-
 	public function penalties()
 	{
 		return $this->hasMany(Penalty::class);

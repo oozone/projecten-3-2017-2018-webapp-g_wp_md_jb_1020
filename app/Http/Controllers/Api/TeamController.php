@@ -86,6 +86,12 @@ class TeamController extends Controller
 		//
 	}
 
+	/**
+	 * Returns all players from related teams
+	 * @param $id
+	 *
+	 * @return array
+	 */
 	public function getAllPlayersFromRelatedTeams($id){
 		$players = array();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Division;
 use App\Http\Controllers\Controller;
 use App\Player;
 use App\Team;
@@ -30,7 +31,8 @@ class PlayerController extends Controller
 	public function create()
 	{
 		$teams = Team::get();
-		return View::make('admin.players.create', array('teams' => $teams));
+		$divisions = Division::get();
+		return View::make('admin.players.create', array('teams' => $teams, 'divisions' => $divisions));
 	}
 
 	/**
@@ -45,7 +47,8 @@ class PlayerController extends Controller
 			'name' => 'required',
 			'date' => 'required',
 			'player_number' => 'required|integer',
-			'team' => 'required|integer'
+			'team' => 'required|integer',
+			'division' => 'required|integer'
 		]);
 
 
@@ -55,6 +58,8 @@ class PlayerController extends Controller
 		$player->birthdate = request()->input('date');
 		$player->starter = request()->input('starter');
 		$player->status = request()->input('status');
+		$player->division_id = 	request()->input('division');
+
 
 		// Save image
 		if(request()->hasFile('image'))
@@ -100,7 +105,8 @@ class PlayerController extends Controller
 	{
 		$player = Player::findOrFail($id);
 		$teams = Team::pluck('name', 'id');
-		return View::make('admin.players.edit', array('player' => $player, 'teams' => $teams));
+		$divisions = Division::pluck('name', 'id');
+		return View::make('admin.players.edit', array('player' => $player, 'teams' => $teams, 'divisions' => $divisions));
 	}
 
 	/**
@@ -119,7 +125,8 @@ class PlayerController extends Controller
 			'name' => 'required',
 			'birthdate' => 'required',
 			'player_number' => 'required|integer',
-			'team_id' => 'required|integer'
+			'team_id' => 'required|integer',
+			'division_id' => 'required|integer'
 		]);
 
 		// Save image
@@ -141,6 +148,7 @@ class PlayerController extends Controller
 		$player->birthdate = request()->input('birthdate');
 		$player->starter = request()->input('starter');
 		$player->status = request()->input('status');
+		$player->division_id = 	request()->input('division_id');
 		$player->save();
 
 		$team = Team::find(request()->input('team_id'));

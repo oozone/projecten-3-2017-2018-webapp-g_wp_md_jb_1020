@@ -18,7 +18,7 @@ class PlayerTableSeeder extends Seeder
 	    $team = Team::first();
 
 	    $player = new Player();
-	    $player->name = "Christof de Bonheure";
+	    $player->name = "Chris Bonheure";
 	    $player->player_number = 1;
 	    $player->status = 1;
 	    $player->birthdate = "1984-03-27 00:00";
@@ -29,7 +29,7 @@ class PlayerTableSeeder extends Seeder
 	    $team->players()->save($player);
 
 	    $player = new Player();
-	    $player->name = "Bert-Jan Weijermars";
+	    $player->name = "Bert Weijer";
 	    $player->player_number = 2;
 	    $player->birthdate = date('Y-m-d H:i:s');
 	    $player->starter = 1;
@@ -44,15 +44,15 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Stefaan Zwinsel", 6, true, $team);
 	    $this->createPlayer("Lou Drent", 7, true, $team);
 	    $this->createPlayer("Riaz Silvius", 8, true, $team);
-	    $this->createPlayer("Samuel van Osch", 9, true, $team);
-	    $this->createPlayer("Selahattin Nuijens", 10, true, $team);
-	    $this->createPlayer("Konstantin Vervoorn", 11, true, $team);
+	    $this->createPlayer("Samuel Osch", 9, true, $team);
+	    $this->createPlayer("Selah Nuijens", 10, true, $team);
+	    $this->createPlayer("Stan Vervoorn", 11, true, $team);
 	    $this->createPlayer("Ajay Duijndam", 12, true, $team);
 	    $this->createPlayer("Mateo Hanoeman", 13, true, $team);
 	    $this->createPlayer("Elco Derks", 14, false, $team);
 	    $this->createPlayer("Luuk Wallenburg", 15, false, $team);
 	    $this->createPlayer("Ruud Kemper", 16, false, $team);
-	    $this->createPlayer("Lowie Reijnders", 17, false, $team);
+	    $this->createPlayer("Lowie Rijnders", 17, false, $team);
 
 	    // Team 2
 	    $team = Team::find(2);

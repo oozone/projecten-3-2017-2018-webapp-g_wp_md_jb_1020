@@ -67,15 +67,10 @@ class MatchController extends Controller
 
 		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
 
-		//$penaltybooks = collect($match->penaltybooks()->with('player')->orderBy('created_at')->get());
+
 		$penaltybooks = collect(Penalty::where('match_id','=',$id)->with('player')->orderBy('created_at')->get());
-		//return $penaltybooks->toJson();
 		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
 
-//		$sorted = $matchdetail->sortBy(function($post)
-//		{
-//			return $post->created_at;
-//		});
 
 		$items = $matchdetail->all();
 		usort($items, function($a, $b) {

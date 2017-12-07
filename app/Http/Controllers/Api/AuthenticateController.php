@@ -13,8 +13,16 @@ use JWTAuth;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
+
 class AuthenticateController extends Controller
 {
+
+	/**
+	 * Authenticate user, returns JWT token
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function authenticate(Request $request)
 	{
 		// grab credentials from the request

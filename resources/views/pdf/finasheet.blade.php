@@ -75,7 +75,7 @@
 
                 <!-- Table A2-->
                 <div style="text-align: center;">
-                    <h1>White Caps</h1>
+                    <h3>White Caps</h3>
                 </div>
 
                 <table class="fw">
@@ -89,14 +89,14 @@
                         </td>
                         <td>{{$match->home->coach->name}}</td>
                     </tr>
-                    <tr>
-                        <td>Assistent coach 1:</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Assistent coach 2:</td>
-                        <td></td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<td>Assistent coach 1:</td>--}}
+                        {{--<td></td>--}}
+                    {{--</tr>--}}
+                    {{--<tr>--}}
+                        {{--<td>Assistent coach 2:</td>--}}
+                        {{--<td></td>--}}
+                    {{--</tr>--}}
                 </table>
 
                 <!-- Table A3 -->
@@ -106,7 +106,7 @@
                         <td class="tc">Player</td>
                         <td style="width: 20%" class="tc" colspan="3">Major fouls</td>
                         <td>
-                            <table class="fw">
+                            <table class="fw noborder">
                                 <tr>
                                     <td class="tc" colspan="5">Goals by quarter</td>
                                 </tr>
@@ -123,7 +123,7 @@
                     <!-- fouten -->
                     @foreach($match->home->players as $p)
 
-                        <tr>
+                        <tr style="height: 18px;">
                             <td class="tc">{{ $loop->iteration }}</td>
                             <td>{{ $p->name }}</td>
                             <td colspan="3">
@@ -329,7 +329,7 @@
 
                 <!-- Table A2-->
                 <div style="text-align: center;">
-                    <h1>Blue Caps</h1>
+                    <h3>Blue Caps</h3>
                 </div>
 
                 <table class="fw">
@@ -343,14 +343,14 @@
                         </td>
                         <td>{{$match->visitor->coach->name}}</td>
                     </tr>
-                    <tr>
-                        <td>Assistent coach 1:</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Assistent coach 2:</td>
-                        <td></td>
-                    </tr>
+                    {{--<tr>--}}
+                        {{--<td>Assistent coach 1:</td>--}}
+                        {{--<td></td>--}}
+                    {{--</tr>--}}
+                    {{--<tr>--}}
+                        {{--<td>Assistent coach 2:</td>--}}
+                        {{--<td></td>--}}
+                    {{--</tr>--}}
                 </table>
 
                 <!-- Table A3 -->
@@ -377,7 +377,7 @@
                     <!-- fouten -->
                     @foreach($match->visitor->players as $p)
 
-                        <tr>
+                        <tr  style="height: 18px;">
                             <td class="tc">{{ $loop->iteration }}</td>
                             <td>{{ $p->name }}</td>
                             <td colspan="3">

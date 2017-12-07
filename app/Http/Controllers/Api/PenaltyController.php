@@ -24,26 +24,11 @@ class PenaltyController extends Controller
 			'penalty_type_id' => 'required|integer',
 		]);
 
-//		$penaltybook = PenaltyBook::where([
-//			['match_id', '=', $request->match_id],
-//			['player_id', '=', $request->player_id]
-//		])->first();
-
-//		// if no penaltybook, create one
-//		if($penaltybook == null || $penaltybook->count() < 1){
-//			$penaltybook = new PenaltyBook();
-//			$penaltybook->match_id = $request->match_id;
-//			$penaltybook->player_id = $request->player_id;
-//			$penaltybook->save();
-//		}
-
 		$match = Match::findOrFail($request->match_id);
 
 		$penalty = new Penalty();
 		$penalty->penalty_type_id = $request->penalty_type_id;
-		//$penalty->match_id = $request->match_id;
 		$penalty->player_id = $request->player_id;
-		//$penaltybook->penalties()->save($penalty);
 		$match->penalties()->save($penalty);
 
 	}

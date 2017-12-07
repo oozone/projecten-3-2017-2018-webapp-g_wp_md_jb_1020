@@ -20,6 +20,8 @@ Route::Resource('players', 'Api\PlayerController');
 Route::get('/teams/{id}/allplayers', 'Api\TeamController@getAllPlayersFromRelatedTeams');
 Route::Resource('teams', 'Api\TeamController');
 
+Route::get('/matches/mailtester', 'Api\MatchController@mailtester');
+Route::post('/matches/{id}/sign', 'Api\MatchController@signAndCloseMatch');
 Route::put('/matches/{id}/starters', 'Api\MatchController@setStarters');
 Route::put('/matches/{id}/cancel', 'Api\MatchController@cancelMatch');
 Route::put('/matches/{id}/comment', 'Api\MatchController@addCommentary');

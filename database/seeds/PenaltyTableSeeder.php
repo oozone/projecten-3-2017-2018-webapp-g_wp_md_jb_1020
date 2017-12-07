@@ -16,33 +16,31 @@ class PenaltyTableSeeder extends Seeder
     public function run()
     {
 
-//	    $penaltybook = new PenaltyBook();
-//		$penaltybook->match_id = 1;
-//		$penaltybook->player_id = 4;
-//		$penaltybook->save();
-//
-//		$penalty = new Penalty();
-//		$penalty->penalty_type_id = 1;
-//		$penaltybook->penalties()->save($penalty);
-//
-//
-//	    $penaltybook = new PenaltyBook();
-//	    $penaltybook->match_id = 1;
-//	    $penaltybook->player_id = 16;
-//	    $penaltybook->save();
-//
-//	    $penalty = new Penalty();
-//	    $penalty->penalty_type_id = 1;
-//	    $penaltybook->penalties()->save($penalty);
-//
-//	    $penaltybook = new PenaltyBook();
-//	    $penaltybook->match_id = 1;
-//	    $penaltybook->player_id = 18;
-//	    $penaltybook->save();
-//
-//	    $penalty = new Penalty();
-//	    $penalty->penalty_type_id = 1;
-//	    $penaltybook->penalties()->save($penalty);
+
+	    $p = new Penalty();
+	    $p->match_id = 1;
+	    $p->player_id = 4;
+	    $p->penalty_type_id = 1;
+	    $p->save();
+
+	    $p = new Penalty();
+	    $p->match_id = 1;
+	    $p->player_id = 15;
+	    $p->penalty_type_id = 1;
+	    $p->save();
+
+	    $p = new Penalty();
+	    $p->match_id = 1;
+	    $p->player_id = 20;
+	    $p->penalty_type_id = 1;
+	    $p->save();
+
+	    $p = new Penalty();
+	    $p->match_id = 1;
+	    $p->player_id = 7;
+	    $p->penalty_type_id = 1;
+	    $p->save();
+
 
 
     }

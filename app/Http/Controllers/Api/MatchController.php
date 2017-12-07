@@ -3,15 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Commentary;
+use App\Events\MatchSigned;
 use App\Goal;
 use App\Http\Controllers\Controller;
+use App\Mail\FinasheetEmail;
 use App\Match;
 //use Barryvdh\DomPDF\PDF;
 use App\Player;
+use App\User;
+use Exception;
 use Illuminate\Http\Request;
 use \Illuminate\Http\Response;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 
 class MatchController extends Controller
@@ -149,6 +155,37 @@ class MatchController extends Controller
 	}
 
 	/**
+	 * Sign and close the specified match
+	 * @param Request $request
+	 * @param $id
+	 */
+	public function signAndCloseMatch(Request $request, $id)
+	{
+
+		$this->validate($request, [
+			'email' => 'required',
+			'password' => 'required'
+		]);
+
+		if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+		{
+			$match = Match::findOrFail($id);
+			$signer = User::where('email', $request->email)->firstOrFail();
+
+			$match->signed = 1;
+			$match->signer_id = $signer->id;
+			$match->save();
+
+			// dispatch event
+			event(new MatchSigned($match));
+
+		} else {
+			abort(403, 'Not authorized');
+		}
+
+	}
+
+	/**
 	 * Add match commentary to specified match
 	 * @param Request $request
 	 * @param $id
@@ -204,6 +241,11 @@ class MatchController extends Controller
 		return $pdf->download('finasheet.pdf');
 	}
 
+	/**
+	 * Set list of starters
+	 * @param Request $request
+	 * @param $id
+	 */
 	public function setStarters(Request $request, $id){
 
 		$players = json_decode($request->getContent(), true);
@@ -215,11 +257,7 @@ class MatchController extends Controller
 			$player->save();
 		}
 
-
-
 	}
-
-
 
 
 }

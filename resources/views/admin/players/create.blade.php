@@ -71,6 +71,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">{{ __('Division') }}</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" id="division" name="division">
+                                @foreach($divisions as $d)
+                                    <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">{{ __('Team') }}</label>
                         <div class="col-sm-9">
                             <select class="form-control" id="team" name="team">

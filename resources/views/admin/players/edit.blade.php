@@ -77,6 +77,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="name" class="col-sm-3 control-label">{{ __('Division') }}</label>
+                            <div class="col-sm-9">
+                                {{ Form::select('division_id', $divisions, $player->division_id, array('class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="name" class="col-sm-3 control-label">{{ __('Team') }}</label>
                             <div class="col-sm-9">
                                 {{ Form::select('team_id', $teams, $player->team->id, array('class' => 'form-control')) }}

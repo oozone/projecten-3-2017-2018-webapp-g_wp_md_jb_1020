@@ -37,7 +37,7 @@ class BasicTest extends DuskTestCase
 			        ->assertSee('Moeskroen')
 			        ->assertSee('First division')
 					->assertSee('Coach: Eerste coach')
-					->assertSee('Christof de Bonheure')
+					->assertSee('Chris Bonheure')
 			;
 		});
 	}
@@ -48,7 +48,7 @@ class BasicTest extends DuskTestCase
 			$browser->visit('http://voom.be:12005/teams/1')
 			        ->assertSee('Moeskroen')
 			        ->assertSee('Coach: Eerste coach')
-			        ->assertSee('Christof de Bonheure')
+			        ->assertSee('Chris Bonheure')
 			;
 		});
 	}
@@ -59,7 +59,7 @@ class BasicTest extends DuskTestCase
 			$browser->visit('http://voom.be:12005/players/1')
 			        ->assertSee('Moeskroen')
 			        ->assertSee('Player number: 1')
-			        ->assertSee('Christof de Bonheure')
+			        ->assertSee('Chris Bonheure')
 			;
 		});
 	}

@@ -179,6 +179,7 @@ class AdminTest extends TestCase
 		     	     'division_id' => 1,
 				     'player_number' => 55,
 				     'name' => "tempplayer",
+				     'division' => 1,
 				     'date' => $date,
 				     'starter' => 1,
 				     'status' => 1,

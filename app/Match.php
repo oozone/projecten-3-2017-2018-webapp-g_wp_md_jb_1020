@@ -27,11 +27,6 @@ class Match extends Model
 	public function division(){
 		return $this->belongsTo(Division::class);
 	}
-//
-//	public function teams()
-//	{
-//		return $this->belongsToMany(Team::class);
-//	}
 
 	public function officials()
 	{
@@ -62,11 +57,6 @@ class Match extends Model
     {
         return $this->hasMany(Goal::class);
     }
-
-//	public function penaltybooks()
-//	{
-//		return $this->hasMany(PenaltyBook::class);
-//	}
 
 	public function penalties(){
 		return $this->hasMany(Penalty::class);

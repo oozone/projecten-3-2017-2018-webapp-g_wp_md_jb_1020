@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class GoalController extends Controller
 {
     /**
+     * Store the resource
      * @param \App\Http\Controllers\Api\Request $request
      * @param $id Match Id
      */

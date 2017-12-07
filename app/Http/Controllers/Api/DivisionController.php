@@ -86,6 +86,12 @@ class DivisionController extends Controller
 		//
 	}
 
+	/**
+	 * Returns list op topscorers
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function topscorers($id){
 		return DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
 

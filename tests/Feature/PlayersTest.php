@@ -36,7 +36,7 @@ class PlayersTest extends TestCase {
 			     ->getContent()
 		);
 
-		$this->assertEquals($response->name, "Christof de Bonheure");
+		$this->assertEquals($response->name, "Chris Bonheure");
 		$this->assertEquals($response->player_number, 1);
 		$this->assertEquals($response->birthdate, "1984-03-27 00:00:00");
 		$this->assertEquals($response->status, 1);
@@ -50,7 +50,7 @@ class PlayersTest extends TestCase {
 		     ->assertJson([
 				     'id' => 1,
 				     'player_number' => 1,
-				     'name' => "Christof de Bonheure",
+				     'name' => "Chris Bonheure",
 				     'birthdate' => "1984-03-27 00:00:00",
 				     'status' => 1,
 				     //'team',

@@ -23,19 +23,19 @@
             border: 0px;
         }
 
-        div.sides {}
+        div.sides {height:100%}
 
         .tc {
             text-align: center;
         }
 
         table.fw {
-            width: 99%
+            width: 100%
         }
     </style>
 </head>
 <body>
-<div>
+
 <table class="" style="margin: 0 auto; width: 99%; border: 0px;">
 
     <tr>
@@ -462,7 +462,7 @@
         </td>
     </tr>
 
-</table>
-</div>
+<table>
+
 </body>
 </html>

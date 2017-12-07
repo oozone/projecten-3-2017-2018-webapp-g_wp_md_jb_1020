@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\Coach;
 use App\Location;
 use App\Match;
 use App\Player;

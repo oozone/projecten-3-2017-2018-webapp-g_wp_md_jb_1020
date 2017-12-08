@@ -25,7 +25,9 @@ The API-routes can be found at: https://documenter.getpostman.com/view/2365272/w
 
 #### Links
 Website: http://voom.be:12005/
+
 Adminsection: http://voom.be:12005/admin/players
+
 API: http://voom.be:12005/api/
 
 #### Contributors

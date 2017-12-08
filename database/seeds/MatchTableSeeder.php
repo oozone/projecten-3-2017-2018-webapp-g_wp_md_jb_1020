@@ -72,5 +72,29 @@ class MatchTableSeeder extends Seeder
 
 	    $season->matches()->save($match);
 
+
+	    // Thuis - Bezoekers
+	    $location = Location::where('name', 'Rooigem')->first();
+	    $difficulty = Difficulty::first();
+	    $valor = Valor::first();
+
+	    $home = Team::where('name', 'Thuis')->first();
+	    $visitor = Team::where('name', 'Bezoekers')->first();
+
+	    $match = new Match();
+	    $match->division_id = 4;
+	    $match->home_id = $home->id;
+	    $match->visitor_id = $visitor->id;
+	    $match->datum = date("Y-m-d H:i:s");
+	    $match->time_played = "00:00";
+	    $match->save();
+
+	    $location->matches()->save($match);
+	    $difficulty->matches()->save($match);
+	    $valor->matches()->save($match);
+
+	    $season->matches()->save($match);
+
+
     }
 }

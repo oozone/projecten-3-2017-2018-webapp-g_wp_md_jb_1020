@@ -178,5 +178,39 @@ class TeamTableSeeder extends Seeder
 		    'draw' => 0
 	    ]);
 
+
+	    /* TESTMATCH */
+	    // Thuis
+	    $team = new Team();
+	    $team->name = "Thuis";
+	    $team->save();
+	    //$team->addRelatedTeam(1);
+	    $team->coach()->save(Coach::where('name', 'Elfde coach')->first());
+	    $division = Division::find(4);
+	    $division->teams()->save($team);
+
+	    $season->teams()->attach($team, [
+		    'played' => 0,
+		    'won' => 0,
+		    'lost' => 0,
+		    'draw' => 0
+	    ]);
+
+	    // Bezoekers
+	    $team = new Team();
+	    $team->name = "Bezoekers";
+	    $team->save();
+	    //$team->addRelatedTeam(1);
+	    $team->coach()->save(Coach::where('name', 'Twaalfde coach')->first());
+	    $division = Division::find(4);
+	    $division->teams()->save($team);
+
+	    $season->teams()->attach($team, [
+		    'played' => 0,
+		    'won' => 0,
+		    'lost' => 0,
+		    'draw' => 0
+	    ]);
+
     }
 }

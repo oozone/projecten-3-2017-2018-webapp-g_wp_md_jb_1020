@@ -79,6 +79,38 @@ class PlayerTableSeeder extends Seeder
 	    $team = Team::find(10);
 	    $this->createPlayer("Moeskroentester", 1, true, $team);
 
+	    // Team 11 Thuis
+	    $team = Team::find(11);
+	    $this->createPlayer("1", 1, true, $team);
+	    $this->createPlayer("2", 2, true, $team);
+	    $this->createPlayer("3", 3, true, $team);
+	    $this->createPlayer("4", 4, true, $team);
+	    $this->createPlayer("5", 5, true, $team);
+	    $this->createPlayer("6", 6, true, $team);
+	    $this->createPlayer("7", 7, true, $team);
+	    $this->createPlayer("8", 8, true, $team);
+	    $this->createPlayer("9", 9, true, $team);
+	    $this->createPlayer("10", 10, true, $team);
+	    $this->createPlayer("11", 11, true, $team);
+	    $this->createPlayer("12", 12, true, $team);
+	    $this->createPlayer("13", 13, true, $team);
+
+	    // Team 12 Bezoekers
+	    $team = Team::find(12);
+	    $this->createPlayer("1", 1, true, $team);
+	    $this->createPlayer("2", 2, true, $team);
+	    $this->createPlayer("3", 3, true, $team);
+	    $this->createPlayer("4", 4, true, $team);
+	    $this->createPlayer("5", 5, true, $team);
+	    $this->createPlayer("6", 6, true, $team);
+	    $this->createPlayer("7", 7, true, $team);
+	    $this->createPlayer("8", 8, true, $team);
+	    $this->createPlayer("9", 9, true, $team);
+	    $this->createPlayer("10", 10, true, $team);
+	    $this->createPlayer("11", 11, true, $team);
+	    $this->createPlayer("12", 12, true, $team);
+	    $this->createPlayer("13", 13, true, $team);
+
 
     }
 

@@ -97,5 +97,15 @@ class LocationTableSeeder extends Seeder
 	    $location->country = "FR";
 	    $location->save();
 
+
+	    // rooigem
+	    $location = new Location();
+	    $location->name = "Rooigem";
+	    $location->street = "Peerstraat 1";
+	    $location->postalcode = "9000";
+	    $location->city = "Gent";
+	    $location->country = "BE";
+	    $location->save();
+
     }
 }

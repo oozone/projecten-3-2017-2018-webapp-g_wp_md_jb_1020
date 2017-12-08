@@ -30,6 +30,16 @@ Adminsection: http://voom.be:12005/admin/players
 
 API: http://voom.be:12005/api/
 
+#### Architectural overview
+This MVC-app follows the guidelines of the Laravel-community.
+
+* Routes: can be found under /routes/
+* Models: can be found under /app/
+* Views: /resources/views
+* Controllers: can be found under /app/Http/Controllers
+* Vue-components: /resources/assets/js/components
+* tests: Browser (Selenium) and feature-tests: /tests/
+
 #### Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.
 
@@ -37,8 +47,6 @@ Other team members (Android app):
 - Pieter Uyttersprot
 - Timo Spanhove
 - Laurent Deschryver
-
-
 
 ## License
 

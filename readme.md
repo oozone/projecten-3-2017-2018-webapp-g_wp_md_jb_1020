@@ -20,6 +20,9 @@ The website gives a live-feed of waterpolo matches, also gives info about player
 
 The adminsection is CRUD-oriented for matches, teams, players and locations.
 
+#### API
+The API-routes can be found at: https://documenter.getpostman.com/view/2365272/waterpolo-api/7EK4VvF
+
 #### Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.
 

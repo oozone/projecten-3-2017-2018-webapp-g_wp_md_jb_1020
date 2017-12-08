@@ -40,6 +40,14 @@ class UserTableSeeder extends Seeder
 	    $user->password = bcrypt('secret');
 	    $user->save();
 	    $user->roles()->save($role_official);
-	
+
+
+	    $user = new User();
+	    $user->name = 'Referee';
+	    $user->email = 'referee@voom.be';
+	    $user->password = bcrypt('secret');
+	    $user->save();
+	    $user->roles()->save($role_official);
+
     }
 }

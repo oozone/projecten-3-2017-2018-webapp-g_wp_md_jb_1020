@@ -16,12 +16,17 @@ The backend supplies critical info to the Android app we created in conjunction:
 it delivers info about matches, teams, locations and more. 
 
 #### Frontend
-The website gives a live-feed of waterpolo matches, also gives info about players, teams, topscorers, locations, ... 
+The website (http://voom.be:12005/) gives a live-feed of waterpolo matches, also gives info about players, teams, topscorers, locations, ... 
 
-The adminsection is CRUD-oriented for matches, teams, players and locations.
+The adminsection (http://voom.be:12005/admin/players - requires login) is CRUD-oriented for matches, teams, players and locations.
 
 #### API
 The API-routes can be found at: https://documenter.getpostman.com/view/2365272/waterpolo-api/7EK4VvF
+
+#### Links
+Website: http://voom.be:12005/
+Adminsection: http://voom.be:12005/admin/players
+API: http://voom.be:12005/api/
 
 #### Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.
@@ -30,6 +35,8 @@ Other team members (Android app):
 - Pieter Uyttersprot
 - Timo Spanhove
 - Laurent Deschryver
+
+
 
 ## License
 

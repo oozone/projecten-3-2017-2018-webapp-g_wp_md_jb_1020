@@ -49,10 +49,10 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Stan Vervoorn", 11, true, $team);
 	    $this->createPlayer("Ajay Duijndam", 12, true, $team);
 	    $this->createPlayer("Mateo Hanoeman", 13, true, $team);
-	    $this->createPlayer("Elco Derks", 14, false, $team);
-	    $this->createPlayer("Luuk Wallenburg", 15, false, $team);
-	    $this->createPlayer("Ruud Kemper", 16, false, $team);
-	    $this->createPlayer("Lowie Rijnders", 17, false, $team);
+	    $this->createPlayer("Elco Derks", 1, false, $team);
+	    $this->createPlayer("Luuk Wallenburg", 2, false, $team);
+	    $this->createPlayer("Ruud Kemper", 3, false, $team);
+	    $this->createPlayer("Lowie Rijnders", 4, false, $team);
 
 	    // Team 2
 	    $team = Team::find(2);
@@ -69,10 +69,10 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Shadi Backus", 11, true, $team);
 	    $this->createPlayer("Tunahan van Hezik", 12, true, $team);
 	    $this->createPlayer("Jolle Tienstra", 13, true, $team);
-	    $this->createPlayer("Arjan Wibbens", 14, false, $team);
-	    $this->createPlayer("Mathies Meuleman", 15, false, $team);
-	    $this->createPlayer("Arnout Deijk", 16, false, $team);
-	    $this->createPlayer("Jelle Gerrits", 17, false, $team);
+	    $this->createPlayer("Arjan Wibbens", 1, false, $team);
+	    $this->createPlayer("Mathies Meuleman", 2, false, $team);
+	    $this->createPlayer("Arnout Deijk", 3, false, $team);
+	    $this->createPlayer("Jelle Gerrits", 4, false, $team);
 
 
 	    // Team 10 Moeskroen B
@@ -94,7 +94,7 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("11", 11, true, $team,4);
 	    $this->createPlayer("12", 12, true, $team,4);
 	    $this->createPlayer("13", 13, true, $team,4);
-	    $this->createPlayer("14", 14, false, $team,4);
+	    $this->createPlayer("14", 1, false, $team,4);
 
 	    // Team 12 Bezoekers
 	    $team = Team::find(12);
@@ -111,7 +111,7 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("11", 11, true, $team,4);
 	    $this->createPlayer("12", 12, true, $team,4);
 	    $this->createPlayer("13", 13, true, $team,4);
-	    $this->createPlayer("14", 14, false, $team,4);
+	    $this->createPlayer("14", 1, false, $team,4);
 
 
     }

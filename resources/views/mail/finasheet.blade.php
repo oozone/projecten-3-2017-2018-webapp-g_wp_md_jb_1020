@@ -13,6 +13,8 @@ Eindstand: {{$match->score_home}} - {{$match->score_visitor}}
 
 Plaats: {{$match->location->name }}
 
+Referee: {{ $referee->name }}
+
 @component('mail::button', ['url' => 'http://voom.be:12005/pdf/' . $match->finasheet ])
 Downloaden
 @endcomponent

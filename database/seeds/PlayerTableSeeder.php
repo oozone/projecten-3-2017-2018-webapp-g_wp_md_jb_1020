@@ -81,35 +81,37 @@ class PlayerTableSeeder extends Seeder
 
 	    // Team 11 Thuis
 	    $team = Team::find(11);
-	    $this->createPlayer("1", 1, true, $team);
-	    $this->createPlayer("2", 2, true, $team);
-	    $this->createPlayer("3", 3, true, $team);
-	    $this->createPlayer("4", 4, true, $team);
-	    $this->createPlayer("5", 5, true, $team);
-	    $this->createPlayer("6", 6, true, $team);
-	    $this->createPlayer("7", 7, true, $team);
-	    $this->createPlayer("8", 8, true, $team);
-	    $this->createPlayer("9", 9, true, $team);
-	    $this->createPlayer("10", 10, true, $team);
-	    $this->createPlayer("11", 11, true, $team);
-	    $this->createPlayer("12", 12, true, $team);
-	    $this->createPlayer("13", 13, true, $team);
+	    $this->createPlayer("1", 1, true, $team, 4);
+	    $this->createPlayer("2", 2, true, $team,4);
+	    $this->createPlayer("3", 3, true, $team,4);
+	    $this->createPlayer("4", 4, true, $team,4);
+	    $this->createPlayer("5", 5, true, $team,4);
+	    $this->createPlayer("6", 6, true, $team,4);
+	    $this->createPlayer("7", 7, true, $team,4);
+	    $this->createPlayer("8", 8, true, $team,4);
+	    $this->createPlayer("9", 9, true, $team,4);
+	    $this->createPlayer("10", 10, true, $team,4);
+	    $this->createPlayer("11", 11, true, $team,4);
+	    $this->createPlayer("12", 12, true, $team,4);
+	    $this->createPlayer("13", 13, true, $team,4);
+	    $this->createPlayer("14", 14, false, $team,4);
 
 	    // Team 12 Bezoekers
 	    $team = Team::find(12);
-	    $this->createPlayer("1", 1, true, $team);
-	    $this->createPlayer("2", 2, true, $team);
-	    $this->createPlayer("3", 3, true, $team);
-	    $this->createPlayer("4", 4, true, $team);
-	    $this->createPlayer("5", 5, true, $team);
-	    $this->createPlayer("6", 6, true, $team);
-	    $this->createPlayer("7", 7, true, $team);
-	    $this->createPlayer("8", 8, true, $team);
-	    $this->createPlayer("9", 9, true, $team);
-	    $this->createPlayer("10", 10, true, $team);
-	    $this->createPlayer("11", 11, true, $team);
-	    $this->createPlayer("12", 12, true, $team);
-	    $this->createPlayer("13", 13, true, $team);
+	    $this->createPlayer("1", 1, true, $team,4);
+	    $this->createPlayer("2", 2, true, $team,4);
+	    $this->createPlayer("3", 3, true, $team,4);
+	    $this->createPlayer("4", 4, true, $team,4);
+	    $this->createPlayer("5", 5, true, $team,4);
+	    $this->createPlayer("6", 6, true, $team,4);
+	    $this->createPlayer("7", 7, true, $team,4);
+	    $this->createPlayer("8", 8, true, $team,4);
+	    $this->createPlayer("9", 9, true, $team,4);
+	    $this->createPlayer("10", 10, true, $team,4);
+	    $this->createPlayer("11", 11, true, $team,4);
+	    $this->createPlayer("12", 12, true, $team,4);
+	    $this->createPlayer("13", 13, true, $team,4);
+	    $this->createPlayer("14", 14, false, $team,4);
 
 
     }

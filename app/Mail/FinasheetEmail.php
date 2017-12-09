@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Match;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,15 +14,19 @@ class FinasheetEmail extends Mailable
 	use Queueable, SerializesModels;
 
 	public $match;
+	public $referee;
+
 
 	/**
 	 * Create a new message instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(Match $match)
+	public function __construct(Match $match, User $referee)
 	{
 		$this->match = $match;
+		$this->referee = $referee;
+
 	}
 
 	/**

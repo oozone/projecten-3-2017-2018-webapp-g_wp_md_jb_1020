@@ -66,6 +66,7 @@ class MatchController extends Controller
 	public function show($id)
 	{
 
+
 		$match = Match::with(array('location', 'difficulty', 'valor','home','visitor'))->find($id);
 
 		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
@@ -167,6 +168,7 @@ class MatchController extends Controller
 			'password' => 'required'
 		]);
 
+
 		if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
 		{
 			$match = Match::findOrFail($id);
@@ -176,8 +178,55 @@ class MatchController extends Controller
 			$match->signer_id = $signer->id;
 			$match->save();
 
+
+			$playersScorePerQuarterArray = [];
+			// Home Scored goals per quarter
+			foreach($match->home->players as $index => $h) {
+				$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'] = [];
+				$tmp = DB::table( 'goals' )->selectRaw( 'quarter' )->where( 'player_id', '=', $h->id )->get()->toArray();
+				if(empty($tmp)) {
+					continue;
+				}
+				foreach ( $tmp as $index2 => $t ) {
+					if ( count( $t->quarter ) < 1 ) {
+						$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'] = [];
+						continue;
+					} else {
+						// niet opgeteld, toevoegen
+						if(!empty($playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ]))
+							$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] = $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] + 1;
+						else {
+							$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] = 1;
+						}
+					}
+				}
+			}
+
+			// Visitor Scored goals per quarter
+			foreach($match->visitor->players as $index => $h) {
+				$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'] = [];
+				$tmp = DB::table( 'goals' )->selectRaw( 'quarter' )->where( 'player_id', '=', $h->id )->get()->toArray();
+				if(empty($tmp)) {
+					continue;
+				}
+				foreach ( $tmp as $index2 => $t ) {
+					if ( count( $t->quarter ) < 1 ) {
+						$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'] = [];
+						continue;
+					} else {
+						// niet opgeteld, toevoegen
+						if(!empty($playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ]))
+							$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] = $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] + 1;
+						else {
+							$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] = 1;
+						}
+					}
+				}
+			}
+
+
 			// dispatch event
-			event(new MatchSigned($match));
+			event(new MatchSigned($match, $playersScorePerQuarterArray ));
 
 		} else {
 			abort(403, 'Not authorized');

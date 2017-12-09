@@ -16,15 +16,17 @@ class MatchSigned
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $match;
+    public $scorersPerQuarter;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Match $match)
+    public function __construct(Match $match, $scorersPerQuarter)
     {
         $this->match = $match;
+        $this->scorersPerQuarter = $scorersPerQuarter;
     }
 
     /**

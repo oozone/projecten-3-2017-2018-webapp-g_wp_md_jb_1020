@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\MatchSigned;
 use App\Mail\FinasheetEmail;
+use App\User;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -50,10 +51,15 @@ class MatchSignedListener
 	                        ->groupBy('player_id')
 	                        ->get();
 
+	    // Get important users
+	    $referee = User::findOrFail($match->signer_id);
+
 	    $pdf = PDF::loadView('pdf.finasheet', array(
 		    'match' => $match,
 		    'foutenThuis' => $foutenThuis,
-		    'foutenBezoeker' => $foutenBezoeker
+		    'foutenBezoeker' => $foutenBezoeker,
+		    'referee' => $referee,
+		    'scorersPerQuarter' => $event->scorersPerQuarter
 	    ))->setPaper('a4', 'landscape');
 
 
@@ -64,8 +70,8 @@ class MatchSignedListener
 	    $match->finasheet = $filename;
 	    $match->save();
 
-	    Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match));
-
+	    //Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match));
+	    Mail::to($referee->email)->send(new FinasheetEmail($match, $referee));
 
 
     }

@@ -437,13 +437,44 @@
                                 </table>
                             </td>
                             <td>
-                                <table class="fw noborder">
+                                <table class="noborder" style="width: 80%">
                                     <tr>
-                                        <td class="noborder"></td>
-                                        <td class="noborder"></td>
-                                        <td class="noborder"></td>
-                                        <td class="noborder"></td>
-                                        <td class="noborder"></td>
+                                        {{--@foreach($scorersPerQuarter["home"][$p->id] as $sc)--}}
+
+                                        @if(sizeof($scorersPerQuarter["visitor"][$p->id]["quartergoals"]) < 1)
+                                            <td style="width: 25%" class="tc"></td>
+                                            <td style="width: 25%" class="tc"></td>
+                                            <td style="width: 25%" class="tc"></td>
+                                            <td style="width: 25%" class="tc"></td>
+
+                                        @else
+                                            {{--{{$sc["quartergoals"]["1"]}}--}}
+                                            @foreach($scorersPerQuarter["visitor"][$p->id] as $score)
+
+                                                @if(array_key_exists("1", $score) && count($score["1"]) > 0))
+                                                <td class="tc"style="width: 25%">{{$score["1"]}}</td>
+                                                @else
+                                                    <td class="tc"style="width: 25%">0</td>
+                                                @endif
+                                                @if(array_key_exists("2", $score) && count($score["2"]) > 0))
+                                                <td class="tc"style="width: 25%">{{$score["2"]}}</td>
+                                                @else
+                                                    <td class="tc" style="width: 25%">0</td>
+                                                @endif
+                                                @if(array_key_exists("3", $score) && count($score["3"]) > 0))
+                                                <td class="tc" style="width: 25%">{{$score["3"]}}</td>
+                                                @else
+                                                    <td class="tc" style="width: 25%">0</td>
+                                                @endif
+                                                @if(array_key_exists("4", $score) && count($score["4"]) > 0))
+                                                <td class="tc" style="width: 25%">{{$score["4"]}}</td>
+                                                @else
+                                                    <td class="tc" style="width: 25%">0</td>
+                                                @endif
+                                            @endforeach
+                                        @endif
+
+                                        {{--@endforeach--}}
                                     </tr>
                                 </table>
                             </td>

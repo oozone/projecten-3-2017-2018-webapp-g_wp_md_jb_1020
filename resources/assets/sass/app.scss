@@ -56,24 +56,24 @@
   color: #fff;
   background: #2c2e3c;
 }
-ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: #2c2e3c;
-}
+//ul ul a {
+//  font-size: 0.9em !important;
+//  padding-left: 30px !important;
+//  background: #2c2e3c;
+//}
 
 a[data-toggle="collapse"] {
   position: relative;
 }
 
-a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
-  content: '\e259';
-  display: block;
-  position: absolute;
-  right: 20px;
-  font-family: 'Glyphicons Halflings';
-  font-size: 0.6em;
-}
+//a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+//  content: '\e259';
+//  display: block;
+//  position: absolute;
+//  right: 20px;
+//  font-family: 'Glyphicons Halflings';
+//  font-size: 0.6em;
+//}
 
 
 
@@ -331,11 +331,11 @@ div.col-xs-12.wp-goal-visitor {
   .panel-scoreboard {
 
     h1 {
-      font-size: 9em;
+      font-size: 12em;
     }
 
     h2 {
-      font-size: 7em;
+      font-size: 10em;
     }
 
     .teamlogo {
@@ -346,6 +346,11 @@ div.col-xs-12.wp-goal-visitor {
         margin: 0 auto;
       }
     }
+
+    span.wppgoallive {
+      font-size: 12em;
+    }
+
   }
 }
 
@@ -355,6 +360,23 @@ div.col-xs-12.wp-goal-visitor {
 
   display: flex;
   align-items: center;
+}
+
+@media all and (max-width: 3000px) { /* screen size until 1200px */
+  .panel-scoreboard {
+
+    h1 {
+      font-size: 9em;
+    }
+
+    h2 {
+      font-size: 7em;
+    }
+
+    span.wppgoallive {
+      font-size: 9em;
+    }
+  }
 }
 
 @media all and (max-width: 2000px) { /* screen size until 1200px */

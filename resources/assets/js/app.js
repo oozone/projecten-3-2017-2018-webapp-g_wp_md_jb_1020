@@ -35,6 +35,7 @@ window.axios.defaults.headers.common = {
 
 
 Vue.component('match', require('./components/Match.vue'));
+Vue.component('scoreboard', require('./components/admin/Scoreboard.vue'));
 Vue.component('matchlist', require('./components/MatchList.vue'));
 Vue.component('topscorers', require('./components/Topscorers.vue'));
 Vue.component('standings', require('./components/Standings.vue'));

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::put('/players/{id}/changenumber', 'Api\PlayerController@changePlayerNumber');
 Route::get('/players/{id}/match/{matchId}', 'Api\PlayerController@showMatch');
 Route::Resource('players', 'Api\PlayerController');
 

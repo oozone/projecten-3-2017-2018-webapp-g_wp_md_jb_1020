@@ -147,6 +147,9 @@
                                     <li><a href="{{ url('admin/locations') }}">{{ __('List') }}</a></li>
                                     <li><a href="{{ url('admin/locations/create')}}">{{ __('Create') }}</a></li>
                                 </ul>
+                                <li>
+                                    <a href="{{ url('admin/scoreboard') }}"><i class="fa fa-television fa-lg"></i>&nbsp;{{ __(' Scoreboard') }}</a>
+                                </li>
 
                             </ul>
 

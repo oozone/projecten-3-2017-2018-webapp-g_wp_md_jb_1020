@@ -40,7 +40,7 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function (
 	Route::resource('teams', 'TeamController');
 	Route::resource('matches', 'MatchController');
 	Route::resource('locations', 'LocationController');
-
+	Route::resource('scoreboard', 'ScoreboardController');
 
 
 });

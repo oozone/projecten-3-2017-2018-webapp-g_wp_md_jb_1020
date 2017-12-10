@@ -17,6 +17,7 @@ use \Illuminate\Http\Response;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 
@@ -296,13 +297,15 @@ class MatchController extends Controller
 	 * @param $id
 	 */
 	public function setStarters(Request $request, $id){
-
-		$players = json_decode($request->getContent(), true);
-		//dd($players);
+		//Log::info('content setstarters: ');
+		//Log::info('content setstarters: '.$request->getContent());
+		$starters = json_decode($request->getContent(), false);
+		//return ($players);
+		$players = $starters->starters;
 		foreach($players as $p){
 			//dd($p["player_id"]);
-			$player = Player::find($p["player_id"]);
-			$player->starter = $p["starter"];
+			$player = Player::find($p->player_id);
+			$player->starter = $p->starter;
 			$player->save();
 		}
 

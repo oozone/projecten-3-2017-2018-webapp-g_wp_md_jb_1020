@@ -96,4 +96,24 @@ class PlayerController extends Controller
 	{
 		//
 	}
+
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  Request  $request
+	 * @return Response
+	 */
+	public function changePlayerNumber(Request $request, $id)
+	{
+		$this->validate(request(), [
+			'player_number' => 'required|integer',
+		]);
+
+		$player = Player::findOrFail($id);
+		$player->player_number = $request->player_number;
+		$player->save();
+
+	}
+
 }

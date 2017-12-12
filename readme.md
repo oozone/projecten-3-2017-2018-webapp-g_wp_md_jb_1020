@@ -18,7 +18,7 @@ it delivers info about matches, teams, locations and more.
 #### Frontend
 The website (http://voom.be:12005/) gives a live-feed of waterpolo matches, also gives info about players, teams, topscorers, locations, ... 
 
-The adminsection (http://voom.be:12005/admin/players - requires login) is CRUD-oriented for matches, teams, players and locations.
+The adminsection (http://voom.be:12005/admin/- requires login) is CRUD-oriented for matches, teams, players and locations.
 
 #### API
 The API-routes can be found at: https://documenter.getpostman.com/view/2365272/waterpolo-api/7EK4VvF
@@ -56,7 +56,7 @@ Other team members (Android app):
 #### Links
 Website: http://voom.be:12005/
 
-Adminsection: http://voom.be:12005/admin/players
+Adminsection: http://voom.be:12005/admin/
 
 API: http://voom.be:12005/api/
 

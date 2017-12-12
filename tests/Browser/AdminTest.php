@@ -191,7 +191,7 @@ class AdminTest extends DuskTestCase
 					->select('status', 1)
 					->select('team', 1)
 			        ->press('Save')
-					->visit('http://voom.be:12005/admin/players?page=2')
+					->visit('http://voom.be:12005/admin/players?page=4')
 			        ->assertSee('Tempplayer')
 					//->assertSee('Mechelen')
 					//->assertSee($date)
@@ -200,7 +200,7 @@ class AdminTest extends DuskTestCase
 		});
 
 		$loc = Player::where('name','=',"Tempplayer")->first();
-		//$loc->delete();
+		$loc->delete();
 
 	}
 

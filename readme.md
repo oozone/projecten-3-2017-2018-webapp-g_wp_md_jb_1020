@@ -23,12 +23,17 @@ The adminsection (http://voom.be:12005/admin/players - requires login) is CRUD-o
 #### API
 The API-routes can be found at: https://documenter.getpostman.com/view/2365272/waterpolo-api/7EK4VvF
 
-#### Links
-Website: http://voom.be:12005/
+#### Docker
+This app is contained in a docker-environment.
 
-Adminsection: http://voom.be:12005/admin/players
+The different containers are:
+* Workspace - makes artisan and other interaction possible with environment and app
+* php-fpm container running PHP 7.1
+* php-worker container - Runs PHP jobs
+* nginx container - HTTP-server
+* MySQL container - Database
+* Selenium container - Browser testing
 
-API: http://voom.be:12005/api/
 
 #### Architectural overview
 This MVC-app follows the guidelines of the Laravel-community.
@@ -47,6 +52,13 @@ Other team members (Android app):
 - Pieter Uyttersprot
 - Timo Spanhove
 - Laurent Deschryver
+
+#### Links
+Website: http://voom.be:12005/
+
+Adminsection: http://voom.be:12005/admin/players
+
+API: http://voom.be:12005/api/
 
 ## License
 

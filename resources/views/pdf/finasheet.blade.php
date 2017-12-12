@@ -279,13 +279,13 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    @if($loop->iteration == 30)
+                                    @if($loop->iteration == 27)
                                         @break
                                     @endif
 
-                                    @if($loop->last && $loop->count < 30)
+                                    @if($loop->last && $loop->count < 27)
                                         </tr>
-                                        @for($i = $loop->count; $i < 31; $i++)
+                                        @for($i = $loop->count; $i < 28; $i++)
                                             <tr>
                                                 <td></td>
                                                 <td></td>

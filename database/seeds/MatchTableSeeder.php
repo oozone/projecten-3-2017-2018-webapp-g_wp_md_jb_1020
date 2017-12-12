@@ -33,7 +33,8 @@ class MatchTableSeeder extends Seeder
 	    $match->visitor_id = $visitor->id;
 	    $match->score_home = 0;
 	    $match->score_visitor = 0;
-		$match->datum = date("Y-m-d H:i:s");
+		//$match->datum = date("Y-m-d H:i:s");
+	    $match->datum = DateTime::createFromFormat('Y-m-d H:i:s', '2017-12-25 20:00:00');
 		$match->time_played = "00:00";
 		$match->save();
 
@@ -62,7 +63,7 @@ class MatchTableSeeder extends Seeder
 	    $match->division_id = 1;
 	    $match->home_id = $home->id;
 	    $match->visitor_id = $visitor->id;
-	    $match->datum = date("Y-m-d H:i:s");
+	    $match->datum = DateTime::createFromFormat('Y-m-d H:i:s', '2017-12-25 14:00:00');
 	    $match->time_played = "00:00";
 	    $match->save();
 

@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 class MatchController extends Controller
@@ -164,10 +165,20 @@ class MatchController extends Controller
 	public function signAndCloseMatch(Request $request, $id)
 	{
 
-		$this->validate($request, [
+//		$this->validate($request, [
+//			'email' => 'required',
+//			'password' => 'required'
+//
+
+		$validator = Validator::make($request->all(), [
 			'email' => 'required',
-			'password' => 'required'
+			'password' => 'required',
 		]);
+
+// then, if it fails, return the error messages in JSON format
+		if ($validator->fails()) {
+			return response()->json($validator->messages(), 422);
+		}
 
 
 		if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))

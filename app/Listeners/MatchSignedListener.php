@@ -70,8 +70,8 @@ class MatchSignedListener
 	    $match->finasheet = $filename;
 	    $match->save();
 
-	    //Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match));
-	    Mail::to($referee->email)->send(new FinasheetEmail($match, $referee));
+	    Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match, $referee));
+	    //Mail::to($referee->email)->send(new FinasheetEmail($match, $referee));
 
 
     }

@@ -23,7 +23,7 @@ The adminsection (http://voom.be:12005/admin/- requires login) is CRUD-oriented 
 #### API
 The API-routes can be found at: https://documenter.getpostman.com/view/2365272/waterpolo-api/7EK4VvF
 
-#### Docker
+## Docker
 This app is contained in a docker-environment.
 
 The different containers are:
@@ -35,7 +35,7 @@ The different containers are:
 * Selenium container - Browser testing
 
 
-#### Architectural overview
+## Architectural overview
 This MVC-app follows the guidelines of the Laravel-community.
 
 * Routes: can be found under /routes/
@@ -45,7 +45,7 @@ This MVC-app follows the guidelines of the Laravel-community.
 * Vue-components: /resources/assets/js/components
 * tests: Browser (Selenium) and feature-tests: /tests/
 
-#### Contributors
+## Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.
 
 Other team members (Android app):
@@ -53,7 +53,7 @@ Other team members (Android app):
 - Timo Spanhove
 - Laurent Deschryver
 
-#### Links
+## Links
 Website: http://voom.be:12005/
 
 Adminsection: http://voom.be:12005/admin/

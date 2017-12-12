@@ -57,7 +57,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ url('admin/players') }}">
+                                        <a href="{{ url('admin/') }}">
                                             {{ __('Admin') }}
                                         </a>
 

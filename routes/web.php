@@ -41,6 +41,6 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function (
 	Route::resource('matches', 'MatchController');
 	Route::resource('locations', 'LocationController');
 	Route::resource('scoreboard', 'ScoreboardController');
-
+	Route::get('/', 'DashboardController@index');
 
 });

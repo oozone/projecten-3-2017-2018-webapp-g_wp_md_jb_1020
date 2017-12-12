@@ -107,7 +107,7 @@
 
                             <ul id="menu-content" class="">
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ url('admin/')}}">
                                         <i class="fa fa-dashboard fa-lg"></i> Dashboard
                                     </a>
                                 </li>

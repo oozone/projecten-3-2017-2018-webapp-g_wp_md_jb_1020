@@ -1,5 +1,3 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-
 <p align="center">
 <img src="http://voom.be:12005/images/header/wpheader.jpg" />
 </p>
@@ -33,6 +31,8 @@ The different containers are:
 
 
 ## Architectural overview
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+
 This MVC-app follows the guidelines of the Laravel-community.
 
 * Routes: can be found under /routes/

@@ -33,6 +33,8 @@ Route::get('/matches/{id}/pdf', 'Api\MatchController@generatePdf');
 Route::get('/matches/active', 'Api\MatchController@activeMatches');
 
 Route::Resource('matches', 'Api\MatchController');
+
+Route::get('/divisions/{id}/standings/{season_id}', 'Api\DivisionController@standings');
 Route::get('/divisions/{id}/topscorers', 'Api\DivisionController@topscorers');
 Route::Resource('divisions', 'Api\DivisionController');
 Route::Resource('locations', 'Api\LocationController');

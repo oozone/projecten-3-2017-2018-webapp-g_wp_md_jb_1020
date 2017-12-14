@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Division;
 use App\Http\Controllers\Controller;
+use App\Season;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -93,7 +94,13 @@ class DivisionController extends Controller
 	 * @return mixed
 	 */
 	public function topscorers($id){
-		return DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
+		return DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->where('players.division_id','=', $id)->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
 
+	}
+
+	public function standings($id, $season_id){
+		$season = Season::find($season_id);
+		$standings = $season->teams()->division($id)->orderBy('pivot_won', 'desc')->get();
+		return $standings;
 	}
 }

@@ -30,7 +30,7 @@
                                 <b>{{ __('Goals') }}</b>
                             </div>
                         </div>
-                        <topscorers :topscorers="{{$topscorers}}"></topscorers>
+                        <topscorers :topscorers="{{$topscorers}}" :division_id="{{$match->division_id}}"></topscorers>
                     </div>
                 </div>
 
@@ -48,7 +48,7 @@
                                 <b>{{ __('Points') }}</b>
                             </div>
                         </div>
-                        <standings :standings="{{$standings}}"></standings>
+                        <standings :standings="{{$standings}}" :division_id="{{$match->division_id}}" :season_id="{{$match->season_id}}"></standings>
 
                     </div>
                 </div>

@@ -16,7 +16,7 @@
 import { bus } from './bus.js';
     export default {
         name: 'topscorers',
-        props: ['topscorers'],
+        props: ['topscorers','division_id'],
         components: {
         },
         data: function(){
@@ -31,9 +31,9 @@ import { bus } from './bus.js';
             let self = this;
             bus.$on('goalScored', function(data) {
 
-                console.log("bus catch");
+                //console.log("bus catch");
                 // Goal scored, let's get our topscorers
-                axios.get('/api/divisions/1/topscorers')
+                axios.get('/api/divisions/'+ self.division_id + '/topscorers')
                     .then(
                         response => {
                             self.datatopscorers = (response.data);

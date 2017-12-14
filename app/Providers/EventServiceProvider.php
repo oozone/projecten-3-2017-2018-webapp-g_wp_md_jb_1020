@@ -15,6 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'App\Events\MatchSigned' => [
             'App\Listeners\MatchSignedListener',
+	        'App\Listeners\TableRankingListener',
         ],
     ];
 

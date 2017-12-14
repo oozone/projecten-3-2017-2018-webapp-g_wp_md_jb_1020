@@ -61,7 +61,7 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Lowie Litteler", 3, true, $team);
 	    $this->createPlayer("Walter Voskamp", 4, true, $team);
 	    $this->createPlayer("Sjaak Kruit", 5, true, $team);
-	    $this->createPlayer("Rudie van Rijn", 6, true, $team);
+	    $this->createPlayer("Jens Buysse", 6, true, $team, 1, "http://voom.be:12005/images/players/1513277937.jpg");
 	    $this->createPlayer("Lodewijk Koedijk", 7, true, $team);
 	    $this->createPlayer("Timen Plasmans", 8, true, $team);
 	    $this->createPlayer("Casimir Liebrand", 9, true, $team);
@@ -116,7 +116,7 @@ class PlayerTableSeeder extends Seeder
 
     }
 
-    private function createPlayer($name, $nr, $starter = false, $team, $division = 1){
+    private function createPlayer($name, $nr, $starter = false, $team, $division = 1, $image = ""){
 
 	    $player = new Player();
 	    $player->name = $name;
@@ -125,6 +125,8 @@ class PlayerTableSeeder extends Seeder
 	    $player->status = 1;
 	    $player->division_id = $division;
 	    $player->birthdate = date('Y-m-d H:i:s');
+	    if($image != "")
+	    	$player->photo = $image;
 	    $player->save();
 	    $team->players()->save($player);
     }

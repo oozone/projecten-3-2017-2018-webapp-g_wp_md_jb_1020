@@ -16,6 +16,7 @@ class CreateGoalsTable extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('player_id')->unsigned();
+            $table->integer('division_id')->unsigned();
             $table->integer('match_id')->unsigned();
             $table->integer('team_id')->unsigned();
             $table->integer('quarter');

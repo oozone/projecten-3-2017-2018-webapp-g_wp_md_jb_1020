@@ -40,6 +40,7 @@ class GoalController extends Controller
 
         $goal = new Goal();
         $goal->match_id = $match->match_id;
+        $goal->division_id = $match->division_id;
         $goal->player_id = $request->player_id;
         $goal->team_id = $player->team_id;
         $goal->score_home = $match->score_home;

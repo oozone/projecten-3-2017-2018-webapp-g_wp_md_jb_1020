@@ -165,22 +165,17 @@ class MatchController extends Controller
 	public function signAndCloseMatch(Request $request, $id)
 	{
 
-//		$this->validate($request, [
-//			'email' => 'required',
-//			'password' => 'required'
-//
-
 		$validator = Validator::make($request->all(), [
 			'email' => 'required',
 			'password' => 'required',
 		]);
 
-// then, if it fails, return the error messages in JSON format
+		// then, if it fails, return the error messages in JSON format
 		if ($validator->fails()) {
 			return response()->json($validator->messages(), 422);
 		}
 
-
+		// Try to login with these credentials
 		if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
 		{
 			$match = Match::findOrFail($id);

@@ -60,10 +60,10 @@ class MatchController extends Controller
 	{
 
 		$match = Match::with('home.players')->with('visitor.players')->find($id);
-		$topscorers = DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
+		$topscorers = DB::table('goals')->selectRaw('player_id, players.division_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->where('players.division_id','=', $match->division_id)->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
 
 		$season = Season::find(1);
-		$standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
+		$standings = $season->teams()->division($match->division_id)->orderBy('pivot_won', 'desc')->get();
 
 		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
 

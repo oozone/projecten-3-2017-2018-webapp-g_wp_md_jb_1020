@@ -85,7 +85,7 @@
             setInterval(function () {
                 this.loadData();
 
-            }.bind(this), 10000);
+            }.bind(this), 5000);
         },
         filters: {
             round,

@@ -48,19 +48,27 @@ This MVC-app follows the guidelines of the Laravel-community.
 This webapp was tested using feature (JSON & Web) & Selenium Browser tests (Dockerized). These can be found in the folder /tests/
 
 #### Feature tests
-<p align="center"><img src="http://voom.be:12005/images/tests/unit1.jpg"></p>
-<p align="center"><img src="http://voom.be:12005/images/tests/unit2.jpg"></p>
+<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/unit1.jpg"></p>
+<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/unit2.jpg"></p>
 
 #### Selenium (Browser tests)
-<p align="center"><img src="http://voom.be:12005/images/tests/dusk1.jpg"></p>
-<p align="center"><img src="http://voom.be:12005/images/tests/dusk2.jpg"></p>
+<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/dusk1.jpg"></p>
+<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/dusk2.jpg"></p>
 
 
 ## Login
 The admin-section (http://voom.be:12005/admin) can be accessed with these credentials:
 
-Email: *lector@hogent.be*
-Password: *DoYouEvenLaravel?*
+Email: **lector@hogent.be**
+
+Password: **DoYouEvenLaravel?**
+
+## Languages
+The webapp is currently translated in these languages:
+
+* English
+* Dutch / Nederlands
+* French / Français
 
 ## Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.

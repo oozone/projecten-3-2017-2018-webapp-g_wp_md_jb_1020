@@ -49,5 +49,13 @@ class UserTableSeeder extends Seeder
 	    $user->save();
 	    $user->roles()->save($role_official);
 
+	    $user = new User();
+	    $user->name = 'Lector HoGent';
+	    $user->email = 'lector@hogent.be';
+	    $user->password = bcrypt('DoYouEvenLaravel?');
+	    $user->save();
+	    $user->roles()->save($role_admin);
+
+
     }
 }

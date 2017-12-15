@@ -11,22 +11,20 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
+// Main index page
 Route::get('/', 'WelcomeController@index');
-//Route::get('login', [ 'as' => 'login', 'uses' => 'LoginController']);
-//Route::resource('login', [ 'as' => 'login', 'uses' => 'Auth\LoginController']);
-//Route::get('/login', 'WelcomeController@index');
+
+// Open resource routes
 Route::Resource('players', 'PlayerController');
 Route::Resource('teams', 'TeamController');
 Route::Resource('matches', 'MatchController');
 Route::Resource('divisions', 'DivisionController');
 Route::Resource('locations', 'LocationController');
 
+// Login & register
 Auth::routes();
 
+// Admin-section
 Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function () {
 
 	Route::get('/teams/{id}/related', 'TeamController@relatedTeams');

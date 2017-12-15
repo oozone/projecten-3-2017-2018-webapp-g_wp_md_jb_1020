@@ -35,12 +35,32 @@ The different containers are:
 
 This MVC-app follows the guidelines of the Laravel-community.
 
-* Routes: can be found under /routes/
-* Models: can be found under /app/
+* Routes: can be found in the folder /routes/
+* Models: can be found in /app/
 * Views: /resources/views
-* Controllers: can be found under /app/Http/Controllers
+* Controllers: can be found in /app/Http/Controllers
 * Vue-components: /resources/assets/js/components
 * tests: Browser (Selenium) and feature-tests: /tests/
+
+## Tests
+<p align="center"><img src="http://voom.be:12005/images/tests/selenium.jpg"></p>
+
+This webapp was tested using feature (JSON & Web) & Selenium Browser tests (Dockerized). These can be found in the folder /tests/
+
+#### Feature tests
+<p align="center"><img src="http://voom.be:12005/images/tests/unit1.jpg"></p>
+<p align="center"><img src="http://voom.be:12005/images/tests/unit2.jpg"></p>
+
+#### Selenium (Browser tests)
+<p align="center"><img src="http://voom.be:12005/images/tests/dusk1.jpg"></p>
+<p align="center"><img src="http://voom.be:12005/images/tests/dusk2.jpg"></p>
+
+
+## Login
+The admin-section (http://voom.be:12005/admin) can be accessed with these credentials:
+
+Email: *lector@hogent.be*
+Password: *DoYouEvenLaravel?*
 
 ## Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.

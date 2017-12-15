@@ -2,9 +2,14 @@
 <img src="http://voom.be:12005/images/header/wpheader.jpg" />
 </p>
 
+## Projecten III: Mobile Apps
+This is part of our assignment for the course Projecten III: Mobile Apps at Hogeschool Gent 2017 - 2018.
+
+Our group is **WP_1020_MD_JB**
+
 ## Waterpolo App + Backend
-This is the backend API + website and admin-section for the waterpolo-app we created for the course Mobile App Projects 3 at Hogeschool Gent. 
-It is written in Laravel + Vue as frontend JS lib. 
+This is the backend API + website and admin-section for the waterpolo-app we created for the course Mobile App Projects 3. 
+It is written in Laravel 5.5 + Vue.js as frontend JS lib. 
 
 #### Backend
 The backend supplies critical info to the Android app we created in conjunction: 

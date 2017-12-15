@@ -29,7 +29,6 @@ The different containers are:
 * MySQL container - Database
 * Selenium container - Browser testing
 
-
 ## Architectural overview
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 

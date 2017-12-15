@@ -43,7 +43,7 @@ This MVC-app follows the guidelines of the Laravel-community.
 * tests: Browser (Selenium) and feature-tests: /tests/
 
 ## Tests
-<p align="center"><img src="http://voom.be:12005/images/tests/selenium.jpg"></p>
+<p align="center"><img src="http://voom.be:12005/images/tests/selenium.png"></p>
 
 This webapp was tested using feature (JSON & Web) & Selenium Browser tests (Dockerized). These can be found in the folder /tests/
 

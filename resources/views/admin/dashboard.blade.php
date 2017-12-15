@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Players</h3>
+                        <h3 class="panel-title">{{ __('Players') }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Teams</h3>
+                        <h3 class="panel-title">{{ __('Teams') }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -54,7 +54,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Matches</h3>
+                        <h3 class="panel-title">{{ __('Matches') }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -75,7 +75,7 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Locations</h3>
+                        <h3 class="panel-title">{{ __('Locations') }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -100,7 +100,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Live Scoreboard</h3>
+                        <h3 class="panel-title">{{ __('Live Scoreboard') }}</h3>
                     </div>
                     <div class="panel-body">
                         <div class="row">

@@ -40,7 +40,7 @@
                                 <b>{{ __('Points') }}</b>
                             </div>
                         </div>
-                        <standings :standings="{{$standings}}"></standings>
+                        <standings :standings="{{$standings}}" :division_id="1" :season_id="1"></standings>
                     </div>
                 </div>
 

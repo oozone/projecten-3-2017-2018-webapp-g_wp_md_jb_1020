@@ -60,18 +60,20 @@ class MatchController extends Controller
 	{
 
 		$match = Match::with('home.players')->with('visitor.players')->find($id);
+		$season = Season::find($match->season_id);
+
+		// Get the topscorers for division
 		$topscorers = DB::table('goals')->selectRaw('player_id, players.division_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->where('players.division_id','=', $match->division_id)->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
 
-		$season = Season::find($match->season_id);
+		// Get the standings for division
 		$standings = $season->teams()->division($match->division_id)->orderBy('pivot_won', 'desc')->get();
 
+		// Get matchdetail for match: goals and faults (merge)
 		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
-
-
 		$penaltybooks = collect(Penalty::where('match_id','=',$id)->with('player')->orderBy('created_at')->get());
 		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
 
-
+		// Sort matchdetail by time created
 		$items = $matchdetail->all();
 		usort($items, function($a, $b) {
 			return $a->created_at <=> $b->created_at;

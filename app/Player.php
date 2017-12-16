@@ -11,16 +11,19 @@ class Player extends Model
 
 	//protected $with = array('team');
 
+	// player belongs to team
 	public function team()
 	{
 		return $this->belongsTo(Team::class);
 	}
 
+	// player belongs to division
 	public function division()
 	{
 		return $this->belongsTo(Division::class);
 	}
 
+	// player hasmany penalties
 	public function penalties()
 	{
 		return $this->hasMany(Penalty::class);

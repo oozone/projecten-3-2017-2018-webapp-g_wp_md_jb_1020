@@ -33,6 +33,8 @@ Route::middleware('auth')->prefix('admin')->namespace('Admin')->group(function (
 	Route::get('/teams/{id}/csv', 'TeamController@csv');
 	Route::post('/teams/{id}/csvImport', 'TeamController@csvImport');
 
+	Route::get('/matches/finasheets', 'MatchController@finasheets');
+
 	// Controllers Within The "App\Http\Controllers\Admin" Namespace
 	Route::resource('players', 'PlayerController');
 	Route::resource('teams', 'TeamController');

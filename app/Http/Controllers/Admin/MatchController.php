@@ -166,4 +166,17 @@ class MatchController extends Controller
 	{
 		//
 	}
+
+
+	/**
+	 * Display a listing of the finalized fina-sheets
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function finasheets()
+	{
+		$matches = Match::where('match_end', '!=', null)->paginate(20);
+		return View::make('admin.matches.finasheets', array('data' => $matches));
+	}
+
 }

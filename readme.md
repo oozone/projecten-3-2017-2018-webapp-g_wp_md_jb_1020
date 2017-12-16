@@ -74,6 +74,11 @@ The webapp is currently translated in these languages:
 * Dutch / Nederlands
 * French / Français
 
+## FINA-sheets
+The webapp / API also generates FINA-sheets in PDF-format
+
+Example: http://voom.be:12005/pdf/finasheet-1513401166.pdf
+
 ## Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.
 

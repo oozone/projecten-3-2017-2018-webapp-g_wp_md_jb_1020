@@ -137,6 +137,7 @@
                                 <ul class="sub-menu collapse" id="matches">
                                     <li><a href="{{ url('admin/matches')}}">{{ __('List') }}</a></li>
                                     <li><a href="{{ url('admin/matches/create')}}">{{ __('Create') }}</a></li>
+                                    <li><a href="{{ url('admin/matches/finasheets')}}">{{ __('FINA-sheets') }}</a></li>
                                 </ul>
 
                                 <!-- Location -->

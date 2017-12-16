@@ -30,7 +30,7 @@
                                         <td><a href="{{url('admin/players/'.$player->id.'/edit')}}">{{$player->name}}</a></td>
                                         <td>{{$player->birthdate}}</td>
                                         <td>{{$player->status}}</td>
-                                        <td>{{$player->team->name}}</td>
+                                        <td>{{__($player->team->name)}}</td>
                                     </tr>
                                 @endforeach
 

@@ -11,11 +11,15 @@ class Match extends Model
 
 	protected $with = array('home','visitor','location','valor','difficulty','goals','goals.player','commentaries','division');
 
+	protected $dates = ['datum'];
+
+	// Match and User: manytomany
 	public function users()
 	{
 		return $this->belongsToMany(User::class);
 	}
 
+	// setup home and visitor
 	public function home(){
 		return $this->belongsTo(Team::class);
 	}
@@ -24,18 +28,49 @@ class Match extends Model
 		return $this->belongsTo(Team::class);
 	}
 
+	// Match belongs to division
 	public function division(){
 		return $this->belongsTo(Division::class);
 	}
 
+	// Match and Official: manytomany
 	public function officials()
 	{
 		return $this->belongsToMany(Official::class);
 	}
 
+	// Match belongs to a location
 	public function location()
 	{
 		return $this->belongsTo(Location::class);
+	}
+
+	// Match hasmany quarters
+	public function quarters()
+	{
+		return $this->hasMany(Quarter::class);
+	}
+
+	// Match hopefully hasmany goals
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
+    // Match hasmany penalties
+	public function penalties(){
+		return $this->hasMany(Penalty::class);
+	}
+
+	// Match belongs to season
+	public function season()
+	{
+		return $this->belongsTo(Season::class);
+	}
+
+	// Match hasmany admin commentaries
+	public function commentaries(){
+		return $this->hasMany(Commentary::class);
 	}
 
 	public function valor()
@@ -47,30 +82,6 @@ class Match extends Model
 	{
 		return $this->belongsTo(Difficulty::class);
 	}
-
-	public function quarters()
-	{
-		return $this->hasMany(Quarter::class);
-	}
-
-    public function goals()
-    {
-        return $this->hasMany(Goal::class);
-    }
-
-	public function penalties(){
-		return $this->hasMany(Penalty::class);
-	}
-
-	public function season()
-	{
-		return $this->belongsTo(Season::class);
-	}
-
-	public function commentaries(){
-		return $this->hasMany(Commentary::class);
-	}
-
 
 	/*
 	 * Scopes

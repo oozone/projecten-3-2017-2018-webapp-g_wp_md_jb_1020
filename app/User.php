@@ -28,16 +28,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // User and matches: manytomany
 	public function matches()
 	{
 		return $this->belongsToMany(Match::class);
 	}
 
+	// User and roles: manytomany
 	public function roles()
 	{
 		return $this->belongsToMany(UserRole::class);
 	}
 
+	/*
+	 * Helper functions
+	 */
 	public function isAdmin()
 	{
 		$role = $this->roles()->where('user_role_id', 2)->first();

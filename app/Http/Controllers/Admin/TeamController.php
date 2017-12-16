@@ -7,6 +7,7 @@ use App\Division;
 use App\Http\Controllers\Controller;
 use App\Player;
 use App\Team;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
@@ -157,6 +158,12 @@ class TeamController extends Controller
 		//
 	}
 
+	/**
+	 * Show related teams form
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function relatedTeams($id){
 		$team = Team::with('relatedTeams')->find($id);
 		$teams = Team::where([ ['id','!=', $id],['division_id','!=',$team->division_id] ])->pluck('name','id');
@@ -173,6 +180,13 @@ class TeamController extends Controller
 		));
 	}
 
+	/**
+	 * Update related teams
+	 * @param Request $request
+	 * @param $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
 	public function updateRelatedTeams(Request $request, $id)
 	{
 		//dd($request->all());
@@ -198,13 +212,24 @@ class TeamController extends Controller
 		return redirect('/admin/teams/' . $id .'/edit');
 	}
 
-
+	/**
+	 * Show csv players upload form
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
 	public function csv($id)
 	{
 		$team = Team::findOrFail($id);
 		return View::make('admin.teams.csv', array('team' => $team));
 	}
 
+	/**
+	 * Import players from CSV-file
+	 * @param $id teamid
+ 	 *
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 */
 	public function csvImport($id)
 	{
 		$this->validate(request(), [
@@ -219,34 +244,31 @@ class TeamController extends Controller
 
 			Excel::load($csvFile, function($reader) use ($team) {
 
-				//Excel::selectSheetsByIndex(0)->load();
-
 				// Getting all results
 				$results = $reader->get();
 
-
+				// Loop through all results
 				foreach($results as $result){
-					//dd($result->name);
+
+					if($result->name == "") break;
 
 					$player = new Player();
 					$player->name = $result->name;
+					$player->division_id = $team->division_id;
 					$player->player_number = $result->player_number;
 					$player->birthdate = $result->birthdate;
 					$player->status = $result->status;
 					$player->starter = $result->starter;
 
-					$team->players()->save($player);
+					try {
+						$team->players()->save($player);
+					} catch (Exception $e){
 
+					}
 				}
 
 			});
-
-
-
 		}
-
-
-
 
 		return redirect('/admin/players/');
 	}

@@ -25,7 +25,7 @@ class TableRankingListener
     }
 
     /**
-     * Handle the event.
+     * Updates the division standings after match ended
      *
      * @param  MatchSigned  $event
      * @return void

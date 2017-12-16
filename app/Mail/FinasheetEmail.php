@@ -30,7 +30,7 @@ class FinasheetEmail extends Mailable
 	}
 
 	/**
-	 * Build the message.
+	 * Build the FINA-sheet email
 	 *
 	 * @return $this
 	 */

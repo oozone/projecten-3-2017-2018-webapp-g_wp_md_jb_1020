@@ -51,7 +51,10 @@ class PlayerController extends Controller
 	{
 		$player = Player::findOrFail($id);
 		$team = Team::find($player->team_id);
+
+		// Get the goals scored by player
 		$goals = $topscorers = DB::table('goals')->selectRaw('count(*) as goalscore')->where('player_id','=',$id)->get();
+
 		return View::make('web.players.show', array(
 			'player' => $player,
 			'team' => $team->players,

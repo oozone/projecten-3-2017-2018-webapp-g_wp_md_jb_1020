@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Season extends Model
 {
 
+	// Season hasmany matches
 	public function matches()
 	{
 		return $this->hasMany(Match::class);
 	}
 
+	// Season and team: manytomany with pivots (standings)
 	public function teams()
 	{
 		return $this->belongsToMany(Team::class)->withPivot('played', 'won', 'lost', 'draw');

@@ -72,7 +72,7 @@
                                         {{ item.player.player_number }} {{ item.player.name }} <i class="fa fa-futbol-o" aria-hidden="true"></i>
                                         <!--{{ moment.utc(moment(item.created_at,"YYYY-MM-DD HH:mm:ss").diff(moment(match.created_at,"YYYY-MM-DD HH:mm:ss"))).format("mm:ss")}}-->
 
-                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 / 60 | round }}'
+                                        {{ item.created_at | moment("diff", match.match_start, "mm:ss") / 1000 / 60 | round }}'
                                     </div>
                                     <div class="col-sm-6">
 
@@ -83,7 +83,7 @@
 
                                     </div>
                                     <div class="col-sm-6 col-xs-12 wp-goal-visitor">
-                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 / 60 | round }}'
+                                        {{ item.created_at | moment("diff", match.match_start, "mm:ss") / 1000 / 60 | round }}'
                                         <i class="fa fa-futbol-o" aria-hidden="true"></i> {{ item.player.player_number }} {{ item.player.name }}
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                         <span class="wppenalty" v-else-if="item.penalty_type_id == 2">UMV</span>
                                         <span class="wppenalty" v-else-if="item.penalty_type_id == 3">UMV 4</span>
 
-                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 / 60 | round }}'
+                                        {{ item.created_at | moment("diff", match.match_start, "mm:ss") / 1000 / 60 | round }}'
                                     </div>
                                     <div class="col-sm-6">
 
@@ -110,7 +110,7 @@
 
                                     </div>
                                     <div class="col-sm-6 col-xs-12 wp-goal-visitor">
-                                        {{ item.created_at | moment("diff", match.created_at, "mm:ss") / 1000 / 60 | round }}'
+                                        {{ item.created_at | moment("diff", match.match_start, "mm:ss") / 1000 / 60 | round }}'
 
                                         <span class="wppenalty" v-if="item.penalty_type_id == 1">U20</span>
                                         <span class="wppenalty" v-else-if="item.penalty_type_id == 2">UMV</span>
@@ -127,7 +127,7 @@
                 </div>
 
                 <!-- Match commentary -->
-                <div v-if="datacommentaries.count > 0 || isadmin != 0" class="panel panel-matchlist">
+                <div v-if="(datacommentaries.count > 0 || isadmin != 0) && match.match_start != null" class="panel panel-matchlist">
                     <div class="panel-heading text-center">
                         {{ comments }}
                     </div>
@@ -135,7 +135,7 @@
                         <!-- home -->
                         <div class="row" v-for="comment in datacommentaries">
                             <div class="col-md-3 text-right">
-                                {{ comment.created_at | moment("diff", match.created_at, "mm:ss") / 1000 }}'
+                                {{ comment.created_at | moment("diff", match.match_start, "mm:ss") / 1000 / 60 | round }}'
                             </div>
                             <div class="col-md-9">
                                 {{ comment.text }}

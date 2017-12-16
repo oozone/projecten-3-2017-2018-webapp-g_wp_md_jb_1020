@@ -26,8 +26,8 @@
                             <tbody>
                                 @foreach($data as $item)
                                     <tr>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->city}}</td>
+                                        <td>{{__($item->name)}}</td>
+                                        <td>{{__($item->city)}}</td>
                                         <td><a href="{{url('admin/locations/'.$item->id.'/edit')}}"><i class="fa fa-edit fa-lg"></i></a></td>
                                     </tr>
                                 @endforeach

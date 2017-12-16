@@ -26,8 +26,8 @@
                             <tbody>
                                 @foreach($data as $item)
                                     <tr>
-                                        <td><a href="{{url('admin/teams/'.$item->id.'/edit')}}">{{$item->name}}</a></td>
-                                        <td>{{$item->division->name}}</td>
+                                        <td><a href="{{url('admin/teams/'.$item->id.'/edit')}}">{{__($item->name)}}</a></td>
+                                        <td>{{__($item->division->name)}}</td>
                                     </tr>
                                 @endforeach
 

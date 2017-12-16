@@ -98,6 +98,13 @@ class DivisionController extends Controller
 
 	}
 
+	/**
+	 * Returns list of standings per season and division
+	 * @param $id
+	 * @param $season_id
+	 *
+	 * @return mixed
+	 */
 	public function standings($id, $season_id){
 		$season = Season::find($season_id);
 		$standings = $season->teams()->division($id)->orderBy('pivot_won', 'desc')->get();

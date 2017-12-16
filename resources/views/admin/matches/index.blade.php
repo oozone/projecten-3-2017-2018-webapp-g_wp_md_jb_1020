@@ -18,18 +18,21 @@
                         <table class="table table-striped table-condensed">
                             <thead>
                             <tr>
+                                <th>{{__('Date')}}</th>
                                 <th>{{__('Home')}}</th>
                                 <th>{{__('Visitor')}}</th>
-                                <th>{{__('Date')}}</th>
+                                <th>{{__('Division')}}</th>
+
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach($data as $item)
                                     <tr>
-                                        <td>{{$item->home->name}}</td>
-                                        <td>{{$item->visitor->name}}</td>
-                                        <td>{{$item->datum}}</td>
+                                        <td>{{$item->datum->format('d/m/Y H:i')}}</td>
+                                        <td>{{__($item->home->name)}}</td>
+                                        <td>{{__($item->visitor->name)}}</td>
+                                        <td>{{__($item->division->name)}}</td>
                                         <td><a href="{{url('admin/matches/'.$item->id.'/edit')}}"><i class="fa fa-edit fa-lg"></i></a></td>
                                     </tr>
                                 @endforeach

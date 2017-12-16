@@ -36,8 +36,6 @@ class GoalController extends Controller
         }
         $match->save();
 
-        //dd($player->team_id);
-
         $goal = new Goal();
         $goal->match_id = $match->match_id;
         $goal->division_id = $match->division_id;

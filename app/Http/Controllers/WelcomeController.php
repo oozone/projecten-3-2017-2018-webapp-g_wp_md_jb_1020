@@ -18,21 +18,25 @@ class WelcomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application homepage.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-    	$divisions = Division::with('matches')->orderBy('ranking','asc')->get();
-    	$season = Season::current()->first();
-	    $standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
-	    $topscorers = DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->where('players.division_id','=', 1)->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
+	    $season = Season::current()->first();
 
+    	// List of divisions with related matches
+    	$divisions = Division::with('matches')->orderBy('ranking','asc')->get();
+
+    	// List of standings from first division
+	    $standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();
+
+	    // List of topsccorers from first division
+	    $topscorers = DB::table('goals')->selectRaw('player_id, players.name, count(*) as goalscore')->join('players','player_id','=','players.id')->where('players.division_id','=', 1)->orderBy('goalscore','desc')->groupBy('player_id')->limit(10)->get();
 
 	    return View::make('welcome', array(
 	    	'divisions' => $divisions,

@@ -34,6 +34,10 @@ class MatchController extends Controller
 		return Match::with('location')->get();
 	}
 
+	/**
+	 * Display a listing of active matches
+	 * @return mixed
+	 */
 	public function activeMatches(){
 		return Match::notCancelled()->notEnded()->with('location')->get();
 	}
@@ -161,6 +165,7 @@ class MatchController extends Controller
 	 * Sign and close the specified match
 	 * @param Request $request
 	 * @param $id
+	 * @return Response
 	 */
 	public function signAndCloseMatch(Request $request, $id)
 	{
@@ -170,7 +175,7 @@ class MatchController extends Controller
 			'password' => 'required',
 		]);
 
-		// then, if it fails, return the error messages in JSON format
+		// validations fails, return the error messages in JSON format
 		if ($validator->fails()) {
 			return response()->json($validator->messages(), 422);
 		}
@@ -186,56 +191,12 @@ class MatchController extends Controller
 			$match->save();
 
 
-			$playersScorePerQuarterArray = [];
-			// Home Scored goals per quarter
-			foreach($match->home->players as $index => $h) {
-				$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'] = [];
-				$tmp = DB::table( 'goals' )->selectRaw( 'quarter' )->where( 'player_id', '=', $h->id )->get()->toArray();
-				if(empty($tmp)) {
-					continue;
-				}
-				foreach ( $tmp as $index2 => $t ) {
-					if ( count( $t->quarter ) < 1 ) {
-						$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'] = [];
-						continue;
-					} else {
-						// niet opgeteld, toevoegen
-						if(!empty($playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ]))
-							$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] = $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] + 1;
-						else {
-							$playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] = 1;
-						}
-					}
-				}
-			}
-
-			// Visitor Scored goals per quarter
-			foreach($match->visitor->players as $index => $h) {
-				$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'] = [];
-				$tmp = DB::table( 'goals' )->selectRaw( 'quarter' )->where( 'player_id', '=', $h->id )->get()->toArray();
-				if(empty($tmp)) {
-					continue;
-				}
-				foreach ( $tmp as $index2 => $t ) {
-					if ( count( $t->quarter ) < 1 ) {
-						$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'] = [];
-						continue;
-					} else {
-						// niet opgeteld, toevoegen
-						if(!empty($playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ]))
-							$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] = $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] + 1;
-						else {
-							$playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] = 1;
-						}
-					}
-				}
-			}
 
 
-			// dispatch event
-			event(new MatchSigned($match, $playersScorePerQuarterArray ));
+			// dispatch event that match is signed
+			event(new MatchSigned($match));
 
-		} else {
+		} else { // Login failed, throw error
 			abort(403, 'Not authorized');
 		}
 
@@ -267,8 +228,6 @@ class MatchController extends Controller
 	public function generatePdf($id){
 
 		$match = Match::findOrFail($id);
-
-		//dd($match->home->team_id);
 
 		$foutenThuis = DB::table('penalty_books')
 		                 ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
@@ -303,13 +262,10 @@ class MatchController extends Controller
 	 * @param $id
 	 */
 	public function setStarters(Request $request, $id){
-		//Log::info('content setstarters: ');
-		//Log::info('content setstarters: '.$request->getContent());
+
 		$starters = json_decode($request->getContent(), false);
-		//return ($players);
 		$players = $starters->starters;
 		foreach($players as $p){
-			//dd($p["player_id"]);
 			$player = Player::find($p->player_id);
 			$player->starter = $p->starter;
 			$player->save();

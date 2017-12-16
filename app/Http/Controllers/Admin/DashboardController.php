@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\View;
 class DashboardController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Show Admin Dashboard
 	 *
 	 * @return \Illuminate\Http\Response
 	 */

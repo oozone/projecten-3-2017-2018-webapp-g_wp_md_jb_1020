@@ -47,7 +47,6 @@ class LocationController extends Controller
 	 */
 	public function show($id)
 	{
-		//dd($id);
 		return Location::find($id);
 	}
 

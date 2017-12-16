@@ -24,7 +24,7 @@ class MatchSignedListener
     }
 
     /**
-     * Handle the event.
+     * Generates FINA-sheet and mails it after match ended
      *
      * @param  MatchSigned  $event
      * @return void
@@ -32,6 +32,55 @@ class MatchSignedListener
     public function handle(MatchSigned $event)
     {
         $match = $event->match;
+
+	    // Setup the FINA-sheet
+	    // ---------------------
+
+	    $playersScorePerQuarterArray = [];
+	    // Home Scored goals per quarter
+	    foreach($match->home->players as $index => $h) {
+		    $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'] = [];
+		    $tmp = DB::table( 'goals' )->selectRaw( 'quarter' )->where( 'player_id', '=', $h->id )->get()->toArray();
+		    if(empty($tmp)) {
+			    continue;
+		    }
+		    foreach ( $tmp as $index2 => $t ) {
+			    if ( count( $t->quarter ) < 1 ) {
+				    $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'] = [];
+				    continue;
+			    } else {
+				    // niet opgeteld, toevoegen
+				    if(!empty($playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ]))
+					    $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] = $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] + 1;
+				    else {
+					    $playersScorePerQuarterArray["home"][ $h->id ]['quartergoals'][ $t->quarter ] = 1;
+				    }
+			    }
+		    }
+	    }
+
+	    // Visitor Scored goals per quarter
+	    foreach($match->visitor->players as $index => $h) {
+		    $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'] = [];
+		    $tmp = DB::table( 'goals' )->selectRaw( 'quarter' )->where( 'player_id', '=', $h->id )->get()->toArray();
+		    if(empty($tmp)) {
+			    continue;
+		    }
+		    foreach ( $tmp as $index2 => $t ) {
+			    if ( count( $t->quarter ) < 1 ) {
+				    $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'] = [];
+				    continue;
+			    } else {
+				    // niet opgeteld, toevoegen
+				    if(!empty($playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ]))
+					    $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] = $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] + 1;
+				    else {
+					    $playersScorePerQuarterArray["visitor"][ $h->id ]['quartergoals'][ $t->quarter ] = 1;
+				    }
+			    }
+		    }
+	    }
+
 
 	    $foutenThuis = DB::table('penalties')
 	                     ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
@@ -59,7 +108,7 @@ class MatchSignedListener
 		    'foutenThuis' => $foutenThuis,
 		    'foutenBezoeker' => $foutenBezoeker,
 		    'referee' => $referee,
-		    'scorersPerQuarter' => $event->scorersPerQuarter
+		    'scorersPerQuarter' => $playersScorePerQuarterArray
 	    ))->setPaper('a4', 'landscape');
 
 
@@ -70,7 +119,7 @@ class MatchSignedListener
 	    $match->finasheet = $filename;
 	    $match->save();
 
-	    //Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match, $referee));
+	    Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match, $referee));
 	    //Mail::to($referee->email)->send(new FinasheetEmail($match, $referee));
 
 

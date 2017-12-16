@@ -18,18 +18,18 @@
                         <table class="table table-striped table-condensed">
                             <thead>
                             <tr>
+                                <th>{{__('Date')}}</th>
                                 <th>{{__('Home')}}</th>
                                 <th>{{__('Visitor')}}</th>
-                                <th>{{__('Date')}}</th>
                                 <th>{{__('Download')}}</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach($data as $item)
                                     <tr>
-                                        <td>{{$item->home->name}}</td>
-                                        <td>{{$item->visitor->name}}</td>
                                         <td>{{$item->datum->format('d/m/Y H:i')}}</td>
+                                        <td>{{__($item->home->name)}}</td>
+                                        <td>{{__($item->visitor->name)}}</td>
                                         <td><a href="{{'/pdf/'. $item->finasheet}}" download><i class="fa fa-file-pdf-o fa-lg"></i></a></td>
                                     </tr>
                                 @endforeach

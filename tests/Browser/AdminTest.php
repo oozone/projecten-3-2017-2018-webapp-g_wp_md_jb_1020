@@ -66,7 +66,7 @@ class AdminTest extends DuskTestCase
 			      ->visit('http://voom.be:12005/admin/matches')
 			      ->assertSee('Matches')
 			      ->assertSee('Moeskroen')
-			      ->assertSee('Antwerpen');
+			      ->assertSee('Antwerp');
 		});
 	}
 
@@ -193,8 +193,7 @@ class AdminTest extends DuskTestCase
 			        ->press('Save')
 					->visit('http://voom.be:12005/admin/players?page=4')
 			        ->assertSee('Tempplayer')
-					//->assertSee('Mechelen')
-					//->assertSee($date)
+
 			;
 
 		});
@@ -235,17 +234,15 @@ class AdminTest extends DuskTestCase
 	 */
 	public function testAdminMatchCreateForm(){
 
-		$date = date('Y-m-d');
+		$date = date('d/m/Y');
 
 		$this->browse(function (Browser $browser) use ($date) {
 			$browser->loginAs(2)
 			        ->visit('http://voom.be:12005/admin/matches/create')
 			        ->assertSee('Season')
-				//->type('name', 'Tempteam')
 				    ->select('season_id', 1)
 			        ->select('home_id', 3)
 			        ->select('visitor_id', 4)
-				//->type('datum', $date)
 				    ->select('division_id', 1)
 			        ->select('location_id', 5)
 			        ->select('valor_id', 1)

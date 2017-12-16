@@ -43,6 +43,7 @@ This MVC-app follows the guidelines of the Laravel-community.
 * Models: can be found in /app/
 * Views: /resources/views
 * Controllers: can be found in /app/Http/Controllers
+* Listeners: in /app/Listeners
 * Vue-components: /resources/assets/js/components
 * Migrations & Seeders: /database/
 * tests: Browser (Selenium) and feature-tests: /tests/
@@ -72,6 +73,9 @@ Email: **lector@hogent.be**
 
 Password: **DoYouEvenLaravel?**
 
+## JWT-token
+The API is protected with a JWT-token authentication mechanism.
+
 ## Languages
 The webapp is currently translated in these languages:
 
@@ -83,6 +87,12 @@ The webapp is currently translated in these languages:
 The webapp / API also generates FINA-sheets in PDF-format
 
 Example: http://voom.be:12005/pdf/finasheet-1513401166.pdf
+
+## End of match event listeners
+This webapp triggers 2 events when it gets the signal a waterpolo-match has ended.
+
+* MatchSignedListener: will generate FINA-sheet and email it to the referee. Example email: http://voom.be:12005/images/tests/email_finasheet.jpg
+* TableRankingListener: will calculate the standings in that particular division after the match
 
 ## Contributors
 This part of the project was completely made by **Matthias Vanooteghem**.

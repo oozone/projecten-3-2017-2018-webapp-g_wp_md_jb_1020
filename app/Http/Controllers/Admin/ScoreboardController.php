@@ -23,7 +23,7 @@ class ScoreboardController extends Controller
 	 */
 	public function index()
 	{
-		$matches = Match::paginate(20);
+		$matches = Match::where('match_end', '=', null)->paginate(20);
 		return View::make('admin.scoreboard.index', array('data' => $matches));
 	}
 

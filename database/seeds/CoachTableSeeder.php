@@ -62,5 +62,9 @@ class CoachTableSeeder extends Seeder
 	    $coach = new Coach();
 	    $coach->name = "Twaalfde coach";
 	    $coach->save();
+
+	    $coach = new Coach();
+	    $coach->name = "Dertiende coach";
+	    $coach->save();
     }
 }

@@ -178,6 +178,22 @@ class TeamTableSeeder extends Seeder
 		    'draw' => 0
 	    ]);
 
+	    // Brugge B
+	    $team = new Team();
+	    $team->name = "Brugge B";
+	    $team->save();
+	    //$team->addRelatedTeam(1);
+	    $team->coach()->save(Coach::where('name', 'Dertiende coach')->first());
+	    $division = Division::find(2);
+	    $division->teams()->save($team);
+
+	    $season->teams()->attach($team, [
+		    'played' => 0,
+		    'won' => 0,
+		    'lost' => 0,
+		    'draw' => 0
+	    ]);
+
 
 	    /* TESTMATCH */
 	    // Thuis

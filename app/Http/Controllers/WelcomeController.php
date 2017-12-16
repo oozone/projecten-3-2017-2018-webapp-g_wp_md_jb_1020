@@ -29,8 +29,10 @@ class WelcomeController extends Controller
     {
 	    $season = Season::current()->first();
 
-    	// List of divisions with related matches
-    	$divisions = Division::with('matches')->orderBy('ranking','asc')->get();
+    	// List of divisions with related matches that have not ended
+    	$divisions = Division::with(['matches' => function($query) {
+	        $query->where('match_end', '=', null);
+        }])->orderBy('ranking','asc')->get();
 
     	// List of standings from first division
 	    $standings = $season->teams()->division(1)->orderBy('pivot_won', 'desc')->get();

@@ -80,38 +80,38 @@ class PlayerTableSeeder extends Seeder
 	    $this->createPlayer("Moeskroentester", 1, true, $team);
 
 	    // Team 11 Thuis
-	    $team = Team::find(11);
-	    $this->createPlayer("1", 1, true, $team, 4);
-	    $this->createPlayer("2", 2, true, $team,4);
-	    $this->createPlayer("3", 3, true, $team,4);
-	    $this->createPlayer("4", 4, true, $team,4);
-	    $this->createPlayer("5", 5, true, $team,4);
-	    $this->createPlayer("6", 6, true, $team,4);
-	    $this->createPlayer("7", 7, true, $team,4);
-	    $this->createPlayer("8", 8, true, $team,4);
-	    $this->createPlayer("9", 9, true, $team,4);
-	    $this->createPlayer("10", 10, true, $team,4);
-	    $this->createPlayer("11", 11, true, $team,4);
-	    $this->createPlayer("12", 12, true, $team,4);
-	    $this->createPlayer("13", 13, true, $team,4);
-	    $this->createPlayer("14", 1, false, $team,4);
+	    $team = Team::find(12);
+	    $this->createPlayer("Gabriel Lagrand", 1, true, $team, 4);
+	    $this->createPlayer("Gersom Boes", 2, true, $team,4);
+	    $this->createPlayer("Floyd Knoef", 3, true, $team,4);
+	    $this->createPlayer("Jordan de Vet", 4, true, $team,4);
+	    $this->createPlayer("Benoit Zitteren", 5, true, $team,4);
+	    $this->createPlayer("Gerrie Weening", 6, true, $team,4);
+	    $this->createPlayer("Arjun Bijen", 7, true, $team,4);
+	    $this->createPlayer("Cornelus van Ek", 8, true, $team,4);
+	    $this->createPlayer("Pavel Hoogkamp", 9, true, $team,4);
+	    $this->createPlayer("Ramon Menten", 10, true, $team,4);
+	    $this->createPlayer("Ricardo Cuijpers", 11, true, $team,4);
+	    $this->createPlayer("Renger Klepper", 12, true, $team,4);
+	    $this->createPlayer("Thymo Iqbal", 13, true, $team,4);
+	    $this->createPlayer("Moses Zuiderveld", 1, false, $team,4);
 
 	    // Team 12 Bezoekers
-	    $team = Team::find(12);
-	    $this->createPlayer("1", 1, true, $team,4);
-	    $this->createPlayer("2", 2, true, $team,4);
-	    $this->createPlayer("3", 3, true, $team,4);
-	    $this->createPlayer("4", 4, true, $team,4);
-	    $this->createPlayer("5", 5, true, $team,4);
-	    $this->createPlayer("6", 6, true, $team,4);
-	    $this->createPlayer("7", 7, true, $team,4);
-	    $this->createPlayer("8", 8, true, $team,4);
-	    $this->createPlayer("9", 9, true, $team,4);
-	    $this->createPlayer("10", 10, true, $team,4);
-	    $this->createPlayer("11", 11, true, $team,4);
-	    $this->createPlayer("12", 12, true, $team,4);
-	    $this->createPlayer("13", 13, true, $team,4);
-	    $this->createPlayer("14", 1, false, $team,4);
+	    $team = Team::find(13);
+	    $this->createPlayer("Lourens Jansens", 1, true, $team,4);
+	    $this->createPlayer("Neville Arkesteijn", 2, true, $team,4);
+	    $this->createPlayer("Seger Tibbe", 3, true, $team,4);
+	    $this->createPlayer("Wytse Luisman", 4, true, $team,4);
+	    $this->createPlayer("Dante Bastiaanssen", 5, true, $team,4);
+	    $this->createPlayer("Ate Janson", 6, true, $team,4);
+	    $this->createPlayer("Marvin Sneller", 7, true, $team,4);
+	    $this->createPlayer("Tjitse Bronsema", 8, true, $team,4);
+	    $this->createPlayer("Yonis Wijngaarden", 9, true, $team,4);
+	    $this->createPlayer("Patrick Luijken", 10, true, $team,4);
+	    $this->createPlayer("Donald Kempen", 11, true, $team,4);
+	    $this->createPlayer("Tunahan Mus", 12, true, $team,4);
+	    $this->createPlayer("Viresh Boomstra", 13, true, $team,4);
+	    $this->createPlayer("Giovanni Erkens", 1, false, $team,4);
 
 
     }

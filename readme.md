@@ -47,6 +47,9 @@ This MVC-app follows the guidelines of the Laravel-community.
 * Migrations & Seeders: /database/
 * tests: Browser (Selenium) and feature-tests: /tests/
 
+## Database Diagram
+The DB-diagram can be viewed at: http://voom.be:12005/images/db/db_diagram.jpg
+
 ## Tests
 <p align="center"><img src="http://voom.be:12005/images/tests/selenium.png"></p>
 

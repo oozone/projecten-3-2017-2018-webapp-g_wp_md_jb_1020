@@ -175,7 +175,7 @@ class MatchController extends Controller
 	 */
 	public function finasheets()
 	{
-		$matches = Match::where('match_end', '!=', null)->paginate(20);
+		$matches = Match::where('finasheet', '!=', null)->paginate(20);
 		return View::make('admin.matches.finasheets', array('data' => $matches));
 	}
 

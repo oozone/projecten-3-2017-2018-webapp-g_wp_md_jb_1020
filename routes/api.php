@@ -50,6 +50,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Protected routes by JWT Authentication token
 Route::middleware('jwt.auth')->group(function () {
 
 

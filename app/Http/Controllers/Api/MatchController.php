@@ -39,7 +39,9 @@ class MatchController extends Controller
 	 * @return mixed
 	 */
 	public function activeMatches(){
-		return Match::notCancelled()->notEnded()->with('location')->get();
+		return Match::notCancelled()
+		            //->notEnded()
+		            ->with('location')->get();
 	}
 
 	/**

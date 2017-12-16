@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class GoalController extends Controller
 {
     /**
-     * Store the resource
+     * Store the goal
      * @param \App\Http\Controllers\Api\Request $request
      * @param $id Match Id
      */
@@ -26,7 +26,7 @@ class GoalController extends Controller
         $match = Match::find($request->match_id);
         $player = Player::find($request->player_id);
 
-        //dd($player->team_id);
+
 
         // Save in score_home or score_visitor
         if($match->home->id == $player->team_id){
@@ -36,6 +36,7 @@ class GoalController extends Controller
         }
         $match->save();
 
+        // Save new goal
         $goal = new Goal();
         $goal->match_id = $match->match_id;
         $goal->division_id = $match->division_id;
@@ -45,13 +46,13 @@ class GoalController extends Controller
         $goal->score_visitor = $match->score_visitor;
         $goal->quarter = $request->quarter;
 
+        // Save goal in related match
         $match->goals()->save($goal);
-
 
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified goal from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

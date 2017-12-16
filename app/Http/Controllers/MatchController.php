@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\View;
 class MatchController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the matches with their locations and home and visitor players.
 	 *
 	 *
 	 */
@@ -25,7 +25,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new match.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -35,7 +35,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created match in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -51,7 +51,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified match.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -89,7 +89,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified match.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -100,7 +100,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified match in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -112,7 +112,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified match from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response

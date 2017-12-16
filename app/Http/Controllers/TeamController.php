@@ -12,7 +12,7 @@ class TeamController extends Controller
 {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the teams.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -22,7 +22,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new team.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -32,7 +32,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created team in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -43,7 +43,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified team.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -51,7 +51,11 @@ class TeamController extends Controller
 	public function show($id)
 	{
 		$team = Team::with(array('players'))->findOrFail($id);
+
+		// Get program for this team
 		$matches = Match::where('home_id','=',$id)->orWhere('visitor_id','=',$id)->get();
+
+		// Get other teams from division
 		$teams = Team::where('division_id', '=', $team->division_id)->get();
 
 		return View::make('web.teams.show', array(
@@ -62,7 +66,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified team.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -73,7 +77,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified team in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -85,7 +89,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified team from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response

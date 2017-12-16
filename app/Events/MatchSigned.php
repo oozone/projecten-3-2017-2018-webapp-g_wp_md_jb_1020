@@ -25,7 +25,6 @@ class MatchSigned
     public function __construct(Match $match)
     {
         $this->match = $match;
-        //$this->scorersPerQuarter = $scorersPerQuarter;
     }
 
     /**

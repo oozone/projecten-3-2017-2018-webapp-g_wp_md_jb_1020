@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\View;
 class PlayerController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the active players with their team.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -21,7 +21,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new player.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -31,7 +31,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created player in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -42,7 +42,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified player.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -63,7 +63,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified player.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -74,7 +74,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified player in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -86,7 +86,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified player from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response

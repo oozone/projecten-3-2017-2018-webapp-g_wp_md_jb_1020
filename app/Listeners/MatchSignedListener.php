@@ -81,19 +81,18 @@ class MatchSignedListener
 		    }
 	    }
 
-
+		// Fouten van thuisspelers
 	    $foutenThuis = DB::table('penalties')
 	                     ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
-	                     //->join('penalties','penalty_books.id','=','penalties.penalty_book_id')
 	                     ->join('players','player_id','=','players.id')
 	                     ->where('players.team_id', '=', $match->home->id)
 	                     ->orderBy('player_id', 'asc')
 	                     ->groupBy('player_id')
 	                     ->get();
 
+	    // Fouten van bezoekers
 	    $foutenBezoeker = DB::table('penalties')
 	                        ->selectRaw('player_id, players.name, count(penalties.id) as aantalfouten')
-	                        //->join('penalties','penalty_books.id','=','penalties.penalty_book_id')
 	                        ->join('players','player_id','=','players.id')
 	                        ->where('players.team_id', '=', $match->visitor->id)
 	                        ->orderBy('player_id', 'asc')
@@ -103,6 +102,7 @@ class MatchSignedListener
 	    // Get important users
 	    $referee = User::findOrFail($match->signer_id);
 
+	    // Generate our pdf, A4 landscape mode
 	    $pdf = PDF::loadView('pdf.finasheet', array(
 		    'match' => $match,
 		    'foutenThuis' => $foutenThuis,
@@ -112,13 +112,14 @@ class MatchSignedListener
 	    ))->setPaper('a4', 'landscape');
 
 
+	    // Save the pdf to disk
 		$filename = 'finasheet-'. time() . '.pdf';
-
 	    $pdf->save(public_path('pdf/' . $filename));
 
 	    $match->finasheet = $filename;
 	    $match->save();
 
+	    // Send the fina sheet email to the referee
 	    Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match, $referee));
 	    //Mail::to($referee->email)->send(new FinasheetEmail($match, $referee));
 

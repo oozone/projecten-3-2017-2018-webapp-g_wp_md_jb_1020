@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class DivisionController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the divisions.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -18,7 +18,7 @@ class DivisionController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new division.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -28,7 +28,7 @@ class DivisionController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created division in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -39,7 +39,7 @@ class DivisionController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified division with its matches.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -53,7 +53,7 @@ class DivisionController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified division.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -64,7 +64,7 @@ class DivisionController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified division in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -76,7 +76,7 @@ class DivisionController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified division from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response

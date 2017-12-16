@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\View;
 class MatchController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the matches.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -28,12 +28,14 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new match.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function create()
 	{
+
+		// Get data for html selects
 		$teams = Team::pluck('name', 'id');
 		$difficulties = Difficulty::pluck('name', 'id');
 		$valors = Valor::pluck('name', 'id');
@@ -52,7 +54,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created match in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -70,6 +72,7 @@ class MatchController extends Controller
 			'season_id' => 'required|integer'
 		]);
 
+		// Store new match
 		$match = new Match();
 		$match->home_id = request()->input('home_id');
 		$match->visitor_id = request()->input('visitor_id');
@@ -81,13 +84,11 @@ class MatchController extends Controller
 		$match->season_id = request()->input('season_id');
 		$match->save();
 
-
-
 		return redirect('/admin/matches');
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified match.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -98,7 +99,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified match.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -122,7 +123,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified match in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id

@@ -11,7 +11,7 @@ class PenaltyController extends Controller
 {
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created penalty in storage.
 	 *
 	 * @param  Request  $request
 	 * @return Response
@@ -26,9 +26,12 @@ class PenaltyController extends Controller
 
 		$match = Match::findOrFail($request->match_id);
 
+		// Save new penalty
 		$penalty = new Penalty();
 		$penalty->penalty_type_id = $request->penalty_type_id;
 		$penalty->player_id = $request->player_id;
+
+		// Save penalty in related match
 		$match->penalties()->save($penalty);
 
 	}

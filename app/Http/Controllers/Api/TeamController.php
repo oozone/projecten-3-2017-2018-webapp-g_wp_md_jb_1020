@@ -10,7 +10,7 @@ class TeamController extends Controller
 {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the teams.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -20,7 +20,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new team.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -30,7 +30,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created team in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -41,7 +41,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified team.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -53,18 +53,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
+	 * Update the specified team in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -76,7 +65,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified team from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -95,9 +84,11 @@ class TeamController extends Controller
 	public function getAllPlayersFromRelatedTeams($id){
 		$players = array();
 
+		// Get team with all related players
 		$team = Team::where('id','=',$id)->with(['players', 'relatedTeams','relatedTeams.players'])->get();
 
-		//dd($team);
+
+		// Extract the players
 		foreach($team[0]->players as $p){
 			$players[] = $p;
 		}

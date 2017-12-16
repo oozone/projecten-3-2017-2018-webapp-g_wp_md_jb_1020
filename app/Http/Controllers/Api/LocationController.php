@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class LocationController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the locations.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -19,7 +19,7 @@ class LocationController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new location.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -29,7 +29,7 @@ class LocationController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created location in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -40,7 +40,7 @@ class LocationController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified location.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -50,19 +50,9 @@ class LocationController extends Controller
 		return Location::find($id);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified location in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -74,7 +64,7 @@ class LocationController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified location from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response

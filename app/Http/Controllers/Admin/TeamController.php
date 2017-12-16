@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class TeamController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the teams.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -27,7 +27,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new reamresource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -38,7 +38,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Stores team + coach
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -51,6 +51,7 @@ class TeamController extends Controller
 			'coach' => 'required',
 		]);
 
+		// Store new team
 		$team = new Team();
 		$team->name = request()->input('name');
 		$team->division_id = request()->input('division_id');
@@ -58,19 +59,20 @@ class TeamController extends Controller
 		// Save image
 		if(request()->hasFile('image'))
 		{
-			// Remove cache tag
-			//Player::flushCache('status_consulenten');
 			$image = request()->file('image');
 			$filename  = time() . '.' . $image->getClientOriginalExtension();
 
+			// Save to public path
 			$path = public_path('images/teams/' . $filename);
 
+			// Resize image
 			Image::make($image->getRealPath())->resize(500, 500)->save($path);
 			$team->logo = url('/') . "/images/teams/" . $filename;
 		}
 
 		$team->save();
 
+		// Also save coach
 		$coach = new Coach();
 		$coach->name = request()->input('coach');
 		$coach->team_id = $team->id;
@@ -80,7 +82,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the team.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -91,7 +93,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing teams.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -104,7 +106,7 @@ class TeamController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update teams in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -123,15 +125,16 @@ class TeamController extends Controller
 		$team->name = request()->input('name');
 		$team->division_id = request()->input('division_id');
 
+		// Save image
 		if(request()->hasFile('image'))
 		{
-			// Remove cache tag
-			//Player::flushCache('status_consulenten');
 			$image = request()->file('image');
 			$filename  = time() . '.' . $image->getClientOriginalExtension();
 
+			// Save to public path
 			$path = public_path('images/teams/' . $filename);
 
+			// Resize image
 			Image::make($image->getRealPath())->resize(500, 500)->save($path);
 			$team->logo = url('/') . "/images/teams/" . $filename;
 		}
@@ -169,7 +172,6 @@ class TeamController extends Controller
 		$teams = Team::where([ ['id','!=', $id],['division_id','!=',$team->division_id] ])->pluck('name','id');
 		$idRelatedTeams = [];
 		foreach($team->relatedTeams as $rt){
-			//dd($rt);
 			$idRelatedTeams[] = $rt->id;
 		}
 
@@ -189,10 +191,6 @@ class TeamController extends Controller
 	 */
 	public function updateRelatedTeams(Request $request, $id)
 	{
-		//dd($request->all());
-		$this->validate(request(), [
-			'teams' => ''
-		]);
 
 		$team = Team::findOrFail($id);
 
@@ -203,6 +201,7 @@ class TeamController extends Controller
 		}
 		$team->relatedTeams()->detach();
 
+		// If teams are not null save them
 		if(($request->teams != null) && !empty($request->teams)){
 			foreach($request->teams as $rt){
 				$team->addRelatedTeam($rt);
@@ -238,20 +237,23 @@ class TeamController extends Controller
 
 		$team = Team::findOrFail($id);
 
+		// Check if request has csv
 		if(request()->hasFile('csv'))
 		{
 			$csvFile = request()->file('csv');
 
+			// Load csv file with Excel extension
 			Excel::load($csvFile, function($reader) use ($team) {
 
 				// Getting all results
 				$results = $reader->get();
 
-				// Loop through all results
+				// Loop through all results / rows
 				foreach($results as $result){
 
 					if($result->name == "") break;
 
+					// Save new player from data
 					$player = new Player();
 					$player->name = $result->name;
 					$player->division_id = $team->division_id;

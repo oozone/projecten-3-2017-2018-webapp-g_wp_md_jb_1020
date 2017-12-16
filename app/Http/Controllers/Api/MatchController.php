@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\View;
 class MatchController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the matches + location.
 	 *
 	 * @return Response
 	 */
@@ -35,7 +35,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Display a listing of active matches
+	 * Display a listing of active matches.
 	 * @return mixed
 	 */
 	public function activeMatches(){
@@ -45,7 +45,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new match.
 	 *
 	 * @return Response
 	 */
@@ -55,7 +55,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created match in storage.
 	 *
 	 * @param  Request  $request
 	 * @return Response
@@ -66,7 +66,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified match + matchdetail.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -74,13 +74,20 @@ class MatchController extends Controller
 	public function show($id)
 	{
 
-
+		// Load match with related data
 		$match = Match::with(array('location', 'difficulty', 'valor','home','visitor'))->find($id);
 
+		// Build up matchdetail
+		// Collect all goals from match
 		$goals = collect(Goal::where('match_id', '=', $id)->with('player')->get());
+
+		// Collect all penalties from match
 		$penaltybooks = collect($match->penalties()->with('player')->orderBy('created_at')->get());
+
+		// Merge goals and penalties
 		$matchdetail = $goals->merge($penaltybooks)->sortBy('created_at');
 
+		// Sort by created_at
 		$items = $matchdetail->all();
 		usort($items, function($a, $b) {
 			return $a->created_at <=> $b->created_at;
@@ -93,19 +100,9 @@ class MatchController extends Controller
 		return $matchArray;
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified match in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -117,7 +114,7 @@ class MatchController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified match from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response

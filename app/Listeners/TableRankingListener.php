@@ -34,20 +34,21 @@ class TableRankingListener
     {
         $match = $event->match;
 
+        // Some vars to get
 	    $home = Team::with('seasons')->find($match->home->id);
 	    $visitor = Team::find($match->visitor->id);
-
-
 		$seasonId = $match->season_id;
 
 
 		if($match->score_home > $match->score_visitor){ // Home won
 
+			// Set pivot won + 1
 			$ranking = $home->seasons()->where('season_id', $seasonId)->first();
 			$ranking->pivot->won += 1;
 			$ranking->pivot->played += 1;
 			$ranking->pivot->save();
 
+			// Visitor loses, so pivot lost + 1
 			$ranking = $visitor->seasons()->where('season_id', $seasonId)->first();
 			$ranking->pivot->lost += 1;
 			$ranking->pivot->played += 1;
@@ -55,11 +56,13 @@ class TableRankingListener
 
 		} elseif($match->score_home < $match->score_visitor){ // Visitors won
 
+			// Home lost
 			$ranking = $home->seasons()->where('season_id', $seasonId)->first();
 			$ranking->pivot->lost += 1;
 			$ranking->pivot->played += 1;
 			$ranking->pivot->save();
 
+			// Visitors won
 			$ranking = $visitor->seasons()->where('season_id', $seasonId)->first();
 			$ranking->pivot->won += 1;
 			$ranking->pivot->played += 1;
@@ -68,6 +71,7 @@ class TableRankingListener
 
 		} else { // Draw
 
+			// Draw = both draw + 1
 			$ranking = $home->seasons()->where('season_id', $seasonId)->first();
 			$ranking->pivot->draw += 1;
 			$ranking->pivot->played += 1;

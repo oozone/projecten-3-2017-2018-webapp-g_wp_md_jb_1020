@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\View;
 class ScoreboardController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display listing of the scoreboard.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -29,7 +29,7 @@ class ScoreboardController extends Controller
 
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified scoreboard.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\View;
 class PlayerController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the players.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -24,7 +24,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new player.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -36,7 +36,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created player in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -51,7 +51,7 @@ class PlayerController extends Controller
 			'division' => 'required|integer'
 		]);
 
-
+		// Store new player
 		$player = new Player();
 		$player->name = request()->input('name');
 		$player->player_number = request()->input('player_number');
@@ -64,17 +64,16 @@ class PlayerController extends Controller
 		// Save image
 		if(request()->hasFile('image'))
 		{
-			// Remove cache tag
-			//Player::flushCache('status_consulenten');
 			$image = request()->file('image');
 			$filename  = time() . '.' . $image->getClientOriginalExtension();
 
+			// Save in public path
 			$path = public_path('images/players/' . $filename);
 
+			// Resize image
 			Image::make($image->getRealPath())->resize(500, 500)->save($path);
 			$player->photo = url('/') . "/images/players/" . $filename;
 		}
-
 
 		$player->save();
 
@@ -96,7 +95,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified player.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -110,7 +109,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified player in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -119,8 +118,6 @@ class PlayerController extends Controller
 	public function update(Request $request, $id)
 	{
 
-		$player = Player::findOrFail($id);
-		//dd($player);
 		$this->validate(request(), [
 			'name' => 'required',
 			'birthdate' => 'required',
@@ -129,20 +126,23 @@ class PlayerController extends Controller
 			'division_id' => 'required|integer'
 		]);
 
+		$player = Player::findOrFail($id);
+
 		// Save image
 		if(request()->hasFile('image'))
 		{
-			// Remove cache tag
-			//Player::flushCache('status_consulenten');
 			$image = request()->file('image');
 			$filename  = time() . '.' . $image->getClientOriginalExtension();
 
+			// Save to public path
 			$path = public_path('images/players/' . $filename);
 
+			// Resize image
 			Image::make($image->getRealPath())->resize(500, 500)->save($path);
 			$player->photo = url('/') . "/images/players/" . $filename;
 		}
 
+		// Update player data
 		$player->name = request()->input('name');
 		$player->player_number = request()->input('player_number');
 		$player->birthdate = request()->input('birthdate');

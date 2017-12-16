@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PlayerController extends Controller
 {
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of the active players.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -19,7 +19,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new player.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -29,7 +29,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created player in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
@@ -40,7 +40,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified player.
 	 *
 	 * @param  int  $id
 	 *
@@ -51,7 +51,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified player with penalties for that specified match.
 	 *
 	 * @param  int  $id
 	 *
@@ -64,18 +64,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
+	 * Update the specified player in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -87,7 +76,7 @@ class PlayerController extends Controller
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified player from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
@@ -99,7 +88,7 @@ class PlayerController extends Controller
 
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Change the player number for the specified player.
 	 *
 	 * @param  Request  $request
 	 * @return Response

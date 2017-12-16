@@ -44,6 +44,7 @@ This MVC-app follows the guidelines of the Laravel-community.
 * Views: /resources/views
 * Controllers: can be found in /app/Http/Controllers
 * Vue-components: /resources/assets/js/components
+* Migrations & Seeders: /database/
 * tests: Browser (Selenium) and feature-tests: /tests/
 
 ## Tests

@@ -451,3 +451,38 @@ div.col-xs-12.wp-goal-visitor {
 
   }
 }
+
+.container2 {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.container2:before,
+.container2:after {
+  content: " ";
+  display: table;
+}
+
+.container2:after {
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  .container2 {
+    width: 650px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container2 {
+    width: 870px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container2 {
+    width: 1070px;
+  }
+}

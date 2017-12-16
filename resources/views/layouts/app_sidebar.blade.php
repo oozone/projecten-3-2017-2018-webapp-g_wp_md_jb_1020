@@ -158,13 +158,11 @@
 
                 </nav>
             <div id="content">
-                <div class="container-fluid">
-                    <div class="container" style="padding-top: 30px;">
+
+                    <div class="container2" style="padding-top: 30px; ">
                         @yield('content')
                     </div>
 
-
-                </div>
             </div>
         </div>
 </div>

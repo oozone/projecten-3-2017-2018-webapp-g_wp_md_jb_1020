@@ -56,13 +56,12 @@ The DB-diagram can be viewed at: http://voom.be:12005/images/db/db_diagram.jpg
 This webapp was tested using **feature (JSON & Web)** & **Selenium Browser tests** (Dockerized). These can be found in the folder /tests/
 
 #### Feature tests
-<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/unit1.jpg"></p>
-<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/unit2.jpg"></p>
+http://voom.be:12005/images/tests/unit1.jpg
+http://voom.be:12005/images/tests/unit2.jpg
 
 #### Selenium (Browser tests)
-<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/dusk1.jpg"></p>
-<p align="center"><img style="width:50%" src="http://voom.be:12005/images/tests/dusk2.jpg"></p>
-
+http://voom.be:12005/images/tests/dusk1.jpg
+http://voom.be:12005/images/tests/dusk2.jpg
 
 ## Login
 The admin-section (http://voom.be:12005/admin) can be accessed with these credentials:

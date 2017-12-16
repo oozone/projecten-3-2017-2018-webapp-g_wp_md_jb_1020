@@ -57,10 +57,12 @@ This webapp was tested using **feature (JSON & Web)** & **Selenium Browser tests
 
 #### Feature tests
 http://voom.be:12005/images/tests/unit1.jpg
+
 http://voom.be:12005/images/tests/unit2.jpg
 
 #### Selenium (Browser tests)
 http://voom.be:12005/images/tests/dusk1.jpg
+
 http://voom.be:12005/images/tests/dusk2.jpg
 
 ## Login

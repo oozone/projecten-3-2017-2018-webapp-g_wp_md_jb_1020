@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Match;
 use App\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class GoalController extends Controller
 {
@@ -16,12 +17,17 @@ class GoalController extends Controller
      * @param $id Match Id
      */
     public function store(Request $request){
-        $this->validate($request, [
 
-            'match_id' => 'required|integer',
-            'player_id' => 'required|integer',
-	        'quarter' => 'required|integer'
-        ]);
+	    $validator = Validator::make($request->all(), [
+		    'match_id' => 'required|integer',
+		    'player_id' => 'required|integer',
+		    'quarter' => 'required|integer'
+	    ]);
+
+	    // validations fails, return the error messages in JSON format
+	    if ($validator->fails()) {
+		    return response()->json($validator->messages(), 500);
+	    }
 
         $match = Match::find($request->match_id);
         $player = Player::find($request->player_id);

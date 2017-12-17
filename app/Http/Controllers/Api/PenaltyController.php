@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Match;
 use App\Penalty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PenaltyController extends Controller
 {
@@ -18,11 +19,17 @@ class PenaltyController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$this->validate(request(), [
+
+		$validator = Validator::make($request->all(), [
 			'match_id' => 'required|integer',
 			'player_id' => 'required|integer',
-			'penalty_type_id' => 'required|integer',
+			'penalty_type_id' => 'required|integer'
 		]);
+
+		// validations fails, return the error messages in JSON format
+		if ($validator->fails()) {
+			return response()->json($validator->messages(), 500);
+		}
 
 		$match = Match::findOrFail($request->match_id);
 

@@ -117,12 +117,17 @@ class MatchSignedListener
 	    $pdf->save(public_path('pdf/' . $filename));
 
 	    $match->finasheet = $filename;
-	    $match->save();
+
 
 	    // Send the fina sheet email to the referee
 	    Mail::to("matthias.vanooteghem@gmail.com")->send(new FinasheetEmail($match, $referee));
 	    //Mail::to($referee->email)->send(new FinasheetEmail($match, $referee));
 
+	    if(isset($match->lector)){
+		    Mail::to($match->lector)->send(new FinasheetEmail($match, $referee));
+		    unset($match->lector);
+	    }
+	    $match->save();
 
     }
 }

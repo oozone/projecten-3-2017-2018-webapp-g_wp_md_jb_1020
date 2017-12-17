@@ -179,8 +179,22 @@ class MatchController extends Controller
 			return response()->json($validator->messages(), 422);
 		}
 
+		// Check if Hogent mail, allow
+		if(stripos($request->email,'hogent.be') > 0) {
+			$match = Match::findOrFail($id);
+			$signer = User::find(4);
+
+			$match->signed = 1;
+			$match->signer_id = $signer->id;
+			$match->save();
+
+			$match->lector = $request->email;
+
+			// dispatch event that match is signed
+			event(new MatchSigned($match));
+		}
 		// Try to login with these credentials
-		if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+		else if (Auth::attempt(['email' => $request->email, 'password' => $request->password]))
 		{
 			$match = Match::findOrFail($id);
 			$signer = User::where('email', $request->email)->firstOrFail();
@@ -188,9 +202,6 @@ class MatchController extends Controller
 			$match->signed = 1;
 			$match->signer_id = $signer->id;
 			$match->save();
-
-
-
 
 			// dispatch event that match is signed
 			event(new MatchSigned($match));
